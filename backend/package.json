@@ -1,0 +1,32 @@
+{
+  "name": "likechoco.ru",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "ts-mocha",
+    "server": "./node_modules/.bin/node ./build/index.js",
+    "watch": "tsc-watch --outDir ./build --onSuccess \"npm run server\"",
+    "en": "./node_modules/.bin/ts-node ./src/en.ts",
+    "run_test": "./node_modules/.bin/ts-node",
+    "migration:create": "./node_modules/.bin/knex migrate:make",
+    "migration:up": "./node_modules/.bin/knex migrate:latest",
+    "migration:down": "./node_modules/.bin/knex migrate:rollback",
+    "server_test": "tsc && node ./lib/Tests/App/App.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elexfreeman/likechoco.ru.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elexfreeman/likechoco.ru/issues"
+  },
+  "homepage": "https://github.com/elexfreeman/likechoco.ru#readme",
+  "dependencies": {
+    "@a-a-game-studio/aa-core": "^1.0.28",
+    "tsc-watch": "^4.2.3"
+  }
+}
