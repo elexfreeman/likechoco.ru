@@ -1,29 +1,26 @@
 import BaseSQL from "@a-a-game-studio/aa-core/lib/System/BaseSQL";
 import { OrderE, OrderI } from "./OrderE";
+import { OrderProductE, OrderProductI } from "./OrderProductE";
 
 /**
  * Товары
  */
-export class OrderSQL extends BaseSQL {
+export class OrderProductSQL extends BaseSQL {
 
     /**
      * Список товаров
      */
-    public async faList(): Promise<OrderI[]> {
-        let ok = true;
-        let resp: OrderI[];
+    public async faList(orderId: number): Promise<OrderProductI[]> {
 
+        let resp: OrderProductI[];
 
-        if (ok) {
-            let sql = `SELECT * FROM ${OrderE.NAME} p`;
+        let sql = `SELECT * FROM ${OrderProductE.NAME} p where p.order_id=:orderId`;
 
-            try {
-                resp = (await this.db.raw(sql, {}))[0];
+        try {
+            resp = (await this.db.raw(sql, { orderId: orderId }))[0];
 
-            } catch (e) {
-                ok = false;
-                this.errorSys.errorEx(e, 'product list', 'Не удалось получить информацию о товарах');
-            }
+        } catch (e) {
+            this.errorSys.errorEx(e, 'order product list', 'Не удалось получить информацию о товарах заказа');
         }
 
         return resp;
@@ -33,10 +30,9 @@ export class OrderSQL extends BaseSQL {
      * Получить товар по Url
      * @param sUrl 
      */
-    public async faOrderInsert(data: OrderI): Promise<number> {
+    public async faInsert(data: OrderI): Promise<number> {
         let resp: number = 0;
         let orderE = new OrderE();
-
 
         try {
 

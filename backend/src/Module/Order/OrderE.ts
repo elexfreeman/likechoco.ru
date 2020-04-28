@@ -11,7 +11,9 @@ export interface OrderI {
     delivery_date?: string;
     delivery_time_comment?: string;
     create_at?: number;
-    user_id?: number;
+    user_name?: string;
+    user_surname?: string;
+    user_phone?: string;
 }
 
 
@@ -54,9 +56,24 @@ export class OrderE {
             .error('delivery_time_comment - неверный формат')
         );     
 
-        rules.set(rules.rule('user_id')
-            .type(ModelRulesT.int)
-            .error('user_id - неверный формат')
+        rules.set(rules.rule('user_name')
+            .type(ModelRulesT.text)
+            .require()
+            .minLen(3)
+            .error('user_name - неверный формат')
+        );     
+
+        rules.set(rules.rule('user_surname')
+            .type(ModelRulesT.text)
+            
+            .error('user_surname - неверный формат')
+        );     
+
+        rules.set(rules.rule('user_phone')
+            .type(ModelRulesT.text)
+            .require()
+            .minLen(5)
+            .error('user_phone - неверный формат')
         );     
 
 

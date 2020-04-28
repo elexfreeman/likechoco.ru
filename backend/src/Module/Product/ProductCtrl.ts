@@ -25,5 +25,5 @@ router.get(R.sUrl, faResponseStatic(R.sTpl, TError.PageNotFound,
 );
 
 export {
-    router as ProductController
+    router as ProductCtrl
 }
