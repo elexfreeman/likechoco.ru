@@ -10,5 +10,3 @@ export interface ProductI {
     bgImg?: string;
 }
 
-
-export type TList = () => Promise<ProductI[]>;

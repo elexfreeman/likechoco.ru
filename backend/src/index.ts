@@ -4,6 +4,9 @@ import * as controller from '@a-a-game-studio/aa-core/lib/Namespace/Controller'
 import { MainRequest } from '@a-a-game-studio/aa-core/lib/System/MainRequest';
 
 import { conf } from './Config/MainConfig'
+import { IndexController } from './Pages/IndexP';
+import { CartController } from './Pages/CartP';
+import { OrderController } from './Pages/OrderAPI';
 
 const app = express();
 
@@ -71,8 +74,6 @@ app.use(middleware.AuthSysMiddleware);
 // =========================
 
 
-// Базовый модуль
-app.use(controller.IndexController.router);
 
 // Модуль для пользователей
 // app.use(controller.UserController.router);
@@ -80,15 +81,9 @@ app.use(controller.IndexController.router);
 // Модуль для login
 app.use(controller.LoginCtrl.router);
 
-// Модуль для редактирования пользователей администратором
-app.use(controller.AdminEditUserCtrl.router);
-
-// Модуль для редактирования групп администратором
-app.use(controller.AdminEditGroupCtrl.router);
-
-// Модуль для редактирования ENUM дерева типов
-app.use(controller.AdminEditEnumCtrl.router);
-
+app.use(IndexController); // главная
+app.use(CartController); // корзина
+app.use(OrderController); // API корзины
 
 console.log('server start at http://localhost:' + conf.common.port);
 app.listen(conf.common.port);
