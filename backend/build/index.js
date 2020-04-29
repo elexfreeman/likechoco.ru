@@ -14,6 +14,8 @@ const express_1 = __importDefault(require("express"));
 const middleware = __importStar(require("@a-a-game-studio/aa-core/lib/Namespace/Middleware"));
 const controller = __importStar(require("@a-a-game-studio/aa-core/lib/Namespace/Controller"));
 const MainConfig_1 = require("./Config/MainConfig");
+const IndexP_1 = require("./Pages/IndexP");
+const CartP_1 = require("./Pages/CartP");
 const app = express_1.default();
 // =========================
 // Базовая конфигурация expressa
@@ -56,18 +58,12 @@ app.use(middleware.AuthSysMiddleware);
 // =========================
 // Подключение контроллеров
 // =========================
-// Базовый модуль
-app.use(controller.IndexController.router);
 // Модуль для пользователей
 // app.use(controller.UserController.router);
 // Модуль для login
 app.use(controller.LoginCtrl.router);
-// Модуль для редактирования пользователей администратором
-app.use(controller.AdminEditUserCtrl.router);
-// Модуль для редактирования групп администратором
-app.use(controller.AdminEditGroupCtrl.router);
-// Модуль для редактирования ENUM дерева типов
-app.use(controller.AdminEditEnumCtrl.router);
+app.use(IndexP_1.IndexController); // главная
+app.use(CartP_1.CartController); // корзина
 console.log('server start at http://localhost:' + MainConfig_1.conf.common.port);
 app.listen(MainConfig_1.conf.common.port);
 //# sourceMappingURL=index.js.map

@@ -3,7 +3,7 @@ import { MainRequest } from '../Sys/MainRequest';
 import { fResponse } from '../Sys/FResponse';
 import { TError } from '../Sys/FErrors';
 
-import * as BReceiptSQL from "./BReceiptSQL";
+import * as BReceiptSQL from "./ReceiptSQL";
 import { ReceiptR } from "./ReceiptR";
 
 

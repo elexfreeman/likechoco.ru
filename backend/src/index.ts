@@ -6,7 +6,6 @@ import { MainRequest } from '@a-a-game-studio/aa-core/lib/System/MainRequest';
 import { conf } from './Config/MainConfig'
 import { IndexController } from './Pages/IndexP';
 import { CartController } from './Pages/CartP';
-import { OrderController } from './Pages/OrderAPI';
 
 const app = express();
 
@@ -83,7 +82,6 @@ app.use(controller.LoginCtrl.router);
 
 app.use(IndexController); // главная
 app.use(CartController); // корзина
-app.use(OrderController); // API корзины
 
 console.log('server start at http://localhost:' + conf.common.port);
 app.listen(conf.common.port);

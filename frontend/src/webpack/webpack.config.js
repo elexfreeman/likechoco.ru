@@ -102,25 +102,22 @@ module.exports = {
     plugins: [
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
-        }),
-        new HtmlWebpackPlugin({
-            filename: 'example.html',
-            template: './src/frontend/html/example.html'
-        }),
+        }),      
         new HtmlWebpackPlugin({
             filename: 'index.html',
             inject: 'body',
-            template: './src/frontend/html/index.html'
+            template: './src/html/index.html',
+            chunks: ['common', 'style', 'index_p'],
         }),
         new HtmlWebpackPlugin({
             filename: 'cart.html',
             inject: 'body',
-            template: './src/frontend/html/cart.html'
+            template: './src/html/cart.html'
         }),
         new HtmlWebpackPlugin({
             filename: 'receipt.html',
             inject: 'body',
-            template: './src/frontend/html/receipt.html'
+            template: './src/html/receipt.html'
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
