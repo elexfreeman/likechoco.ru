@@ -53,3 +53,11 @@ export const BlogPageR: RouteI = {
     sUrl: "/blog/:url",
     sTpl: "blog/blog_page"
 }
+
+/**
+ * Блог стр
+ */
+export const ReceiptR: RouteI = {
+    sUrl: "/receipt",
+    sTpl: "receipt/index"
+}
