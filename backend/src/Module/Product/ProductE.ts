@@ -3,17 +3,6 @@ import { Components } from '@a-a-game-studio/aa-classes/lib';
 import { ModelRulesT } from '@a-a-game-studio/aa-components/lib';
 
 
-export interface ProductI {
-    id?: number;
-    caption?: string;
-    description?: string;
-    img?: string;
-    url?: string;
-    price?: number;
-    isPublished?: boolean;
-    bgImg?: string;
-}
-
 
 export class ProductE {
     //Имя таблицы

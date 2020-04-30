@@ -1,5 +1,5 @@
 import BaseM from "@a-a-game-studio/aa-core/lib/System/BaseM";
-import { OrderR as R } from "./OrderR";
+import { OrderR as R } from "../../../../Entry/Routes/OrderR";
 /**
  * Бизнес модель пользователя суда мы нас проксирует контроллер 1 url = 1 метод модели
  * Внутри метода делаем нужную бизнес логику

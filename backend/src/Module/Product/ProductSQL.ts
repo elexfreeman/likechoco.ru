@@ -1,7 +1,7 @@
 import BaseSQL from "@a-a-game-studio/aa-core/lib/System/BaseSQL";
-import { ProductE, ProductI } from "./ProductE";
+import { ProductE } from "./ProductE";
 import { ProductCategoryE } from "./ProductCategoryE";
-
+import { ProductI } from "../../../../Entity/Interfaces/ProductI";
 /**
  * Товары
  */

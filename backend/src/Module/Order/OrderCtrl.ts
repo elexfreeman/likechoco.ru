@@ -3,7 +3,7 @@ import { faResponseStatic } from '@a-a-game-studio/aa-core/lib/System/ResponseSy
 import { TError, MainRequest } from '@a-a-game-studio/aa-core/lib/System/MainRequest';
 import { OrderM } from './OrderM';
 import BaseCtrl from '@a-a-game-studio/aa-core/lib/System/BaseCtrl';
-import { OrderR as R} from "./OrderR";
+import { OrderR as R} from "../../../../Entity/Routes/OrderR";
 
 const router = express.Router();
 

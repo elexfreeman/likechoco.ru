@@ -29,3 +29,7 @@ export declare const BlogMainR: RouteI;
  * Блог стр
  */
 export declare const BlogPageR: RouteI;
+/**
+ * Блог стр
+ */
+export declare const ReceiptR: RouteI;

@@ -13,7 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = __importStar(require("express"));
 const OrderM_1 = require("./OrderM");
 const BaseCtrl_1 = __importDefault(require("@a-a-game-studio/aa-core/lib/System/BaseCtrl"));
-const OrderR_1 = require("./OrderR");
+const OrderR_1 = require("../../../../Entry/Routes/OrderR");
 const router = express.Router();
 exports.OrderCtrl = router;
 class OrderController extends BaseCtrl_1.default {

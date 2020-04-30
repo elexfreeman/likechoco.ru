@@ -1,5 +1,5 @@
 import BaseSQL from "@a-a-game-studio/aa-core/lib/System/BaseSQL";
-import { OrderI } from "./OrderE";
+import { OrderI } from "../../../../Entry/Interfaces/OrderI";
 /**
  * Товары
  */

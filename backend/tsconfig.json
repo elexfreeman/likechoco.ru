@@ -11,7 +11,7 @@
         "esModuleInterop": true
     },
     "include": [
-        "src/**/*.ts", "src/index.tsx.ts", "src/**/*.json"
+        "src/**/*.ts", "src/index.tsx.ts", "src/**/*.json", "../Entry/**/*.ts"
     ],
     "exclude": [
         "node_modules"

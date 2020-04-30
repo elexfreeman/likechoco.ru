@@ -15,6 +15,7 @@ exports.faResponseStaticL = (tpl, tError, faCallback) => {
             out.sApiVer = '1';
             out.Site = SiteConfig_1.Site;
             out.apiUrl = SiteConfig_1.apiUrl;
+            console.log(out);
             res.render(tpl, out);
         }
         catch (error) {

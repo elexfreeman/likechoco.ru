@@ -18,6 +18,8 @@ export const faResponseStaticL = (tpl: string, tError: TError, faCallback: Funct
             out.sApiVer = '1';
             out.Site = Site;
             out.apiUrl = apiUrl;
+            console.log(out);
+            
             res.render(tpl, out);
         } catch (error) {
             req.errorType = tError;

@@ -1,7 +1,7 @@
 import BaseM from "@a-a-game-studio/aa-core/lib/System/BaseM";
 import { OrderSQL } from "./OrderSQL";
 import * as V from "./OrderV";
-import {OrderR as R} from "./OrderR";
+import {OrderR as R} from "../../../../Entity/Routes/OrderR";
 
 /**
  * Бизнес модель пользователя суда мы нас проксирует контроллер 1 url = 1 метод модели

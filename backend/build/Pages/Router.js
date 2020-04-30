@@ -45,4 +45,11 @@ exports.BlogPageR = {
     sUrl: "/blog/:url",
     sTpl: "blog/blog_page"
 };
+/**
+ * Блог стр
+ */
+exports.ReceiptR = {
+    sUrl: "/receipt",
+    sTpl: "receipt/index"
+};
 //# sourceMappingURL=Router.js.map

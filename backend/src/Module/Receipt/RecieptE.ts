@@ -3,12 +3,6 @@ import { Components } from '@a-a-game-studio/aa-classes/lib';
 import { ModelRulesT } from '@a-a-game-studio/aa-components/lib';
 
 
-export interface ReceiptI {
-    id?: number;
-    caption?: string;
-    description?: string;
-}
-
 
 export class ReceiptE {
     //Имя таблицы

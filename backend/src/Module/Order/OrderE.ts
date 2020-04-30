@@ -3,16 +3,6 @@ import { Components } from '@a-a-game-studio/aa-classes/lib';
 import { ModelRulesT } from '@a-a-game-studio/aa-components/lib';
 
 
-export interface OrderI {
-    id?: number;
-    city?: string;
-    delivery_address?: string;
-    comment?: string;
-    delivery_date?: string;
-    delivery_time_comment?: string;
-    create_at?: number;
-    user_id?: number;
-}
 
 
 export class OrderE {

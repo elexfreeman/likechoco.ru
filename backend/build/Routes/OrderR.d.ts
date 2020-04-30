@@ -1,17 +1,8 @@
-// =======================================================
-
-export namespace OrderR {
-
-
-
-    /* Создать заказ */
-    export namespace makeOrder {
-
-        export const route = '/order/make_order';
-
-
+export declare namespace OrderR {
+    namespace makeOrder {
+        const route = "/order/make_order";
         /** Параметры api запроса */
-        export interface RequestI {
+        interface RequestI {
             city: string;
             delivery_address: string;
             comment: string;
@@ -22,11 +13,9 @@ export namespace OrderR {
                 count: number;
             }[];
         }
-
         /** Параметры api ответа */
-        export interface ResponseI {
-            order_id: number; // заказ
+        interface ResponseI {
+            order_id: number;
         }
-
     }
 }
