@@ -104,3 +104,4 @@ dist
 .tern-port
 
 src/Config/MainConfig.ts
+src/Config/SiteConfig.ts

@@ -6,9 +6,7 @@ export interface OrderI {
     delivery_date?: string;
     delivery_time_comment?: string;
     create_at?: number;
-    user_name?: string;
-    user_surname?: string;
-    user_phone?: string;
+    user_id?: number;
 }
 export declare class OrderE {
     static NAME: string;

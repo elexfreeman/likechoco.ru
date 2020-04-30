@@ -25,19 +25,6 @@ class OrderE {
         rules.set(rules.rule('delivery_time_comment')
             .type(lib_2.ModelRulesT.text)
             .error('delivery_time_comment - неверный формат'));
-        rules.set(rules.rule('user_name')
-            .type(lib_2.ModelRulesT.text)
-            .require()
-            .minLen(3)
-            .error('user_name - неверный формат'));
-        rules.set(rules.rule('user_surname')
-            .type(lib_2.ModelRulesT.text)
-            .error('user_surname - неверный формат'));
-        rules.set(rules.rule('user_phone')
-            .type(lib_2.ModelRulesT.text)
-            .require()
-            .minLen(5)
-            .error('user_phone - неверный формат'));
         return rules.get();
     }
 }

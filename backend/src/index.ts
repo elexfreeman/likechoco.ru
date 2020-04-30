@@ -1,4 +1,6 @@
 import express from 'express';
+const path = require('path');
+
 import * as middleware from '@a-a-game-studio/aa-core/lib/Namespace/Middleware';
 import * as controller from '@a-a-game-studio/aa-core/lib/Namespace/Controller'
 import { MainRequest } from '@a-a-game-studio/aa-core/lib/System/MainRequest';
@@ -6,6 +8,8 @@ import { MainRequest } from '@a-a-game-studio/aa-core/lib/System/MainRequest';
 import { conf } from './Config/MainConfig'
 import { IndexController } from './Pages/IndexP';
 import { CartController } from './Pages/CartP';
+import SeoMiddleware from "@a-a-game-studio/aa-core/lib/Middleware/SeoMiddleware";
+import { ProductCtrl } from './Pages/ProductP';
 
 const app = express();
 
@@ -64,6 +68,12 @@ app.use(middleware.RequestSysMiddleware);
 
 /* ответ */
 app.use(middleware.ResponseSysMiddleware);
+app.use(SeoMiddleware);
+
+app.use(express.static('./public'));
+app.set('views', path.join(__dirname, '../Views'));
+app.set('view engine', 'ejs');
+
 
 /* проверка авторизации на уровне приложения */
 app.use(middleware.AuthSysMiddleware);
@@ -82,6 +92,7 @@ app.use(controller.LoginCtrl.router);
 
 app.use(IndexController); // главная
 app.use(CartController); // корзина
+app.use(ProductCtrl); // корзина
 
 console.log('server start at http://localhost:' + conf.common.port);
 app.listen(conf.common.port);

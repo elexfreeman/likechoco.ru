@@ -21,6 +21,8 @@ export class ProductSQL extends BaseSQL {
                 resp = (await this.db.raw(sql, {}))[0];
 
             } catch (e) {
+                console.log(e);
+                
                 ok = false;
                 this.errorSys.errorEx(e, 'product list', 'Не удалось получить информацию о товарах');
             }
@@ -39,7 +41,7 @@ export class ProductSQL extends BaseSQL {
 
         if (ok) {
             let sql = `SELECT p.* FROM ${ProductE.NAME} p
-            where p.url=:sUrl"`;
+            where p.url=:sUrl`;
 
             try {
                 resp = (await this.db.raw(sql, {sUrl: sUrl}))[0][0];

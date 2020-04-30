@@ -10,7 +10,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = __importStar(require("express"));
 const FResponse_1 = require("../Sys/FResponse");
 const FErrors_1 = require("../Sys/FErrors");
-const BReceiptSQL = __importStar(require("./BReceiptSQL"));
+const BReceiptSQL = __importStar(require("./ReceiptSQL"));
 const ReceiptR_1 = require("./ReceiptR");
 const router = express.Router();
 exports.ReceiptController = router;

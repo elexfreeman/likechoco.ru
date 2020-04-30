@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { IndexR as R} from "./Router"
+import { ProductR as R} from "./Router"
 import { TError, MainRequest } from '@a-a-game-studio/aa-core/lib/System/MainRequest';
 import { ProductSQL } from '../Module/Product/ProductSQL';
 import { faResponseStaticL } from '../Module/Sys/ResponseSys';
@@ -12,16 +12,21 @@ const router = express.Router();
 router.get(R.sUrl, faResponseStaticL(R.sTpl, TError.PageNotFound,
     async (req: MainRequest, res: any, error: any) => {
 
+        const sUrl = req.params['url'];
         const productSQL = new ProductSQL(req);
-        const aProducts = await productSQL.faList();
-        
+
+        const product = await productSQL.faGetByUrl(sUrl);
+
+        req.seo.sTitle = `Likechoco - ${product.caption}`;
+        req.seo.sDescription = `Likechoco - ${product.description}`;
+
         return {
-            products: aProducts,
+            product: product,
         }
 
     })
 );
 
 export {
-    router as IndexController
+    router as ProductCtrl
 }

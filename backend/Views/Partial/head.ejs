@@ -9,8 +9,8 @@
   <link rel="shortcut icon" href="/favicon/favicon.ico">
   <link rel="stylesheet" href="/css/main.css?ver=<%= sApiVer %>">
 
-  <title><%= seo.title %></title>
-  <meta name="description" content="<%= seo.description %>" />
+  <title><%= seo.sTitle %></title>
+  <meta name="description" content="<%= seo.sDescription %>" />
   <meta name="keywords" content="<%= seo.keywords %>" />
 
   <meta property="og:type" content="<%= seo.og.type %>">
@@ -54,9 +54,9 @@
     <div class="card_menu center-container">
       <div class="header">
         <div class="header-item">
-          <a class="phone-col" href="tel:<%= site.phone %>">
+          <a class="phone-col" href="tel:<%= Site.phone %>">
             <img src="/img/phone-ico.png" class="phone-ico">&nbsp;
-            <span class="header-phone"><%= site.phone %></span>
+            <span class="header-phone"><%= Site.phone %></span>
           </a>
         </div>
         <div class="header-item logo-top">

@@ -13,15 +13,18 @@ const MainRequest_1 = require("@a-a-game-studio/aa-core/lib/System/MainRequest")
 const ProductSQL_1 = require("../Module/Product/ProductSQL");
 const ResponseSys_1 = require("../Module/Sys/ResponseSys");
 const router = express.Router();
-exports.IndexController = router;
+exports.ProductCtrl = router;
 /**
  * Индексная страница
  */
-router.get(Router_1.IndexR.sUrl, ResponseSys_1.faResponseStaticL(Router_1.IndexR.sTpl, MainRequest_1.TError.PageNotFound, async (req, res, error) => {
+router.get(Router_1.ProductR.sUrl, ResponseSys_1.faResponseStaticL(Router_1.ProductR.sTpl, MainRequest_1.TError.PageNotFound, async (req, res, error) => {
+    const sUrl = req.params['url'];
     const productSQL = new ProductSQL_1.ProductSQL(req);
-    const aProducts = await productSQL.faList();
+    const product = await productSQL.faGetByUrl(sUrl);
+    req.seo.sTitle = `Likechoco - ${product.caption}`;
+    req.seo.sDescription = `Likechoco - ${product.description}`;
     return {
-        products: aProducts,
+        product: product,
     };
 }));
-//# sourceMappingURL=IndexP.js.map
+//# sourceMappingURL=ProductP.js.map
