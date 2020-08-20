@@ -61,3 +61,11 @@ export const ReceiptR: RouteI = {
     sUrl: "/receipt",
     sTpl: "receipt/index"
 }
+
+/**
+ * Товар
+ */
+export const IngredientR: RouteI = {
+    sUrl: "ingredient/:url",
+    sTpl: "ingredient"
+}
