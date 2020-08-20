@@ -1,6 +1,7 @@
 "use strict";
 // =======================================================
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.OrderR = void 0;
 var OrderR;
 (function (OrderR) {
     /* Создать заказ */
