@@ -1,7 +1,7 @@
 import BaseSQL from "@a-a-game-studio/aa-core/lib/System/BaseSQL";
 import { IngredientE } from "./IngredientE";
 import { IngredientI } from "../../../../Entity/Interfaces/IngredientI";
-import { SearchS } from "../../Service/SearchS";
+import { SearchS } from "../../../../Entity/Service/SearchS";
 
 /**
  * Ингредиенты 

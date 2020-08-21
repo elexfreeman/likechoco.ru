@@ -1,7 +1,7 @@
 module.exports = {
     'index_p': './src/Pages/IndexP.ts',
     'style': './src/scss/style.scss',
-    'index_crm': './scs/Pages/IndexCrm.ts',
+    'index_crm': './src/Pages/IndexCrm.ts',
     'style_crm': './src/scss/crm.scss',
 }
 

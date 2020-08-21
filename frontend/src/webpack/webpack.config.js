@@ -107,7 +107,7 @@ module.exports = {
             filename: 'index.html',
             inject: 'body',
             template: './src/html/index.html',
-            chunks: ['common', 'style', 'index_p'],
+            chunks: ['common', 'index_crm', 'style_crm'],
         }),
         new HtmlWebpackPlugin({
             filename: 'cart.html',
