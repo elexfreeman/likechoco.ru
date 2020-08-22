@@ -39,4 +39,9 @@ export class SearchS {
             sSearchString: this.sSearchString,
         }
     }
+
+    fSetParam(data: SearchParamI):SearchS {
+        
+        return this;
+    }
 }

@@ -7,17 +7,7 @@ const mem: MemSysI = {}
 
 class MyApp extends App {
     public fUseProduct(): App {
-        console.log('Use product');
-
         this.objExpress.use(ProductCtrl)
-        return this;
-    }
-
-    public fUseLoger(): App {
-        this.objExpress.use((req, resp, next) => {
-            console.log(req.originalUrl);
-            next();
-        });
         return this;
     }
 }
@@ -26,8 +16,4 @@ const app: MyApp = new MyApp(config);
 app.fDisableCors(); // отключаем cors
 app.fUseBodyParser(); // используем дефолтный BodyParser
 app.fUseMySql();
-app.fUseSharedMem(mem);
-
-app.fUseLoger();
-app.fUseProduct();
-app.fStart(); // Запускаем приложение
+app.faRunDefaultMigration()

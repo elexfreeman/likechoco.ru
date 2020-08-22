@@ -4,9 +4,9 @@ import axios from 'axios';
 declare var window: any;
 declare var localStorage: any;
 
-export interface ApiResponseI {
+export interface ApiResponseI<T> {
     ok: boolean;
-    data: any;
+    data: T;
     e: boolean;
     msg: string;
 }
@@ -58,7 +58,7 @@ export class BaseModel {
      * @param body
      * @param url
      */
-    public async faApiRequest(body: any, url: string): Promise<ApiResponseI> {
+    public async faApiRequest(body: any, url: string): Promise<ApiResponseI<any>> {
         let resp = null;
         try {
             resp = (

@@ -2,7 +2,6 @@ import { faResponseStatic, fResponse } from '@a-a-game-studio/aa-core/lib/System
 import { MainRequest } from '@a-a-game-studio/aa-core/lib/Namespace/System';
 import { TError } from '@a-a-game-studio/aa-core/lib/System/MainRequest';
 import * as express from 'express';
-import { Site , apiUrl } from "../../Config/SiteConfig";
 
 
 /**
@@ -16,8 +15,8 @@ export const faResponseStaticL = (tpl: string, tError: TError, faCallback: Funct
             const out: any = fResponse(req, await faCallback(req))
             /* добавляем свою переменную */
             out.sApiVer = '1';
-            out.Site = Site;
-            out.apiUrl = apiUrl;
+            out.Site = '';
+            out.apiUrl = '/';
             console.log(out);
             
             res.render(tpl, out);

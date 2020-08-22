@@ -6,21 +6,6 @@ import { faResponseStaticL } from '../Module/Sys/ResponseSys';
 
 const router = express.Router();
 
-/**
- * Индексная страница
- */
-router.get(R.sUrl, faResponseStaticL(R.sTpl, TError.PageNotFound,
-    async (req: MainRequest, res: any, error: any) => {
-
-        const productSQL = new ProductSQL(req);
-        const aProducts = await productSQL.faList();
-        
-        return {
-            products: aProducts,
-        }
-
-    })
-);
 
 export {
     router as IndexController

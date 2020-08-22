@@ -1,4 +1,3 @@
-
 export interface ProductI {
     id?: number;
     caption: string;

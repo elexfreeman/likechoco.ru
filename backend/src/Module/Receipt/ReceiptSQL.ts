@@ -1,5 +1,6 @@
 import BaseSQL from "@a-a-game-studio/aa-core/lib/System/BaseSQL";
-import { ReceiptE, ReceiptI } from "./RecieptE";
+import { ReceiptE } from "./RecieptE";
+import { ReceiptI } from "../../../../Entity/Interfaces/RecieptI";
 
 /**
  * Товары
@@ -12,7 +13,7 @@ export class ReceiptSQL extends BaseSQL {
     public async faList(): Promise<ReceiptI[]> {
         let ok = true;
         let resp: ReceiptI[];
-     
+
         if (ok) {
             let sql = `SELECT * FROM ${ReceiptE.NAME} p`;
 
@@ -21,7 +22,7 @@ export class ReceiptSQL extends BaseSQL {
 
             } catch (e) {
                 console.log(e);
-                
+
                 ok = false;
                 this.errorSys.errorEx(e, 'product list', 'Не удалось получить информацию о товарах');
             }
@@ -36,14 +37,14 @@ export class ReceiptSQL extends BaseSQL {
      */
     public async faGetByUrl(sUrl: string): Promise<ReceiptI> {
         let ok = true;
-        let resp: ReceiptI = null;       
+        let resp: ReceiptI = null;
 
         if (ok) {
             let sql = `SELECT p.* FROM ${ReceiptE.NAME} p
             where p.url=:sUrl`;
 
             try {
-                resp = (await this.db.raw(sql, {sUrl: sUrl}))[0][0];
+                resp = (await this.db.raw(sql, { sUrl: sUrl }))[0][0];
 
             } catch (e) {
                 ok = false;
@@ -59,7 +60,7 @@ export class ReceiptSQL extends BaseSQL {
 
 /**
  * обработка BgImg
- * @param product 
+ * @param product
  */
 /* export const fProcessBgIg = (product: TReceipt.ReceiptI) => {
     if (product.img) {
