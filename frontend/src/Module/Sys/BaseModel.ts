@@ -4,12 +4,7 @@ import axios from 'axios';
 declare var window: any;
 declare var localStorage: any;
 
-export interface ApiResponseI<T> {
-    ok: boolean;
-    data: T;
-    e: boolean;
-    msg: string;
-}
+import { ApiResponseI } from "../../../../Entity/Interfaces/ApiResponseI";
 
 export const getCookie = (cname: string): string => {
     let name = cname + "=";

@@ -15,6 +15,8 @@ class MyApp extends App {
 
     public fUseLoger(): App {
         this.objExpress.use((req, resp, next) => {
+            console.log(req.headers.token);
+            
             console.log(req.originalUrl);
             next();
         });
@@ -27,7 +29,7 @@ app.fDisableCors(); // отключаем cors
 app.fUseBodyParser(); // используем дефолтный BodyParser
 app.fUseMySql();
 app.fUseSharedMem(mem);
-
+app.faUseAuthSys()
 app.fUseLoger();
 app.fUseProduct();
 app.fStart(); // Запускаем приложение
