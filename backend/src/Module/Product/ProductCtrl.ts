@@ -31,12 +31,33 @@ export class ProductController extends System.BaseCtrl {
  */
 router.post(R.list.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductController(req, res);
-    console.log('product');
-    
     await ctrl.faInit();
     await ctrl.userSys.isAuth(); // Пробуем авторизироваться
     await ctrl.faAction('Список товаров', () => {
         return ctrl.productM.faList(req.body);
+    })
+});
+
+/**
+ * insert 
+ */
+router.post(R.list.route, async (req: System.MainRequest, res: any, next: any) => {
+    const ctrl = new ProductController(req, res);
+    await ctrl.faInit();
+    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    await ctrl.faAction('Добавление товаров', () => {
+        return ctrl.productM.faInsert(req.body);
+    })
+});
+/**
+ * update 
+ */
+router.post(R.list.route, async (req: System.MainRequest, res: any, next: any) => {
+    const ctrl = new ProductController(req, res);
+    await ctrl.faInit();
+    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    await ctrl.faAction('Обновленеи товара', () => {
+        return ctrl.productM.faUpdate(req.body);
     })
 });
 

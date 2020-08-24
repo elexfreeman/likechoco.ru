@@ -36,6 +36,20 @@ async function run() {
 
         assert.ok(resp.data.list.length > 0);
     }); //it ****
+    mocha.it('Product insert-get', async () => {
+
+        let sUrl = R.list.route;
+        
+        let resp: ApiResponseI<R.list.ResponseI> =
+            (await axios.post(global['window'].apiUrl + sUrl, {}, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'token': '12345',
+                }
+            })).data;
+
+        assert.ok(resp.data.list.length > 0);
+    }); //it ****
 
  
 }

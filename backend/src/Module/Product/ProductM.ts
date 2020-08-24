@@ -15,7 +15,7 @@ import { SearchS } from "../../../../Entity/Service/SearchS";
 import { ProductI } from "../../../../Entity/Interfaces/ProductI";
 
 /**
- * Ингредиенты
+ * Товыры
  */
 export class ProductM extends System.BaseM {
 
@@ -46,6 +46,64 @@ export class ProductM extends System.BaseM {
         if (ok) { // Формирование ответа
             out = {
                 list: vProduct,
+            };
+        }
+
+        return out;
+    }
+
+    /**
+     * вставка 
+     * @param data 
+     */
+    public async faInsert(data: R.insert.RequestI): Promise<R.insert.ResponseI> {
+
+        data = <R.insert.RequestI>V.insert(this.req, data);
+        let ok = this.errorSys.isOk();
+
+        // --------------------------
+
+        let id: number = 0;
+        if (ok) {
+            id = await this.productSQL.faInsert(data);
+        }
+
+        // --------------------------
+
+        let out: R.insert.ResponseI = null;
+        if (ok) { // Формирование ответа
+            out = {
+                id,
+            };
+
+        }
+
+        return out;
+    }
+    // =====================================
+
+    /**
+     * Обновленеи 
+     * @param data 
+     */
+    public async faUpdate(data: R.update.RequestI): Promise<R.update.ResponseI> {
+
+        data = <R.update.RequestI>V.update(this.req, data);
+        let ok = this.errorSys.isOk();
+
+        // --------------------------
+
+        let id: number = data.id;
+        if (ok) {
+            await this.productSQL.faUpdate(id, data);
+        }
+
+        // --------------------------
+
+        let out: R.update.ResponseI = null;
+        if (ok) { // Формирование ответа
+            out = {
+                id,
             };
         }
 
