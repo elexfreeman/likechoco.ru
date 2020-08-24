@@ -1,15 +1,15 @@
-import { ProductCategoryI } from "../Interfaces/ProductCategoryI";
+import { ProductTagI } from "../Interfaces/ProductTagI";
 
 /**
- * Категория товара 
+ * Тэг товара
  */
-export namespace ProductCategoryR {
+export namespace ProductTagR {
     // =======================================================
     /** Начальные данные */
     export namespace list {
 
         /** APIURL */
-        export const route = '/api/productCategory/list';
+        export const route = '/api/productTag/list';
 
         /** Alias действия */
         export const action = 'list';
@@ -23,13 +23,13 @@ export namespace ProductCategoryR {
 
         /** Параметры api ответа */
         export interface ResponseI {
-            list: ProductCategoryI[];
+            list: ProductTagI[];
         }
     }
     export namespace getById {
 
         /** APIURL */
-        export const route = '/api/productCategory/getById';
+        export const route = '/api/productTag/getById';
 
         /** Alias действия */
         export const action = 'getById';
@@ -40,7 +40,7 @@ export namespace ProductCategoryR {
         }
 
         /** Параметры api ответа */
-        export interface ResponseI extends ProductCategoryI{
+        export interface ResponseI extends ProductTagI{
         }
     }
 
@@ -48,13 +48,13 @@ export namespace ProductCategoryR {
     export namespace insert {
 
         /** APIURL */
-        export const route = '/api/productCategory/insert';
+        export const route = '/api/productTag/insert';
 
         /** Alias действия */
         export const action = 'insert';
 
         /** Параметры api запроса */
-        export interface RequestI extends ProductCategoryI {
+        export interface RequestI extends ProductTagI {
         }
 
         /** Параметры api ответа */
@@ -66,13 +66,13 @@ export namespace ProductCategoryR {
     export namespace update {
 
         /** APIURL */
-        export const route = '/api/productCategory/update';
+        export const route = '/api/productTag/update';
 
         /** Alias действия */
         export const action = 'insert';
 
         /** Параметры api запроса */
-        export interface RequestI extends ProductCategoryI {
+        export interface RequestI extends ProductTagI {
         }
 
         /** Параметры api ответа */

@@ -3,9 +3,9 @@ import { Components } from '@a-a-game-studio/aa-classes/lib';
 import { ModelRulesT } from '@a-a-game-studio/aa-components/lib';
 
 
-export class ProductCategoryE {
+export class ProductTagE {
     //Имя таблицы
-    public static NAME = 'product_category';
+    public static NAME = 'product_tag';
 
     public getRulesInsert() {
         let rules = new Components.ModelRulesC();
@@ -20,7 +20,6 @@ export class ProductCategoryE {
             .type(ModelRulesT.text)
             .error('description - неверный формат')
         );
-
 
         return rules.get();
     }
