@@ -3,9 +3,9 @@ import { Components } from '@a-a-game-studio/aa-classes/lib';
 import { ModelRulesT } from '@a-a-game-studio/aa-components/lib';
 
 
-export class ProductE {
+export class ProductCategoryE {
     //Имя таблицы
-    public static NAME = 'product';
+    public static NAME = 'productCategory';
 
     public getRulesInsert() {
         let rules = new Components.ModelRulesC();

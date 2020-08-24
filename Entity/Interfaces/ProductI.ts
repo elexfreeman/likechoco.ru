@@ -4,4 +4,5 @@ export interface ProductI {
     caption: string;
     description?: string;
     price: number;
+    category_id: number;
 }

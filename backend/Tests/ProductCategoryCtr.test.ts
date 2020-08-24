@@ -13,17 +13,17 @@ initMosk();
 /* *********************************************** */
 
 import { getRandomInt } from "./anyFunctions";
-import { ProductR as R } from "../../Entity/Routes/ProductR";
+import { ProductCategoryR as R } from "../../Entity/Routes/ProductCategoryR";
 import { SearchS } from "../../Entity/Service/SearchS";
 import { ApiResponseI } from "../../Entity/Interfaces/ApiResponseI";
-import { ProductI } from '../../Entity/Interfaces/ProductI';
+import { ProductCategoryI } from '../../Entity/Interfaces/ProductCategoryI';
 
 
 /* запускатор теста для async-await */
 async function run() {
 
     //++++++++++++++++++++++++++++++++++++
-    mocha.it('Product list', async () => {
+    mocha.it('ProductCategory list', async () => {
 
         let sUrl = R.list.route;
 
@@ -39,13 +39,11 @@ async function run() {
     }); //it ****
 
 
-    mocha.it('Product insert-get', async () => {
+    mocha.it('ProductCategory insert-get', async () => {
 
         let sUrl = R.insert.route;
-        const data: ProductI = {
-            caption: 'test product',
-            price: 300,
-            category_id: 1,
+        const data: ProductCategoryI = {
+            caption: 'test productCategory',
         }
 
         let resp: ApiResponseI<R.insert.ResponseI> =
@@ -73,13 +71,11 @@ async function run() {
     }); //it ****
 
 
-    mocha.it('Product insert-update-get', async () => {
+    mocha.it('ProductCategory insert-update-get', async () => {
 
         let sUrl = R.insert.route;
-        const data: ProductI = {
-            caption: 'test product',
-            price: 300,
-            category_id: 1,
+        const data: ProductCategoryI = {
+            caption: 'test productCategory',
         }
 
         let resp: ApiResponseI<R.insert.ResponseI> =
