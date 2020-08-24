@@ -47,8 +47,7 @@ export class ProductE {
 
         rules.set(rules.rule('price')
             .type(ModelRulesT.int)
-            .more(0)
-            .require()
+            .moreOrEq(0) 
             .error('price - неверный формат')
         );
 

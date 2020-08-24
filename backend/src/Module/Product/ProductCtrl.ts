@@ -41,7 +41,7 @@ router.post(R.list.route, async (req: System.MainRequest, res: any, next: any) =
 /**
  * insert 
  */
-router.post(R.list.route, async (req: System.MainRequest, res: any, next: any) => {
+router.post(R.insert.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductController(req, res);
     await ctrl.faInit();
     await ctrl.userSys.isAuth(); // Пробуем авторизироваться
@@ -49,15 +49,29 @@ router.post(R.list.route, async (req: System.MainRequest, res: any, next: any) =
         return ctrl.productM.faInsert(req.body);
     })
 });
+
+
 /**
  * update 
  */
-router.post(R.list.route, async (req: System.MainRequest, res: any, next: any) => {
+router.post(R.update.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductController(req, res);
     await ctrl.faInit();
     await ctrl.userSys.isAuth(); // Пробуем авторизироваться
     await ctrl.faAction('Обновленеи товара', () => {
         return ctrl.productM.faUpdate(req.body);
+    })
+});
+
+/**
+ * get by id 
+ */
+router.post(R.getById.route, async (req: System.MainRequest, res: any, next: any) => {
+    const ctrl = new ProductController(req, res);
+    await ctrl.faInit();
+    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    await ctrl.faAction('Получение товара', () => {
+        return ctrl.productM.faGetById(req.body);
     })
 });
 

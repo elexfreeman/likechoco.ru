@@ -26,6 +26,23 @@ export namespace ProductR {
             list: ProductI[];
         }
     }
+    export namespace getById {
+
+        /** APIURL */
+        export const route = '/api/product/getById';
+
+        /** Alias действия */
+        export const action = 'getById';
+
+        /** Параметры api запроса */
+        export interface RequestI {
+            id: number;
+        }
+
+        /** Параметры api ответа */
+        export interface ResponseI extends ProductI{
+        }
+    }
 
 
     export namespace insert {

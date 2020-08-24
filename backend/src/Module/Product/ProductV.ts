@@ -72,6 +72,35 @@ export function update(req: MainRequest, data: any) {
         .maxLen(100)
         .errorEx('description', 'description')
     );
+    rules.set(rules.rule('price')
+        .type(Components.ModelRulesT.decimal)
+        .moreOrEq(0)
+        .errorEx('price', 'price')
+    );
+    // ---------------------------------------
+    let validator = new Components.ModelValidatorSys(req.sys.errorSys);
+    validator.fValid(rules.get(), data);
+
+    return validator.getResult();
+}
+
+
+/**
+ * Get by id 
+ * @param req MainRequest
+ * @param data RequestI
+ */
+export function getById(req: MainRequest, data: any) {
+    let rules = new Components.ModelRulesC();
+
+    // ---------------------------------------
+
+    rules.set(rules.rule('id')
+        .type(Components.ModelRulesT.int)
+        .require()
+        .moreOrEq(0)
+        .errorEx('id', 'id')
+    );
 
     // ---------------------------------------
 
@@ -102,6 +131,12 @@ export function insert(req: MainRequest, data: any) {
         .type(Components.ModelRulesT.text)
         .maxLen(1024)
         .errorEx('description', 'description')
+    );
+
+    rules.set(rules.rule('price')
+        .type(Components.ModelRulesT.decimal)
+        .require()
+        .errorEx('price', 'price')
     );
 
     // ---------------------------------------

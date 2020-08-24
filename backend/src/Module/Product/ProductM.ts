@@ -38,7 +38,6 @@ export class ProductM extends System.BaseM {
         if (ok) {
             vProduct = await this.productSQL.faList(new SearchS().fSetParam(data));
         }
-        console.log(vProduct);
 
         // --------------------------
 
@@ -53,29 +52,26 @@ export class ProductM extends System.BaseM {
     }
 
     /**
-     * вставка 
+     * Получить по id 
      * @param data 
      */
-    public async faInsert(data: R.insert.RequestI): Promise<R.insert.ResponseI> {
+    public async faGetById(data: R.getById.RequestI): Promise<R.getById.ResponseI> {
 
-        data = <R.insert.RequestI>V.insert(this.req, data);
+        data = <R.getById.RequestI>V.getById(this.req, data);
         let ok = this.errorSys.isOk();
 
         // --------------------------
 
-        let id: number = 0;
+        let item: ProductI = null;
         if (ok) {
-            id = await this.productSQL.faInsert(data);
+            item = await this.productSQL.faGetById(data.id);
         }
 
         // --------------------------
 
-        let out: R.insert.ResponseI = null;
+        let out: R.getById.ResponseI = null;
         if (ok) { // Формирование ответа
-            out = {
-                id,
-            };
-
+            out = item;
         }
 
         return out;
@@ -101,6 +97,36 @@ export class ProductM extends System.BaseM {
         // --------------------------
 
         let out: R.update.ResponseI = null;
+        if (ok) { // Формирование ответа
+            out = {
+                id,
+            };
+        }
+
+        return out;
+    }
+    // =====================================
+
+
+    /**
+     * Вставка 
+     * @param data 
+     */
+    public async faInsert(data: R.insert.RequestI): Promise<R.insert.ResponseI> {
+
+        data = <R.insert.RequestI>V.insert(this.req, data);
+        let ok = this.errorSys.isOk();
+
+        // --------------------------
+
+        let id: number = null;
+        if (ok) {
+            id = await this.productSQL.faInsert(data);
+        }
+
+        // --------------------------
+
+        let out: R.insert.ResponseI = null;
         if (ok) { // Формирование ответа
             out = {
                 id,
