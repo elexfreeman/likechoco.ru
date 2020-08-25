@@ -120,7 +120,7 @@ export class ProductSQL extends BaseSQL {
      * @param id 
      * @param data 
      */
-    public async faAddProductTag(productId: number, tagId: number): Promise<number> {
+    public async faAddTag(productId: number, tagId: number): Promise<number> {
         let ok = this.errorSys.isOk();
         let resp: number = 0;
         let productTagIdxE = new ProductTagIdxE();

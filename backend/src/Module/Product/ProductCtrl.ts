@@ -87,6 +87,18 @@ router.post(R.tagList.route, async (req: System.MainRequest, res: any, next: any
     })
 });
 
+/**
+ * Tag add 
+ */
+router.post(R.addTag.route, async (req: System.MainRequest, res: any, next: any) => {
+    const ctrl = new ProductController(req, res);
+    await ctrl.faInit();
+    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    await ctrl.faAction('Добавление тега товара', () => {
+        return ctrl.productM.faAddTag(req.body);
+    })
+});
+
 export {
     router as ProductCtrl
 }

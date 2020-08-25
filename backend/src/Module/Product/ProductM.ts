@@ -166,4 +166,38 @@ export class ProductM extends System.BaseM {
 
         return out;
     }
+
+
+
+    /**
+     * Добавить тэг 
+     * @param data 
+     */
+    public async faAddTag(data: R.addTag.RequestI): Promise<R.addTag.ResponseI> {
+
+        data = <R.addTag.RequestI>V.insert(this.req, data);
+        let ok = this.errorSys.isOk();
+
+        // --------------------------
+
+        const aTag = await this.productSQL.faGetTagList(data.product_id);
+        const tagIdx = aTag.findIndex(item => item.id == data.tag_id);
+
+        let id: number = null; 
+        if (tagIdx == -1) {
+            id = await this.productSQL.faAddTag(data.product_id, data.tag_id);
+        }
+
+        // --------------------------
+
+        let out: R.addTag.ResponseI = null;
+        if (ok) { // Формирование ответа
+            out = {
+                id,
+            };
+        }
+
+        return out;
+    }
+    // =====================================
 }

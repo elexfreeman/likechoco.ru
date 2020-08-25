@@ -102,5 +102,24 @@ export namespace ProductR {
         }
     }
 
+    export namespace addTag {
+
+        /** APIURL */
+        export const route = '/api/product/addTag';
+
+        /** Alias действия */
+        export const action = 'addTag';
+
+        /** Параметры api запроса */
+        export interface RequestI { 
+            product_id: number;
+            tag_id: number;
+        }
+
+        /** Параметры api ответа */
+        export interface ResponseI {
+            id: number;
+        }
+    }
 }
 
