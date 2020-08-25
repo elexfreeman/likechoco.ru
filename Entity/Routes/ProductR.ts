@@ -121,5 +121,24 @@ export namespace ProductR {
             id: number;
         }
     }
+
+    export namespace delTag {
+
+        /** APIURL */
+        export const route = '/api/product/delTag';
+
+        /** Alias действия */
+        export const action = 'delTag';
+
+        /** Параметры api запроса */
+        export interface RequestI { 
+            product_id: number;
+            tag_id: number;
+        }
+
+        /** Параметры api ответа */
+        export interface ResponseI {
+        }
+    }
 }
 

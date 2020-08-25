@@ -99,6 +99,18 @@ router.post(R.addTag.route, async (req: System.MainRequest, res: any, next: any)
     })
 });
 
+/**
+ * Tag delete 
+ */
+router.post(R.delTag.route, async (req: System.MainRequest, res: any, next: any) => {
+    const ctrl = new ProductController(req, res);
+    await ctrl.faInit();
+    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    await ctrl.faAction('Удаление тега товара', () => {
+        return ctrl.productM.faDelTag(req.body);
+    })
+});
+
 export {
     router as ProductCtrl
 }

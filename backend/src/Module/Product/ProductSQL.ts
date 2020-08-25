@@ -145,6 +145,40 @@ export class ProductSQL extends BaseSQL {
         return resp;
     }
 
+    /**
+     * Удалить тэг товара 
+     * @param id 
+     * @param data 
+     */
+    public async faDelTag(productId: number, tagId: number): Promise<number> {
+        let ok = this.errorSys.isOk();
+        let resp: number = 0;
+        let productTagIdxE = new ProductTagIdxE();
+
+        try {
+            // Валидируем входящие данные
+            if (!this.modelValidatorSys.fValid(productTagIdxE.getRulesDel(), {
+                product_id: productId,
+                tag_id: tagId,
+            })) {
+                throw 'validation error';
+            }
+
+            await this.db(ProductTagIdxE.NAME)
+                .where({
+                    product_id: productId,
+                    tag_id: tagId,
+                })
+                .del()
+                ;
+
+        } catch (e) {
+            this.errorSys.errorEx(e, 'faDelTag', 'Не удалить тэг');
+        }
+
+        return resp;
+    }
+
 
     /**
      * Список тэгов товара

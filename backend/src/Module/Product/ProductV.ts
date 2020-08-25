@@ -159,3 +159,60 @@ export function insert(req: MainRequest, data: any) {
 
     return validator.getResult();
 }
+
+/**
+ * Add tag
+ * @param req MainRequest
+ * @param data RequestI
+ */
+export function addTag(req: MainRequest, data: any) {
+    let rules = new Components.ModelRulesC();
+
+    // ---------------------------------------
+
+    rules.set(rules.rule('product_id')
+        .type(Components.ModelRulesT.int)
+        .moreOrEq(0)
+        .errorEx('product_id', 'product_id')
+    );
+
+    rules.set(rules.rule('tag_id')
+        .type(Components.ModelRulesT.int)
+        .moreOrEq(0)
+        .errorEx('tag_id', 'tag_id')
+    );
+    // ---------------------------------------
+
+    let validator = new Components.ModelValidatorSys(req.sys.errorSys);
+    validator.fValid(rules.get(), data);
+
+    return validator.getResult();
+}
+/**
+ * Delete tag
+ * @param req MainRequest
+ * @param data RequestI
+ */
+export function delTag(req: MainRequest, data: any) {
+    let rules = new Components.ModelRulesC();
+
+    // ---------------------------------------
+
+    rules.set(rules.rule('product_id')
+        .type(Components.ModelRulesT.int)
+        .moreOrEq(0)
+        .errorEx('product_id', 'product_id')
+    );
+
+    rules.set(rules.rule('tag_id')
+        .type(Components.ModelRulesT.int)
+        .moreOrEq(0)
+        .errorEx('tag_id', 'tag_id')
+    );
+    // ---------------------------------------
+
+    let validator = new Components.ModelValidatorSys(req.sys.errorSys);
+    validator.fValid(rules.get(), data);
+
+    return validator.getResult();
+}

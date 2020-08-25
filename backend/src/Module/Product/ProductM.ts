@@ -152,7 +152,7 @@ export class ProductM extends System.BaseM {
 
         let list: ProductTagI[] = null;
         if (ok) {
-            list = await this.productSQL.faGetTagList(data.product_id)
+            list = await this.productSQL.faGetTagList(data.product_id);
         }
 
         // --------------------------
@@ -175,7 +175,7 @@ export class ProductM extends System.BaseM {
      */
     public async faAddTag(data: R.addTag.RequestI): Promise<R.addTag.ResponseI> {
 
-        data = <R.addTag.RequestI>V.insert(this.req, data);
+        data = <R.addTag.RequestI>V.addTag(this.req, data);
         let ok = this.errorSys.isOk();
 
         // --------------------------
@@ -183,7 +183,7 @@ export class ProductM extends System.BaseM {
         const aTag = await this.productSQL.faGetTagList(data.product_id);
         const tagIdx = aTag.findIndex(item => item.id == data.tag_id);
 
-        let id: number = null; 
+        let id: number = null;
         if (tagIdx == -1) {
             id = await this.productSQL.faAddTag(data.product_id, data.tag_id);
         }
@@ -194,6 +194,30 @@ export class ProductM extends System.BaseM {
         if (ok) { // Формирование ответа
             out = {
                 id,
+            };
+        }
+
+        return out;
+    }
+    // =====================================
+
+    /**
+     * Удалить тег товара 
+     * @param data 
+     */
+    public async faDelTag(data: R.delTag.RequestI): Promise<R.delTag.ResponseI> {
+
+        data = <R.delTag.RequestI>V.delTag(this.req, data);
+        let ok = this.errorSys.isOk();
+
+        // --------------------------
+        await this.productSQL.faDelTag(data.product_id, data.tag_id);
+
+        // --------------------------
+
+        let out: R.delTag.ResponseI = null;
+        if (ok) { // Формирование ответа
+            out = {
             };
         }
 
