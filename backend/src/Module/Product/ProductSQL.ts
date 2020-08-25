@@ -2,6 +2,7 @@ import BaseSQL from "@a-a-game-studio/aa-core/lib/System/BaseSQL";
 import { ProductE } from "./ProductE";
 import { ProductI } from "../../../../Entity/Interfaces/ProductI";
 import { SearchS } from "../../../../Entity/Service/SearchS";
+import { ProductTagIdxE } from "./ProductTagIdxE";
 
 /**
  * Продкты 
@@ -109,6 +110,37 @@ export class ProductSQL extends BaseSQL {
         }
 
         return ok;
+    }
+
+
+    /**
+     * Обновить продукт 
+     * @param id 
+     * @param data 
+     */
+    public async faAddProductTag(productId: number, tagId: number): Promise<number> {
+        let ok = this.errorSys.isOk();
+        let resp: number = 0;
+        let productTagIdxE = new ProductTagIdxE();
+
+        try {
+            // Валидируем входящие данные
+            if (!this.modelValidatorSys.fValid(productTagIdxE.getRulesInsert(), {
+                product_id: productId,
+                tag_id: tagId,
+            })) {
+                throw 'validation error';
+            }
+
+            resp = (await this.db(ProductTagIdxE.NAME)
+                .insert(this.modelValidatorSys.getResult())
+            )[0];
+            
+        } catch (e) {
+            this.errorSys.errorEx(e, 'faAddProductTag', 'Не добавить тэг');
+        }
+
+        return resp;
     }
 
 }
