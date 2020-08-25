@@ -13,6 +13,7 @@ import R = ProductR
 import * as V from './ProductV'
 import { SearchS } from "../../../../Entity/Service/SearchS";
 import { ProductI } from "../../../../Entity/Interfaces/ProductI";
+import { ProductTagI } from "../../../../Entity/Interfaces/ProductTagI";
 
 /**
  * Товыры
@@ -136,4 +137,33 @@ export class ProductM extends System.BaseM {
         return out;
     }
     // =====================================
+
+
+    /**
+     * Тэги товара
+     * @param data 
+     */
+    public async faProductTagList(data: R.tagList.RequestI): Promise<R.tagList.ResponseI> {
+
+        data = <R.tagList.RequestI>V.list(this.req, data);
+        let ok = this.errorSys.isOk();
+
+        // --------------------------
+
+        let list: ProductTagI[] = null;
+        if (ok) {
+            list = await this.productSQL.faGetTagList(data.product_id)
+        }
+
+        // --------------------------
+
+        let out: R.tagList.ResponseI = null;
+        if (ok) { // Формирование ответа
+            out = {
+                list: list,
+            };
+        }
+
+        return out;
+    }
 }

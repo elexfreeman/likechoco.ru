@@ -75,6 +75,18 @@ router.post(R.getById.route, async (req: System.MainRequest, res: any, next: any
     })
 });
 
+/**
+ * Tag list 
+ */
+router.post(R.tagList.route, async (req: System.MainRequest, res: any, next: any) => {
+    const ctrl = new ProductController(req, res);
+    await ctrl.faInit();
+    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    await ctrl.faAction('Получение списка тэгов товара', () => {
+        return ctrl.productM.faProductTagList(req.body);
+    })
+});
+
 export {
     router as ProductCtrl
 }

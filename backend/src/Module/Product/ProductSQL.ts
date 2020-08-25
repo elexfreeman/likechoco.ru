@@ -3,6 +3,8 @@ import { ProductE } from "./ProductE";
 import { ProductI } from "../../../../Entity/Interfaces/ProductI";
 import { SearchS } from "../../../../Entity/Service/SearchS";
 import { ProductTagIdxE } from "./ProductTagIdxE";
+import { ProductTagI } from "../../../../Entity/Interfaces/ProductTagI";
+import { ProductTagE } from "../ProductTag/ProductTagE";
 
 /**
  * Продкты 
@@ -135,13 +137,40 @@ export class ProductSQL extends BaseSQL {
             resp = (await this.db(ProductTagIdxE.NAME)
                 .insert(this.modelValidatorSys.getResult())
             )[0];
-            
+
         } catch (e) {
             this.errorSys.errorEx(e, 'faAddProductTag', 'Не добавить тэг');
         }
 
         return resp;
     }
+
+
+    /**
+     * Список тэгов товара
+     */
+    public async faGetTagList(productId: number): Promise<ProductTagI[]> {
+        let ok = true;
+        let resp: ProductI[];
+
+        if (ok) {
+            let sql = `SELECT pt.* FROM ${ProductTagE.NAME} pt
+                JOIN ${ProductTagIdxE.NAME} pt_idx
+                ON pt_idx.tag_id=pt.id
+                WHERE
+                pt_idx.product_id = :product_id
+            `
+            try {
+                resp = (await this.db.raw(sql, { product_id: productId }))[0];
+            } catch (e) {
+                ok = false;
+                this.errorSys.errorEx(e, 'Product tag list', 'Не удалось получить информацию о Product tag list');
+            }
+        }
+
+        return resp;
+    }
+
 
 }
 
