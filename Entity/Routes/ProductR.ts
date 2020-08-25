@@ -1,5 +1,6 @@
 import { ProductI } from "../Interfaces/ProductI";
 import { ProductTagI } from "../Interfaces/ProductTagI";
+import { SearchParamI } from "../Service/SearchS";
 
 /**
  * Товар
@@ -16,10 +17,7 @@ export namespace ProductR {
         export const action = 'list';
 
         /** Параметры api запроса */
-        export interface RequestI {
-            nLimit: number;
-            nOffset: number;
-            sSearchString: string;
+        export interface RequestI extends SearchParamI {
         }
 
         /** Параметры api ответа */

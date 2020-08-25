@@ -1,4 +1,5 @@
 import { ProductCategoryI } from "../Interfaces/ProductCategoryI";
+import { SearchParamI } from "../Service/SearchS";
 
 /**
  * Категория товара 
@@ -15,10 +16,7 @@ export namespace ProductCategoryR {
         export const action = 'list';
 
         /** Параметры api запроса */
-        export interface RequestI {
-            nLimit: number;
-            nOffset: number;
-            sSearchString: string;
+        export interface RequestI extends SearchParamI {
         }
 
         /** Параметры api ответа */

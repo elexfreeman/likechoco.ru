@@ -1,33 +1,34 @@
-import { ProductTagI } from "../Interfaces/ProductTagI";
+import { ProductCategoryVarI } from "../Interfaces/ProductCategoryVarI";
 import { SearchParamI } from "../Service/SearchS";
 
 /**
- * Тэг товара
+ * Категория товара 
  */
-export namespace ProductTagR {
+export namespace ProductCategoryVarR {
     // =======================================================
     /** Начальные данные */
     export namespace list {
 
         /** APIURL */
-        export const route = '/api/productTag/list';
+        export const route = '/api/productCategoryVar/list';
 
         /** Alias действия */
         export const action = 'list';
 
         /** Параметры api запроса */
         export interface RequestI extends SearchParamI {
+            product_category_id: number;
         }
 
         /** Параметры api ответа */
         export interface ResponseI {
-            list: ProductTagI[];
+            list: ProductCategoryVarI[];
         }
     }
     export namespace getById {
 
         /** APIURL */
-        export const route = '/api/productTag/getById';
+        export const route = '/api/productCategoryVar/getById';
 
         /** Alias действия */
         export const action = 'getById';
@@ -38,7 +39,7 @@ export namespace ProductTagR {
         }
 
         /** Параметры api ответа */
-        export interface ResponseI extends ProductTagI{
+        export interface ResponseI extends ProductCategoryVarI{
         }
     }
 
@@ -46,13 +47,13 @@ export namespace ProductTagR {
     export namespace insert {
 
         /** APIURL */
-        export const route = '/api/productTag/insert';
+        export const route = '/api/productCategoryVar/insert';
 
         /** Alias действия */
         export const action = 'insert';
 
         /** Параметры api запроса */
-        export interface RequestI extends ProductTagI {
+        export interface RequestI extends ProductCategoryVarI {
         }
 
         /** Параметры api ответа */
@@ -64,13 +65,13 @@ export namespace ProductTagR {
     export namespace update {
 
         /** APIURL */
-        export const route = '/api/productTag/update';
+        export const route = '/api/productCategoryVar/update';
 
         /** Alias действия */
         export const action = 'insert';
 
         /** Параметры api запроса */
-        export interface RequestI extends ProductTagI {
+        export interface RequestI extends ProductCategoryVarI {
         }
 
         /** Параметры api ответа */
