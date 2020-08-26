@@ -78,6 +78,12 @@ export function update(req: MainRequest, data: any) {
         .errorEx('description', 'description')
     );
 
+    rules.set(rules.rule('var_type')
+        .type(Components.ModelRulesT.int)
+        .moreOrEq(0)
+        .errorEx('var_type', 'var_type')
+    );
+
     // ---------------------------------------
     let validator = new Components.ModelValidatorSys(req.sys.errorSys);
     validator.fValid(rules.get(), data);
@@ -138,6 +144,12 @@ export function insert(req: MainRequest, data: any) {
         .type(Components.ModelRulesT.int)
         .moreOrEq(0)
         .errorEx('product_category_id', 'product_category_id')
+    );
+
+    rules.set(rules.rule('var_type')
+        .type(Components.ModelRulesT.int)
+        .moreOrEq(0)
+        .errorEx('var_type', 'var_type')
     );
 
     // ---------------------------------------
