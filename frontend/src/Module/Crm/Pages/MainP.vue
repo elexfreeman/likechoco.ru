@@ -1,6 +1,7 @@
 <template>
   <div>
     Main page
+    <CTable :aRow="aRow" :aColumn="aColumn"></CTable>
   </div>
 </template>
 

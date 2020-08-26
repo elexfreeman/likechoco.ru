@@ -1,3 +1,4 @@
+import CTable from "../../Components/Table/CTable.vue";
 export default {
     name: "MainP",
     data() {
@@ -13,6 +14,27 @@ export default {
         onLoad() {
             return this.$store.onLoad;
         },
+        aRow() {
+            return [
+                { id: 1, caption: 'Caption' },
+                { id: 1, caption: 'Caption' },
+                { id: 1, caption: 'Caption' },
+                { id: 1, caption: 'Caption' },
+                { id: 1, caption: 'Caption' },
+            ]
+        },
+        aColumn() {
+            return [
+                {
+                    label: 'id',
+                    field: 'id',
+                },
+                {
+                    label: 'caption',
+                    field: 'caption',
+                },
+            ]
+        }
     }, // computed
-    components: {}, // components
+    components: { CTable }, // components
 };
