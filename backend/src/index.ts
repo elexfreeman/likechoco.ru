@@ -5,6 +5,8 @@ import { MemSysI } from '@a-a-game-studio/aa-redis-sys/lib/CacheSys';
 import { ProductCtrl } from "./Module/Product/ProductCtrl";
 import { ProductTagCtrl } from "./Module/ProductTag/ProductTagCtrl";
 import { ProductCategoryCtrl } from "./Module/ProductCategory/ProductCategoryCtrl";
+import { ProductVarCtrl } from "./Module/ProductVar/ProductVarCtrl";
+import { ProductCategoryVarCtrl } from "./Module/ProductCategoryVar/ProductCategoryVarCtrl";
 const mem: MemSysI = {}
 
 class MyApp extends App {
@@ -22,6 +24,16 @@ class MyApp extends App {
     public fUseProductCategory(): App {
         console.log('+ Use product category');
         this.objExpress.use(ProductCategoryCtrl)
+        return this;
+    }
+    public fUseProductVar(): App {
+        console.log('+ Use product var');
+        this.objExpress.use(ProductVarCtrl)
+        return this;
+    }
+    public fUseProductCategoryVar(): App {
+        console.log('+ Use product category var');
+        this.objExpress.use(ProductCategoryVarCtrl)
         return this;
     }
 
@@ -48,5 +60,7 @@ app.fUseLoger();
 app.fUseProduct();
 app.fUseProductTag();
 app.fUseProductCategory();
+app.fUseProductVar();
+app.fUseProductCategoryVar();
 
 app.fStart(); // Запускаем приложение
