@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue, { VNode } from "vue";
 import VueRouter from 'vue-router';
 import Crm from '../Module/Crm/Crm.vue';
 import { store } from '../store';
@@ -8,9 +8,6 @@ import VueGoodTablePlugin from 'vue-good-table';
 // import the styles
 
 Vue.use(VueGoodTablePlugin);
-
-
-
 async function faMain() {
     console.log('Start crm');
 

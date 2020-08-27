@@ -1,4 +1,5 @@
 import CTable from "../../Components/Table/CTable.vue";
+import TTable from "../../Components/Table/TTable.vue";
 export default {
     name: "MainP",
     data() {
@@ -36,5 +37,5 @@ export default {
             ]
         }
     }, // computed
-    components: { CTable }, // components
+    components: { CTable, TTable }, // components
 };
