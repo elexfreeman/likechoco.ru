@@ -1,3 +1,6 @@
+/**
+ * Обработчик списков для таблицы
+ */
 export class ListLoader {
 
     protected sUrl: string;

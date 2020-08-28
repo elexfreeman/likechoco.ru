@@ -23,6 +23,7 @@ export namespace ProductR {
         /** Параметры api ответа */
         export interface ResponseI {
             list: ProductI[];
+            total: number;
         }
     }
     export namespace getById {

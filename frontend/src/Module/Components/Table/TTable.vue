@@ -77,6 +77,7 @@ export class PaginationOptions {
     name: "TTable",
 })
 export default class TTable extends Vue {
+
     //data
     private serverParams = {};
     private totalRecords = 10;

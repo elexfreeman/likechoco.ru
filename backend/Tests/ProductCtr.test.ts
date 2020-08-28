@@ -34,7 +34,8 @@ async function run() {
                     'token': '12345',
                 }
             })).data;
-
+            console.log(resp.data);
+            
         assert.ok(resp.data.list.length > 0);
     }); //it ****
 

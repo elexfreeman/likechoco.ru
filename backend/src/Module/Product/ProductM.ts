@@ -35,9 +35,11 @@ export class ProductM extends System.BaseM {
 
         // --------------------------
 
-        let vProduct: ProductI[] = [];
+        let aList: ProductI[] = [];
+        let nTotal = 0;
         if (ok) {
-            vProduct = await this.productSQL.faList(new SearchS().fSetParam(data));
+            aList = await this.productSQL.faList(new SearchS().fSetParam(data));
+            nTotal = await this.productSQL.faListTotal(new SearchS().fSetParam(data));
         }
 
         // --------------------------
@@ -45,7 +47,8 @@ export class ProductM extends System.BaseM {
         let out: R.list.ResponseI = null;
         if (ok) { // Формирование ответа
             out = {
-                list: vProduct,
+                list: aList,
+                total: nTotal,
             };
         }
 

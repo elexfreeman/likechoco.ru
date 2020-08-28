@@ -32,6 +32,27 @@ export class ProductSQL extends BaseSQL {
         return resp;
     }
 
+    /**
+     * Список 
+     */
+    public async faListTotal(search: SearchS): Promise<number> {
+        let ok = true;
+        let resp: number = 0;
+
+        if (ok) {
+            let sql = `SELECT count(*) cc FROM ${ProductE.NAME} p `;
+
+            try {
+                resp = (await this.db.raw(sql, search.fGetSearchParam()))[0][0]['cc'];
+            } catch (e) {
+                ok = false;
+                this.errorSys.errorEx(e, 'faListTotal', 'Не удалось получить информацию о faListTotal');
+            }
+        }
+
+        return resp;
+    }
+
 
     /**
      * Получить ProductI
