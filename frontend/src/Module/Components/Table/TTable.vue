@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="paginationOptions">
         <vue-good-table
             mode="remote"
             @on-page-change="onPageChange"
@@ -23,71 +23,28 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 import { ListLoader } from "../../Sys/ListLoader";
-
-export interface RowI {
-    [key: string]: any;
-}
-
-export enum SortTypeEnum {
-    desc = "desc",
-    asc = "asc",
-}
-
-export interface ColumnI {
-    label: string;
-    field: string;
-    sortable?: boolean;
-    firstSortType?: SortTypeEnum;
-    sortFn?: (x, y, col, rowX, rowY) => boolean;
-    formatFn?: (val: any) => any;
-    html?: boolean;
-    width?: number | string;
-    hidden?: boolean;
-    thClass?: string;
-    tdClass?: string | ((row: RowI) => string);
-    globalSearchDisabled?: boolean;
-}
-
-export class PaginationOptions {
-    public enabled: boolean = true;
-    public mode: string = "pages";
-    public perPage: number = 20;
-    public position: string = "top";
-    public perPageDropdown: [20, 50, 100];
-    public dropdownAllowAll: false;
-    public setCurrentPage: number = 0;
-    public nextLabel: string = "next";
-    public prevLabel: string = "prev";
-    public rowsPerPageLabel: string = "Rows per page";
-    public ofLabel: string = "of";
-    public pageLabel: string = "page"; // for 'pages' mod;
-    public allLabel: string = "All";
-
-    static InitRus() {
-        const out = new PaginationOptions();
-        out.nextLabel = "далее";
-        out.prevLabel = "назад";
-        out.rowsPerPageLabel = "Строк на странице";
-
-        return out;
-    }
-}
+import {
+    RowI,
+    ColumnI,
+    PaginationOptionsI,
+} from "../../../../../Entity/Interfaces/ListI";
+import { log } from "util";
 
 @Component({
     name: "TTable",
 })
 export default class TTable extends Vue {
-
     //data
     private serverParams = {};
     private totalRecords = 10;
     private isLoading = false;
 
+    private aRow: RowI = [];
+    private aColumn: ColumnI[] = [];
+    private paginationOptions: PaginationOptionsI;
+
     // props
-    @Prop({ required: true }) readonly aRow: RowI[];
-    @Prop({ required: true }) readonly aColumn: ColumnI[];
     @Prop({ required: true }) readonly cListLoader: ListLoader;
-    @Prop({ required: true }) readonly paginationOptions: PaginationOptions;
 
     // computed
     get totalRecord(): number {
@@ -99,6 +56,16 @@ export default class TTable extends Vue {
     }
 
     // methods
+
+    mounted() {
+        console.log("mounted");
+        const oInfo = this.cListLoader.faGetInfo().then(data=> {
+            console.log(data);
+            
+        });
+        console.log(oInfo);
+        
+    }
 
     updateParams(newProps) {
         this.serverParams = Object.assign({}, this.serverParams, newProps);

@@ -7,6 +7,7 @@ import { ProductTagCtrl } from "./Module/ProductTag/ProductTagCtrl";
 import { ProductCategoryCtrl } from "./Module/ProductCategory/ProductCategoryCtrl";
 import { ProductVarCtrl } from "./Module/ProductVar/ProductVarCtrl";
 import { ProductCategoryVarCtrl } from "./Module/ProductCategoryVar/ProductCategoryVarCtrl";
+import { ProductListCtrl } from "./Module/Product/ProductListCtrl";
 const mem: MemSysI = {}
 
 class MyApp extends App {
@@ -14,6 +15,7 @@ class MyApp extends App {
     public fUseProduct(): App {
         console.log('+ Use product');
         this.objExpress.use(ProductCtrl)
+        this.objExpress.use(ProductListCtrl)
         return this;
     }
     public fUseProductTag(): App {

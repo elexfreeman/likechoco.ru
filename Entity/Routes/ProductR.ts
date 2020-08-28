@@ -1,6 +1,7 @@
 import { ProductI } from "../Interfaces/ProductI";
 import { ProductTagI } from "../Interfaces/ProductTagI";
 import { SearchParamI } from "../Service/SearchS";
+import { ColumnI, PaginationOptionsI, ListInfoResponseI, ListResponseI } from "../Interfaces/ListI";
 
 /**
  * Товар
@@ -21,11 +22,28 @@ export namespace ProductR {
         }
 
         /** Параметры api ответа */
-        export interface ResponseI {
-            list: ProductI[];
-            total: number;
+        export interface ResponseI extends ListResponseI<ProductI> {
         }
     }
+    export namespace listInfo {
+
+        /** APIURL */
+        export const route = '/api/product/list/info';
+
+        /** Alias действия */
+        export const action = 'listInfo';
+
+        /** Параметры api запроса */
+        export interface RequestI {
+        }
+
+        /** Параметры api ответа */
+        export interface ResponseI extends ListInfoResponseI {
+        }
+    }
+
+    //++++++++++++
+
     export namespace getById {
 
         /** APIURL */
@@ -40,7 +58,7 @@ export namespace ProductR {
         }
 
         /** Параметры api ответа */
-        export interface ResponseI extends ProductI{
+        export interface ResponseI extends ProductI {
         }
     }
 
@@ -110,7 +128,7 @@ export namespace ProductR {
         export const action = 'addTag';
 
         /** Параметры api запроса */
-        export interface RequestI { 
+        export interface RequestI {
             product_id: number;
             tag_id: number;
         }
@@ -130,7 +148,7 @@ export namespace ProductR {
         export const action = 'delTag';
 
         /** Параметры api запроса */
-        export interface RequestI { 
+        export interface RequestI {
             product_id: number;
             tag_id: number;
         }

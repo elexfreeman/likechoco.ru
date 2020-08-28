@@ -18,12 +18,11 @@
 
 <script lang='ts'>
 import { Component, Prop, Vue } from "vue-property-decorator";
-import TTable, {
-    PaginationOptions,
-    RowI,
-    ColumnI,
-} from "../../Components/Table/TTable.vue";
+import TTable from "../../Components/Table/TTable.vue";
 import { ListLoader } from "../../Sys/ListLoader";
+
+import { RowI, ColumnI } from "../../../../../Entity/Interfaces/ListI";
+import { PaginationOptionsS } from "../../../../../Entity/Service/PaginationOptionsS";
 
 @Component({
     components: { TTable },
@@ -34,11 +33,14 @@ export default class MainP extends Vue {
     private serverParams = {};
     private totalRecords = 10;
     private isLoading = false;
-    private paginationOptions: PaginationOptions = PaginationOptions.InitRus();
-    private cListLoader = new ListLoader("url");
+    private paginationOptions: PaginationOptionsS = PaginationOptionsS.InitRus();
     // props
 
     // computed
+    get cListLoader(): ListLoader {
+        return new ListLoader("/product");
+    }
+
     get totalRecord(): number {
         return 10;
     }

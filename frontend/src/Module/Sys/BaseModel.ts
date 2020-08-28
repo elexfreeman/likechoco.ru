@@ -41,10 +41,10 @@ export class BaseModel {
 
 
     fApiHeaders() {
-        let apikey = getCookie('apikey');
+        let apikey = getCookie('token');
         return {
             'Content-Type': 'application/json',
-            'apikey': apikey,
+            'token': apikey,
         };
     };
 
@@ -62,6 +62,8 @@ export class BaseModel {
                 })
             ).data;
         } catch (e) {
+            console.log(e);
+            
             resp = e.response.data;
         }
         return resp;
