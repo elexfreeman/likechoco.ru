@@ -1,4 +1,6 @@
-
+/**
+ * Список для vue-good-table
+ */
 export interface RowI {
     [key: string]: any;
 }

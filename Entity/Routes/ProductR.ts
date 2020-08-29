@@ -2,7 +2,7 @@ import { ProductI } from "../Interfaces/ProductI";
 import { ProductTagI } from "../Interfaces/ProductTagI";
 import { SearchParamI } from "../Service/SearchS";
 import { ColumnI, PaginationOptionsI, ListInfoResponseI, ListResponseI } from "../Interfaces/ListI";
-
+import { TableI } from "../Interfaces/TableI";
 /**
  * Товар
  */
@@ -155,6 +155,24 @@ export namespace ProductR {
 
         /** Параметры api ответа */
         export interface ResponseI {
+        }
+    }
+
+
+    export namespace info {
+
+        /** APIURL */
+        export const route = '/api/product/info';
+
+        /** Alias действия */
+        export const action = 'info';
+
+        /** Параметры api запроса */
+        export interface RequestI {
+        }
+
+        /** Параметры api ответа */
+        export interface ResponseI extends TableI {
         }
     }
 }
