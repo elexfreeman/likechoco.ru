@@ -46,8 +46,6 @@ export class ProductInfoM extends System.BaseM {
             },
         ];
 
-
-
         // --------------------------
 
         let out: R.info.ResponseI = null;

@@ -7,6 +7,8 @@
                 :paginationOptions="paginationOptions"
                 :aRow="aRow"
                 :aColumn="aColumn"
+                :oEditBtn="{sUrl:''}"
+                :oDelBtn="{sUrl:''}"
             >
                 <template slot="default" slot-scope="props">
                     <span>{{props.tableData.formattedRow[props.tableData.column.field]}}</span>
@@ -28,7 +30,6 @@ import { PaginationOptionsS } from "../../../../../Entity/Service/PaginationOpti
     components: { TTable },
 })
 export default class MainP extends Vue {
-
     //data
     private serverParams = {};
     private totalRecords = 10;

@@ -6,7 +6,7 @@
             @on-sort-change="onSortChange"
             @on-column-filter="onColumnFilter"
             @on-per-page-change="onPerPageChange"
-            :totalRows="nTotalRecords"
+            :totalRows="totalRecords"
             :isLoading.sync="isLoading"
             :pagination-options="paginationOptions"
             :columns="aColumn"
@@ -14,16 +14,6 @@
         >
             <template slot="table-row" slot-scope="props">
                 <slot :tableData="props"></slot>
-
-                <div class="d-flex justify-content-end" v-if="props.column.field == 'buttons'">
-                    <button v-if="oEditBtn" type="button" class="btn btn-light">
-                        <i class="fa fa-edit"></i>
-                    </button>
-                    <button v-if="oDelBtn" type="button" class="btn btn-light">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </div>
-
             </template>
         </vue-good-table>
     </div>
@@ -50,11 +40,6 @@ export interface ServerParamsI {
     perPage: 20;
 }
 
-export interface BtnI {
-    sToolTip?: string;
-    sUrl: string;
-}
-
 @Component({
     name: "TTable",
 })
@@ -69,23 +54,20 @@ export default class TTable extends Vue {
         page: 1,
         perPage: 20,
     };
-
-    private nTotalRecords = 10;
+    private totalRecords = 10;
     private isLoading = false;
 
     private aRow: RowI = [];
     private aColumn: ColumnI[] = [];
     private paginationOptions: PaginationOptionsI = null;
 
-    private bShowBtns = false;
-
     // props
     @Prop({ required: true }) readonly cListLoader: ListLoader;
-    @Prop({ required: false }) readonly oEditBtn: BtnI;
-    @Prop({ required: false }) readonly oDelBtn: BtnI;
-    @Prop({ required: false }) readonly oAddBtn: BtnI;
 
     // computed
+    get totalRecord(): number {
+        return 10;
+    }
 
     get isLoadin2g(): boolean {
         return false;
@@ -94,28 +76,19 @@ export default class TTable extends Vue {
     // methods
 
     async mounted() {
+        console.log("mounted");
         const oInfo = await this.cListLoader.faGetInfo();
+        console.log(oInfo);
 
-        // параметры пагинации
         this.paginationOptions = oInfo.paginationOptions;
-        // параметры столбцов
         this.aColumn = oInfo.aColumn;
-
-        // кнопки 
-        this.bShowBtns = Boolean(this.oEditBtn)||Boolean(this.oDelBtn);
-        if (this.bShowBtns) {
-            this.aColumn.push({
-                label: "",
-                field: "buttons",
-                sortable: false,
-            });
-        }
 
         this.faLoadItems();
     }
 
     updateParams(newProps) {
         this.serverParams = Object.assign({}, this.serverParams, newProps);
+        console.log(this.serverParams);
     }
 
     onPageChange(params) {
@@ -150,7 +123,7 @@ export default class TTable extends Vue {
 
         const resp = await this.cListLoader.faLoad(searchS);
         this.aRow = resp.list;
-        this.nTotalRecords = resp.total;
+        this.totalRecords = resp.total;
     }
 
     components: {};
