@@ -116,9 +116,11 @@ export default class TTable extends Vue {
     // load items is what brings back the rows from server
     async faLoadItems() {
         const searchS = new SearchS();
-        searchS.fSetOffest(this.serverParams.page * this.serverParams.perPage);
+        searchS.fSetOffest(
+            (this.serverParams.page - 1) * this.serverParams.perPage
+        );
         searchS.fSetLimit(this.serverParams.perPage);
-        
+
         const resp = await this.cListLoader.faLoad(searchS);
         this.aRow = resp.list;
         this.totalRecords = resp.total;

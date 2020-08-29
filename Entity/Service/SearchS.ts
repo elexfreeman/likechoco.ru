@@ -40,8 +40,10 @@ export class SearchS {
         }
     }
 
-    fSetParam(data: SearchParamI):SearchS {
-        
+    fSetParam(data: SearchParamI): SearchS {
+        this.nLimit = data.nLimit;
+        this.nOffset = data.nOffset;
+        this.sSearchString = data.sSearchString;
         return this;
     }
 }

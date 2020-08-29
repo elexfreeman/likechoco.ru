@@ -9,7 +9,7 @@ export class PaginationOptionsS implements PaginationOptionsI {
     public mode: string = "pages";
     public perPage: number = 20;
     public position: PaginationPositionEnum = PaginationPositionEnum.bottom;
-    public perPageDropdown: number[] = [20, 50, 100];
+    public perPageDropdown: number[] = [5, 20, 50, 100];
     public dropdownAllowAll: boolean = false;
     public setCurrentPage: number = 0;
     public nextLabel: string = "next";

@@ -14,8 +14,6 @@ export class ListLoader {
 
     constructor(sUrl: string) {
         this.sUrl = sUrl;
-        console.log(sUrl);
-
         this.baseModel = new BaseModel(config);
     }
 
@@ -23,10 +21,7 @@ export class ListLoader {
      * Загрзка основного списка
      */
     public async faLoad(searchS: SearchS): Promise<ListResponseI<any>> {
-
         const url = `${this.sUrl}/list`;
-        console.log(url);
-
         const respApi: ApiResponseI<ListResponseI<any>> =
             await this.baseModel.faApiRequest(searchS, url);
         return respApi.data;
@@ -36,11 +31,7 @@ export class ListLoader {
      * Информация о таблице
      */
     public async faGetInfo(): Promise<ListInfoResponseI> {
-        console.log(this);
-
         const url = `${this.sUrl}/list/info`;
-        console.log(url);
-
         const respApi: ApiResponseI<ListInfoResponseI> =
             await this.baseModel.faApiRequest({}, url);
         return respApi.data;
