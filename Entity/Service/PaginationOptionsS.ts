@@ -1,15 +1,16 @@
-import { PaginationOptionsI } from "../Interfaces/ListI";
+import { PaginationOptionsI, PaginationPositionEnum } from "../Interfaces/ListI";
 
 /**
  * Опции для пагинации таблицы
  */
 export class PaginationOptionsS implements PaginationOptionsI {
+
     public enabled: boolean = true;
     public mode: string = "pages";
     public perPage: number = 20;
-    public position: string = "top";
-    public perPageDropdown: [20, 50, 100];
-    public dropdownAllowAll: false;
+    public position: PaginationPositionEnum = PaginationPositionEnum.bottom;
+    public perPageDropdown: number[] = [20, 50, 100];
+    public dropdownAllowAll: boolean = false;
     public setCurrentPage: number = 0;
     public nextLabel: string = "next";
     public prevLabel: string = "prev";
@@ -23,7 +24,9 @@ export class PaginationOptionsS implements PaginationOptionsI {
         out.nextLabel = "далее";
         out.prevLabel = "назад";
         out.rowsPerPageLabel = "Строк на странице";
-
+        out.pageLabel = 'стр.';
+        out.ofLabel = 'из';
+        out.allLabel = 'Все';
         return out;
     }
 }

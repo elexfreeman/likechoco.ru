@@ -9,7 +9,7 @@
                 :aColumn="aColumn"
             >
                 <template slot="default" slot-scope="props">
-                    <span>{{props}}</span>
+                    <span>{{props.tableData.formattedRow[props.tableData.column.field]}}</span>
                 </template>
             </TTable>
         </div>

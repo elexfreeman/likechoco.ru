@@ -14,6 +14,8 @@ import * as V from './ProductV'
 import { SearchS } from "../../../../Entity/Service/SearchS";
 import { ProductI } from "../../../../Entity/Interfaces/ProductI";
 import { ProductTagI } from "../../../../Entity/Interfaces/ProductTagI";
+import { PaginationOptionsI, ColumnI } from "../../../../Entity/Interfaces/ListI";
+import { PaginationOptionsS } from "../../../../Entity/Service/PaginationOptionsS";
 
 /**
  * Товыры
@@ -55,27 +57,36 @@ export class ProductListM extends System.BaseM {
         return out;
     }
 
-    public async faListInfo(data: R.list.RequestI): Promise<R.list.ResponseI> {
+    public async faListInfo(data: R.listInfo.RequestI): Promise<R.listInfo.ResponseI> {
 
-        data = <R.list.RequestI>V.list(this.req, data);
         let ok = this.errorSys.isOk();
 
         // --------------------------
 
-        let aList: ProductI[] = [];
-        let nTotal = 0;
-        if (ok) {
-            aList = await this.productSQL.faList(new SearchS().fSetParam(data));
-            nTotal = await this.productSQL.faListTotal(new SearchS().fSetParam(data));
-        }
+        const paginationOptions: PaginationOptionsI = PaginationOptionsS.InitRus();
+        const aColumn: ColumnI[] = [
+            {
+                label: 'id',
+                field: 'id',
+            },
+            {
+                label: 'caption',
+                field: 'caption',
+            },
+            {
+                label: 'description',
+                field: 'description',
+            },
+        ];
+
 
         // --------------------------
 
-        let out: R.list.ResponseI = null;
+        let out: R.listInfo.ResponseI = null;
         if (ok) { // Формирование ответа
             out = {
-                list: aList,
-                total: nTotal,
+                paginationOptions: paginationOptions,
+                aColumn: aColumn,
             };
         }
 

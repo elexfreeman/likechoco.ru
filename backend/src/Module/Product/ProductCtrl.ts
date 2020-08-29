@@ -32,7 +32,7 @@ export class ProductController extends System.BaseCtrl {
 router.post(R.list.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductController(req, res);
     await ctrl.faInit();
-    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
     await ctrl.faAction('Список товаров', () => {
         return ctrl.productM.faList(req.body);
     })
@@ -44,7 +44,7 @@ router.post(R.list.route, async (req: System.MainRequest, res: any, next: any) =
 router.post(R.insert.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductController(req, res);
     await ctrl.faInit();
-    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
     await ctrl.faAction('Добавление товаров', () => {
         return ctrl.productM.faInsert(req.body);
     })
@@ -57,7 +57,7 @@ router.post(R.insert.route, async (req: System.MainRequest, res: any, next: any)
 router.post(R.update.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductController(req, res);
     await ctrl.faInit();
-    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
     await ctrl.faAction('Обновленеи товара', () => {
         return ctrl.productM.faUpdate(req.body);
     })
@@ -69,7 +69,7 @@ router.post(R.update.route, async (req: System.MainRequest, res: any, next: any)
 router.post(R.getById.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductController(req, res);
     await ctrl.faInit();
-    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
     await ctrl.faAction('Получение товара', () => {
         return ctrl.productM.faGetById(req.body);
     })
@@ -81,7 +81,7 @@ router.post(R.getById.route, async (req: System.MainRequest, res: any, next: any
 router.post(R.tagList.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductController(req, res);
     await ctrl.faInit();
-    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
     await ctrl.faAction('Получение списка тэгов товара', () => {
         return ctrl.productM.faProductTagList(req.body);
     })
@@ -93,7 +93,7 @@ router.post(R.tagList.route, async (req: System.MainRequest, res: any, next: any
 router.post(R.addTag.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductController(req, res);
     await ctrl.faInit();
-    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
     await ctrl.faAction('Добавление тега товара', () => {
         return ctrl.productM.faAddTag(req.body);
     })
@@ -105,7 +105,7 @@ router.post(R.addTag.route, async (req: System.MainRequest, res: any, next: any)
 router.post(R.delTag.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductController(req, res);
     await ctrl.faInit();
-    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
     await ctrl.faAction('Удаление тега товара', () => {
         return ctrl.productM.faDelTag(req.body);
     })

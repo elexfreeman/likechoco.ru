@@ -2,6 +2,7 @@ import { ListInfoResponseI, ListResponseI } from "../../../../Entity/Interfaces/
 import { BaseModel } from "./BaseModel";
 import { config } from "../../Config";
 import { ApiResponseI } from "../../../../Entity/Interfaces/ApiResponseI";
+import { SearchS } from "../../../../Entity/Service/SearchS";
 
 /**
  * Обработчик списков для таблицы
@@ -14,19 +15,20 @@ export class ListLoader {
     constructor(sUrl: string) {
         this.sUrl = sUrl;
         console.log(sUrl);
-        
+
         this.baseModel = new BaseModel(config);
     }
 
     /**
      * Загрзка основного списка
      */
-    public async faLoad(): Promise<ListResponseI<any>> {
-        const url = config.apiUrl + '/' + this.sUrl + 'list';
+    public async faLoad(searchS: SearchS): Promise<ListResponseI<any>> {
+
+        const url = `${this.sUrl}/list`;
         console.log(url);
 
         const respApi: ApiResponseI<ListResponseI<any>> =
-            await this.baseModel.faApiRequest({}, url);
+            await this.baseModel.faApiRequest(searchS, url);
         return respApi.data;
     }
 
@@ -35,10 +37,10 @@ export class ListLoader {
      */
     public async faGetInfo(): Promise<ListInfoResponseI> {
         console.log(this);
-        
+
         const url = `${this.sUrl}/list/info`;
         console.log(url);
-        
+
         const respApi: ApiResponseI<ListInfoResponseI> =
             await this.baseModel.faApiRequest({}, url);
         return respApi.data;

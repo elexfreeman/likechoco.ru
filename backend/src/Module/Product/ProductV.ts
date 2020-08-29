@@ -29,7 +29,6 @@ export function list(req: MainRequest, data: any) {
 
     rules.set(rules.rule('sSearchString')
         .type(Components.ModelRulesT.text)
-        .minLen(2)
         .maxLen(100)
         .errorEx('sSearchString', 'sSearchString')
     );

@@ -23,11 +23,15 @@ export interface ColumnI {
     globalSearchDisabled?: boolean;
 }
 
+export enum PaginationPositionEnum {
+    top = 'top',
+    bottom = 'bottom',
+}
 export interface PaginationOptionsI {
     enabled: boolean;
     mode: string;
     perPage: number;
-    position: string;
+    position: PaginationPositionEnum;
     perPageDropdown: number[];
     dropdownAllowAll: boolean;
     setCurrentPage: number;
@@ -41,7 +45,7 @@ export interface PaginationOptionsI {
 
 export interface ListInfoResponseI {
     aColumn: ColumnI[];
-    PaginationOptionsI: PaginationOptionsI;
+    paginationOptions: PaginationOptionsI;
 }
 
 export interface ListResponseI<T> {

@@ -21,7 +21,7 @@
 
 <script lang='ts' >
 import { Component, Prop, Vue } from "vue-property-decorator";
-
+import { SearchS, SearchParamI } from "../../../../../Entity/Service/SearchS";
 import { ListLoader } from "../../Sys/ListLoader";
 import {
     RowI,
@@ -30,18 +30,36 @@ import {
 } from "../../../../../Entity/Interfaces/ListI";
 import { log } from "util";
 
+export interface ServerParamsI {
+    columnFilters: {};
+    sort: {
+        field: string;
+        type: string;
+    };
+    page: 1;
+    perPage: 20;
+}
+
 @Component({
     name: "TTable",
 })
 export default class TTable extends Vue {
     //data
-    private serverParams = {};
+    private serverParams: ServerParamsI = {
+        columnFilters: {},
+        sort: {
+            field: "",
+            type: "",
+        },
+        page: 1,
+        perPage: 20,
+    };
     private totalRecords = 10;
     private isLoading = false;
 
     private aRow: RowI = [];
     private aColumn: ColumnI[] = [];
-    private paginationOptions: PaginationOptionsI;
+    private paginationOptions: PaginationOptionsI = null;
 
     // props
     @Prop({ required: true }) readonly cListLoader: ListLoader;
@@ -57,50 +75,53 @@ export default class TTable extends Vue {
 
     // methods
 
-    mounted() {
+    async mounted() {
         console.log("mounted");
-        const oInfo = this.cListLoader.faGetInfo().then(data=> {
-            console.log(data);
-            
-        });
+        const oInfo = await this.cListLoader.faGetInfo();
         console.log(oInfo);
-        
+
+        this.paginationOptions = oInfo.paginationOptions;
+        this.aColumn = oInfo.aColumn;
+
+        this.faLoadItems();
     }
 
     updateParams(newProps) {
         this.serverParams = Object.assign({}, this.serverParams, newProps);
+        console.log(this.serverParams);
     }
 
     onPageChange(params) {
         this.updateParams({ page: params.currentPage });
-        this.loadItems();
+        this.faLoadItems();
     }
 
     onPerPageChange(params) {
         this.updateParams({ perPage: params.currentPerPage });
-        this.loadItems();
+        this.faLoadItems();
     }
 
     onSortChange(params) {
         this.updateParams({
-            sort: [
-                {
-                    type: params.sortType,
-                    field: this.aColumn[params.columnIndex].field,
-                },
-            ],
+            sort: params[0],
         });
-        this.loadItems();
+        this.faLoadItems();
     }
 
     onColumnFilter(params) {
         this.updateParams(params);
-        this.loadItems();
+        this.faLoadItems();
     }
 
     // load items is what brings back the rows from server
-    loadItems() {
-        this.cListLoader.faLoad();
+    async faLoadItems() {
+        const searchS = new SearchS();
+        searchS.fSetOffest(this.serverParams.page * this.serverParams.perPage);
+        searchS.fSetLimit(this.serverParams.perPage);
+        
+        const resp = await this.cListLoader.faLoad(searchS);
+        this.aRow = resp.list;
+        this.totalRecords = resp.total;
     }
 
     components: {};
