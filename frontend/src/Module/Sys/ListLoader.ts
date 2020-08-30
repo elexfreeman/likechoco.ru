@@ -1,21 +1,13 @@
 import { ListInfoResponseI, ListResponseI } from "../../../../Entity/Interfaces/ListI";
-import { BaseModel } from "./BaseModel";
-import { config } from "../../Config";
 import { ApiResponseI } from "../../../../Entity/Interfaces/ApiResponseI";
 import { SearchS } from "../../../../Entity/Service/SearchS";
+import { BaseLoader } from "./BaseLoader";
 
 /**
  * Обработчик списков для таблицы
  */
-export class ListLoader {
+export class ListLoader extends BaseLoader {
 
-    protected sUrl: string;
-    protected baseModel: BaseModel;
-
-    constructor(sUrl: string) {
-        this.sUrl = sUrl;
-        this.baseModel = new BaseModel(config);
-    }
 
     /**
      * Загрзка основного списка

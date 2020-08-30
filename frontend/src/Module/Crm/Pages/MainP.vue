@@ -25,11 +25,14 @@ import { ListLoader } from "../../Sys/ListLoader";
 
 import { RowI, ColumnI } from "../../../../../Entity/Interfaces/ListI";
 import { PaginationOptionsS } from "../../../../../Entity/Service/PaginationOptionsS";
+import { config } from "../../../Config";
+import { BaseModel } from "../../Sys/BaseModel";
 
 @Component({
     components: { TTable },
 })
 export default class MainP extends Vue {
+
     //data
     private serverParams = {};
     private totalRecords = 10;
@@ -39,7 +42,7 @@ export default class MainP extends Vue {
 
     // computed
     get cListLoader(): ListLoader {
-        return new ListLoader("/product");
+        return new ListLoader("/product", new BaseModel(config));
     }
 
     get totalRecord(): number {

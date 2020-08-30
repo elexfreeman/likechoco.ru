@@ -1,24 +1,22 @@
 import * as TableI from "../../../../Entity/Interfaces/TableI";
 import { BaseModel } from "./BaseModel";
 import { ApiResponseI } from "../../../../Entity/Interfaces/ApiResponseI";
+import { BaseLoader } from "./BaseLoader";
 
 
 /**
  * Загрузчик информации о таблице
  */
-export class TableInfoLoader implements TableI.TableI {
+export class TableInfoLoader extends BaseLoader implements TableI.TableI {
 
-    public sCaption: string;
-    public sDescription: string;
-    public aColumn: TableI.ColumnI[];
+    public sCaption: string = '';
+    public sDescription: string = '';
+    public aColumn: TableI.ColumnI[] = [];
+
 
     protected sUrl: string;
     protected baseModel: BaseModel;
 
-    constructor(sUrl: string, baseModel: BaseModel) {
-        this.sUrl = sUrl;
-        this.baseModel = baseModel;
-    }
 
     public fSetData(data: TableI.TableI) {
         this.aColumn = data.aColumn;
@@ -36,5 +34,4 @@ export class TableInfoLoader implements TableI.TableI {
 
         return respApi.data;
     }
-
 }
