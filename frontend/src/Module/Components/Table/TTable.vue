@@ -38,7 +38,6 @@ import {
     ColumnI,
     PaginationOptionsI,
 } from "../../../../../Entity/Interfaces/ListI";
-import { log } from "util";
 
 export interface ServerParamsI {
     columnFilters: {};
