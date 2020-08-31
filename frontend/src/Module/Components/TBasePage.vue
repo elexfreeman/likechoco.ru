@@ -1,9 +1,12 @@
 <template>
     <div>
-        <div class="container pt-4">
-            <h2>{{sCaption}}</h2>
+        <div class="container pt-4 page-content">
+            <div class="slot-header d-flex justify-content-between align-items-center">
+                <div class="header-caption">{{sCaption}}</div>
+                <slot name="header"></slot>
+            </div>
             <div class="">
-                <slot></slot>
+                <slot name="content"></slot>
             </div>
         </div>
     </div>

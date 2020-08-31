@@ -1,3 +1,22 @@
+$theme-colors: (
+    "primary": #e11284,
+    "success": #c2217a,
+    "danger": #ff4136
+);
+
 @import "node_modules/bootstrap/scss/bootstrap.scss";
 
 @import 'node_modules/vue-good-table/src/styles/style.scss';
+@import "./crm/table.scss";
+
+body {
+    background-color: rgb(246, 247, 251);
+}
+
+
+.slot-header {
+    font-size: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+

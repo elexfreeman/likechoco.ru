@@ -6,6 +6,7 @@
                 :cListLoader="cListLoader"
                 :paginationOptions="paginationOptions"
                 :aRow="aRow"
+                :sRoute="'/product'"
                 :aColumn="aColumn"
                 :oEditBtn="{sUrl:''}"
                 :oDelBtn="{sUrl:''}"

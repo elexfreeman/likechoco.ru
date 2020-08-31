@@ -1,9 +1,9 @@
 <template>
     <TBasePage :sCaption="sCaption">
-        <Slot></Slot>
-        <div class>
+        <content></content>
+        <div class="text-right">
             <button type="button" class="btn btn-success">Success</button>
-            <button type="button" class="btn btn-light">Cancel</button>
+            <button type="button" class="btn btn-outline-success">Cancel</button>
         </div>
     </TBasePage>
 </template>

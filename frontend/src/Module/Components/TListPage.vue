@@ -1,9 +1,16 @@
 <template>
     <TBasePage :sCaption="sCaption">
-        <div class="text-right pb-3">
-            <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i></button>
-        </div>
-        <slot></slot>
+        <template v-slot:header>
+            <slot name="header"></slot>
+            <div class="text-right">
+                <button type="button" class="btn btn-primary">
+                    <i class="fa fa-plus"></i>
+                </button>
+            </div>
+        </template>
+        <template v-slot:content>
+            <slot name="content"></slot>
+        </template>
     </TBasePage>
 </template>
 

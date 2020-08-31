@@ -16,12 +16,12 @@
                 <slot :tableData="props"></slot>
 
                 <div class="d-flex justify-content-end" v-if="props.column.field == 'buttons'">
-                    <button v-if="oEditBtn" type="button" class="btn btn-light">
+                    <router-link :to="`${sRoute}/edit/${props.formattedRow['id']}`" v-if="oEditBtn" type="button" class="btn btn-light">
                         <i class="fa fa-edit"></i>
-                    </button>
-                    <button v-if="oDelBtn" type="button" class="btn btn-light">
+                    </router-link>
+                    <a v-if="oDelBtn" type="button" class="btn btn-light">
                         <i class="fa fa-trash"></i>
-                    </button>
+                    </a>
                 </div>
 
             </template>
@@ -83,6 +83,9 @@ export default class TTable extends Vue {
     @Prop({ required: false }) readonly oEditBtn: BtnI;
     @Prop({ required: false }) readonly oDelBtn: BtnI;
     @Prop({ required: false }) readonly oAddBtn: BtnI;
+    // маршрут в vue
+    @Prop({ required: true }) readonly sRoute: string;
+
 
     // computed
 

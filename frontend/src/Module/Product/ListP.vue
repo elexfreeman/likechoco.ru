@@ -1,15 +1,18 @@
 <template>
     <TListPage :sCaption="'Товары'">
-        <TTable
-            :cListLoader="cListLoader"
-            :paginationOptions="paginationOptions"
-            :oEditBtn="{sUrl:''}"
-            :oDelBtn="{sUrl:''}"
-        >
-            <template slot="default" slot-scope="props">
-                <span>{{props.tableData.formattedRow[props.tableData.column.field]}}</span>
-            </template>
-        </TTable>
+        <template slot="content">
+            <TTable
+                :cListLoader="cListLoader"
+                :paginationOptions="paginationOptions"
+                :sRoute="'/product'"
+                :oEditBtn="{sUrl:''}"
+                :oDelBtn="{sUrl:''}"
+            >
+                <template slot="default" slot-scope="props">
+                    <span>{{props.tableData.formattedRow[props.tableData.column.field]}}</span>
+                </template>
+            </TTable>
+        </template>
     </TListPage>
 </template>
 

@@ -50,6 +50,8 @@ export default class TTable extends Vue {
     @Prop({ required: true }) readonly cTableInfoLoader: TableInfoLoader;
     // Строка с данными
     @Prop({ required: true }) readonly row: any;
+    // маршрут в vue
+    @Prop({ required: true }) readonly sRoute: string;
 
     get ColumnTypeEnumText(): number {
         return TableI.ColumnTypeEnum.Text;
