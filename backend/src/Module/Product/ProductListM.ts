@@ -70,11 +70,11 @@ export class ProductListM extends System.BaseM {
                 field: 'id',
             },
             {
-                label: 'caption',
+                label: 'Название',
                 field: 'caption',
             },
             {
-                label: 'description',
+                label: 'Описание',
                 field: 'description',
             },
         ];

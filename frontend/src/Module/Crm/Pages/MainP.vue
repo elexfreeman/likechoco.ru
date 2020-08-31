@@ -1,21 +1,21 @@
 <template>
-    <div>
+    <div class="main-page">
+        <div class="main-top">
+            <div class="top-title">Добро пожаловать</div>
+            <div class="top-description">Тут все и начинается</div>
+        </div>
         <div class="container">
-            <h2>Main page</h2>
-            <TTable
-                :cListLoader="cListLoader"
-                :paginationOptions="paginationOptions"
-                :aRow="aRow"
-                :sRoute="'/product'"
-                :aColumn="aColumn"
-                :oEditBtn="{sUrl:''}"
-                :oDelBtn="{sUrl:''}"
-            >
-                <template slot="default" slot-scope="props">
-                    <span>{{props.tableData.formattedRow[props.tableData.column.field]}}</span>
-                </template>
-            </TTable>
-            <TEdit v-if="row" :cTableInfoLoader="cTableInfoLoader" :row="row" />
+            <div class="main-wraper">
+                <router-link to="/product" class="main-item">
+                    <div class="item-title">Товары на складе</div>
+                </router-link>
+                <router-link to="/product" class="main-item">
+                    <div class="item-title">Товары на складе</div>
+                </router-link>
+                <router-link to="/product" class="main-item">
+                    <div class="item-title">Товары на складе</div>
+                </router-link>
+            </div>
         </div>
     </div>
 </template>

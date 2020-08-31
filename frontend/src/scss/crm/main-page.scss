@@ -1,0 +1,38 @@
+.main-page {
+    .main-top {
+        background-color: #ddd;
+        text-align: center;
+        padding: 80px;
+        width: 100%;
+
+        .top-title {
+            font-size: 50px;
+            font-weight: 100;
+        }
+    }
+
+    .main-wraper {
+        display: flex;
+        justify-content: center;
+        margin-top: -40px;
+        .main-item {
+            margin-left: 20px;
+            margin-right: 20px;
+            background-color: #fff;
+            width: 300px;
+            height: 250px;
+            text-align: center;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .main-item:hover {
+            text-decoration: none;
+        }
+        .item-title {
+            font-size: 30px;
+            font-weight: 200;
+        }
+    }
+}

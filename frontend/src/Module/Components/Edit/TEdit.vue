@@ -1,6 +1,5 @@
 <template>
-    <div v-if="!bIsLoad">
-        <h4>{{cTableInfoLoader.sCaption}}</h4>
+    <div class="t-edit" v-if="!bIsLoad">
         <div :key="key" v-for="(column, key) in cTableInfoLoader.aColumn">
             <div class="form-group">
                 <label for="exampleInputEmail1">{{column.sCaption}}</label>

@@ -11,7 +11,7 @@ export class PaginationOptionsS implements PaginationOptionsI {
     public position: PaginationPositionEnum = PaginationPositionEnum.bottom;
     public perPageDropdown: number[] = [5, 20, 50, 100];
     public dropdownAllowAll: boolean = false;
-    public setCurrentPage: number = 0;
+    public setCurrentPage: number = 1;
     public nextLabel: string = "next";
     public prevLabel: string = "prev";
     public rowsPerPageLabel: string = "Rows per page";

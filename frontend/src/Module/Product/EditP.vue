@@ -1,6 +1,8 @@
 <template>
-    <TEditPage>
-        <TEdit v-if="row" :sRoute="'/product'" :cTableInfoLoader="cTableInfoLoader" :row="row" />
+    <TEditPage :fOk="()=> {}" :fCancel="()=>{}" :sCaption="'Товар'" :sRoute="'/product'">
+        <template v-slot:content>
+            <TEdit v-if="row" :sRoute="'/product'" :cTableInfoLoader="cTableInfoLoader" :row="row" />
+        </template>
     </TEditPage>
 </template>
 

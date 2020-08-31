@@ -1,10 +1,12 @@
 <template>
     <TBasePage :sCaption="sCaption">
-        <content></content>
-        <div class="text-right">
-            <button type="button" class="btn btn-success">Success</button>
-            <button type="button" class="btn btn-outline-success">Cancel</button>
-        </div>
+        <template v-slot:content>
+            <slot name="content"></slot>
+            <div class="text-right pt-4">
+                <button type="button" class="btn btn-success">Success</button>
+                <router-link :to="sRoute" class="btn btn-outline-success">Cancel</router-link>
+            </div>
+        </template>
     </TBasePage>
 </template>
 
@@ -24,6 +26,9 @@ export default class MainP extends Vue {
 
     // props
     @Prop({ required: true }) readonly sCaption: string;
+    // маршрут в vue
+    @Prop({ required: true }) readonly sRoute: string;
+
     @Prop({ required: true }) readonly fOk: () => void;
     @Prop({ required: true }) readonly fCancel: () => void;
 
