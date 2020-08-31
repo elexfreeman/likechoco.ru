@@ -32,7 +32,7 @@ export class ProductListController extends System.BaseCtrl {
 router.post(R.list.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductListController(req, res);
     await ctrl.faInit();
-    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    //await ctrl.userSys.isAuth(); // Пробуем авторизироваться
     await ctrl.faAction('Список товаров', () => {
         return ctrl.productListM.faList(req.body);
     })
@@ -44,7 +44,7 @@ router.post(R.list.route, async (req: System.MainRequest, res: any, next: any) =
 router.post(R.listInfo.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductListController(req, res);
     await ctrl.faInit();
-    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    //await ctrl.userSys.isAuth(); // Пробуем авторизироваться
     await ctrl.faAction('Список товаров', () => {
         return ctrl.productListM.faListInfo(req.body);
     })

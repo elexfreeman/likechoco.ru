@@ -13,4 +13,9 @@ export class BaseLoader {
         this.baseModel = baseModel; 
     }
 
+
+    public fGetUrl(): string {
+        return this.sUrl;
+    }
+
 }

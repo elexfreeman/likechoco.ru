@@ -45,8 +45,8 @@ export interface ServerParamsI {
         field: string;
         type: string;
     };
-    page: 1;
-    perPage: 20;
+    page: number;
+    perPage: number;
 }
 
 export interface BtnI {
@@ -69,7 +69,7 @@ export default class TTable extends Vue {
         perPage: 20,
     };
 
-    private nTotalRecords = 10;
+    private nTotalRecords = 0;
     private isLoading = false;
 
     private aRow: RowI = [];
