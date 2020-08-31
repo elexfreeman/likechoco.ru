@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as System from "@a-a-game-studio/aa-core/lib/Namespace/System";
 import { ProductR as R  } from "../../../../Entity/Routes/ProductR";
-import { ProductM } from './ProductM';
+import { ProductInfoM} from './ProductInfoM';
 
 const router = express.Router();
 
@@ -11,7 +11,7 @@ const router = express.Router();
  */
 export class ProductInfoController extends System.BaseCtrl {
 
-    public productM: ProductM;
+    public productInfoM: ProductInfoM;
 
     /**
      * Конструктор
@@ -21,7 +21,7 @@ export class ProductInfoController extends System.BaseCtrl {
      */
     public async faInit() {
         // Инициализация бизнес моделей
-        this.productM = new ProductM(this.req);
+        this.productInfoM = new ProductInfoM(this.req);
     }
 
 }
@@ -29,87 +29,15 @@ export class ProductInfoController extends System.BaseCtrl {
 /**
  * List
  */
-router.post(R.list.route, async (req: System.MainRequest, res: any, next: any) => {
+router.post(R.info.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductInfoController(req, res);
     await ctrl.faInit();
     // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
-    await ctrl.faAction('Список товаров', () => {
-        return ctrl.productM.faList(req.body);
+    await ctrl.faAction('Инфломация о строках товара', () => {
+        return ctrl.productInfoM.faInfo(req.body);
     })
 });
 
-/**
- * insert 
- */
-router.post(R.insert.route, async (req: System.MainRequest, res: any, next: any) => {
-    const ctrl = new ProductInfoController(req, res);
-    await ctrl.faInit();
-    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
-    await ctrl.faAction('Добавление товаров', () => {
-        return ctrl.productM.faInsert(req.body);
-    })
-});
-
-
-/**
- * update 
- */
-router.post(R.update.route, async (req: System.MainRequest, res: any, next: any) => {
-    const ctrl = new ProductInfoController(req, res);
-    await ctrl.faInit();
-    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
-    await ctrl.faAction('Обновленеи товара', () => {
-        return ctrl.productM.faUpdate(req.body);
-    })
-});
-
-/**
- * get by id 
- */
-router.post(R.getById.route, async (req: System.MainRequest, res: any, next: any) => {
-    const ctrl = new ProductInfoController(req, res);
-    await ctrl.faInit();
-    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
-    await ctrl.faAction('Получение товара', () => {
-        return ctrl.productM.faGetById(req.body);
-    })
-});
-
-/**
- * Tag list 
- */
-router.post(R.tagList.route, async (req: System.MainRequest, res: any, next: any) => {
-    const ctrl = new ProductInfoController(req, res);
-    await ctrl.faInit();
-    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
-    await ctrl.faAction('Получение списка тэгов товара', () => {
-        return ctrl.productM.faProductTagList(req.body);
-    })
-});
-
-/**
- * Tag add 
- */
-router.post(R.addTag.route, async (req: System.MainRequest, res: any, next: any) => {
-    const ctrl = new ProductInfoController(req, res);
-    await ctrl.faInit();
-    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
-    await ctrl.faAction('Добавление тега товара', () => {
-        return ctrl.productM.faAddTag(req.body);
-    })
-});
-
-/**
- * Tag delete 
- */
-router.post(R.delTag.route, async (req: System.MainRequest, res: any, next: any) => {
-    const ctrl = new ProductInfoController(req, res);
-    await ctrl.faInit();
-    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
-    await ctrl.faAction('Удаление тега товара', () => {
-        return ctrl.productM.faDelTag(req.body);
-    })
-});
 
 export {
     router as ProductInfoCtrl

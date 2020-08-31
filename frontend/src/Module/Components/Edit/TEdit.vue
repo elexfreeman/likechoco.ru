@@ -2,7 +2,32 @@
     <div v-if="!bIsLoad">
         <h4>{{cTableInfoLoader.sCaption}}</h4>
         <div :key="key" v-for="(column, key) in cTableInfoLoader.aColumn">
-            {{column}}
+            <div class="form-group">
+                <label for="exampleInputEmail1">{{column.sCaption}}</label>
+
+                <input
+                    v-if="column.nType==ColumnTypeEnumInteger"
+                    :disabled="column.sName=='id'"
+                    v-model="row[column.sName]"
+                    type="text"
+                    class="form-control"
+                />
+                <input
+                    v-if="column.nType==ColumnTypeEnumString"
+                    :disabled="column.sName=='id'"
+                    v-model="row[column.sName]"
+                    type="text"
+                    class="form-control"
+                />
+                <textarea
+                    v-if="column.nType==ColumnTypeEnumText"
+                    :disabled="column.sName=='id'"
+                    v-model="row[column.sName]"
+                    rows="4"
+                    type="text"
+                    class="form-control"
+                ></textarea>
+            </div>
         </div>
     </div>
 </template>
@@ -26,8 +51,14 @@ export default class TTable extends Vue {
     // Строка с данными
     @Prop({ required: true }) readonly row: any;
 
-    get isLoadin2g(): boolean {
-        return false;
+    get ColumnTypeEnumText(): number {
+        return TableI.ColumnTypeEnum.Text;
+    }
+    get ColumnTypeEnumString(): number {
+        return TableI.ColumnTypeEnum.String;
+    }
+    get ColumnTypeEnumInteger(): number {
+        return TableI.ColumnTypeEnum.Integer;
     }
 
     // methods

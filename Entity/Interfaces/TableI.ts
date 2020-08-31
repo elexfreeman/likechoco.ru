@@ -1,8 +1,9 @@
 export enum ColumnTypeEnum {
     String = 0,
-    Integer = 1,
-    Float = 2,
-    Data = 3,
+    Text = 1,
+    Integer = 2,
+    Float = 3,
+    Data = 4,
 }
 export interface ColumnI {
     sName: string; // поле в таблице

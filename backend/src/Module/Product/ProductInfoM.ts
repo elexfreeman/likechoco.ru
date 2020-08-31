@@ -27,7 +27,7 @@ export class ProductInfoM extends System.BaseM {
     }
 
 
-    public async faListInfo(data: R.info.RequestI): Promise<R.info.ResponseI> {
+    public async faInfo(data: R.info.RequestI): Promise<R.info.ResponseI> {
 
         let ok = this.errorSys.isOk();
 
@@ -44,6 +44,12 @@ export class ProductInfoM extends System.BaseM {
                 sName: 'caption',
                 sCaption: 'Название',
                 nType: TableI.ColumnTypeEnum.String,
+                bPrimaryKey: false,
+            },
+            {
+                sName: 'description',
+                sCaption: 'Описание',
+                nType: TableI.ColumnTypeEnum.Text,
                 bPrimaryKey: false,
             },
         ];
