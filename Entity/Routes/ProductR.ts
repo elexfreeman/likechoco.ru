@@ -2,7 +2,7 @@ import { ProductI } from "../Interfaces/ProductI";
 import { ProductTagI } from "../Interfaces/ProductTagI";
 import { SearchParamI } from "../Service/SearchS";
 import { ColumnI, PaginationOptionsI, ListInfoResponseI, ListResponseI } from "../Interfaces/ListI";
-import { TableI } from "../Interfaces/TableI";
+import { TableI, sGetInfoByIdR, sGetTableInfo } from "../Interfaces/TableI";
 /**
  * Товар
  */
@@ -47,7 +47,7 @@ export namespace ProductR {
     export namespace getById {
 
         /** APIURL */
-        export const route = '/api/product/getById';
+        export const route = `/api/product/${sGetInfoByIdR}`;
 
         /** Alias действия */
         export const action = 'getById';
@@ -159,10 +159,13 @@ export namespace ProductR {
     }
 
 
+    /**
+     * Инфо об талице
+     */
     export namespace info {
 
         /** APIURL */
-        export const route = '/api/product/info';
+        export const route = `/api/product/${sGetTableInfo}`;
 
         /** Alias действия */
         export const action = 'info';

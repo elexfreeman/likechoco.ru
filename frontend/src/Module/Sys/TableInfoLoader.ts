@@ -3,7 +3,6 @@ import { BaseModel } from "./BaseModel";
 import { ApiResponseI } from "../../../../Entity/Interfaces/ApiResponseI";
 import { BaseLoader } from "./BaseLoader";
 
-
 /**
  * Загрузчик информации о таблице
  */
@@ -17,6 +16,9 @@ export class TableInfoLoader extends BaseLoader implements TableI.TableI {
     protected sUrl: string;
     protected baseModel: BaseModel;
 
+    constructor(sUrl: string, baseModel: BaseModel) {
+        super(sUrl, baseModel);
+    }
 
     public fSetData(data: TableI.TableI) {
         this.aColumn = data.aColumn;

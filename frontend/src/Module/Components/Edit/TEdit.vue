@@ -1,6 +1,9 @@
 <template>
     <div v-if="!bIsLoad">
         <h4>{{cTableInfoLoader.sCaption}}</h4>
+        <div :key="key" v-for="(column, key) in cTableInfoLoader.aColumn">
+            {{column}}
+        </div>
     </div>
 </template>
 
@@ -8,18 +11,20 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import * as TableI from "../../../../../Entity/Interfaces/TableI";
 import { TableInfoLoader } from "../../Sys/TableInfoLoader";
-
+import { RowInfoLoader } from "../../Sys/RowInfoLoader";
 
 @Component({
-    name: "TTable",
+    name: "TEdit",
 })
 export default class TTable extends Vue {
     //data
     private bIsLoad = true;
-    
 
     // props
+    // Загрзчик таблицы
     @Prop({ required: true }) readonly cTableInfoLoader: TableInfoLoader;
+    // Строка с данными
+    @Prop({ required: true }) readonly row: any;
 
     get isLoadin2g(): boolean {
         return false;
@@ -29,7 +34,8 @@ export default class TTable extends Vue {
 
     async mounted() {
         console.log("mounted");
-        await this.cTableInfoLoader.faLoadInfo()
+
+        await this.cTableInfoLoader.faLoadInfo();
         this.bIsLoad = false;
     }
 

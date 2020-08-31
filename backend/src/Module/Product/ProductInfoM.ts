@@ -35,12 +35,14 @@ export class ProductInfoM extends System.BaseM {
         const sCaption = 'Товар';
         const aColumn: TableI.ColumnI[] = [
             {
-                sName: 'Id',
+                sName: 'id',
+                sCaption: 'Id',
                 nType: TableI.ColumnTypeEnum.Integer,
                 bPrimaryKey: true,
             },
             {
-                sName: 'Название',
+                sName: 'caption',
+                sCaption: 'Название',
                 nType: TableI.ColumnTypeEnum.String,
                 bPrimaryKey: false,
             },
