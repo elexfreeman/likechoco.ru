@@ -1,12 +1,12 @@
 <template>
-    <TListPage :sCaption="'Товары'">
+    <TListPage :sCaption="'Товары'" :sRoute="sRoute">
         <template slot="content">
             <TTable
                 :cListLoader="cListLoader"
                 :paginationOptions="paginationOptions"
                 :sRoute="'/product'"
-                :oEditBtn="{sUrl:''}"
-                :oDelBtn="{sUrl:''}"
+                :oEditBtn="{sRoute:''}"
+                :oDelBtn="{sRoute:''}"
             >
                 <template slot="default" slot-scope="props">
                     <span>{{props.tableData.formattedRow[props.tableData.column.field]}}</span>
@@ -39,16 +39,16 @@ export default class MainP extends Vue {
     private isLoading = false;
     private paginationOptions: PaginationOptionsS = PaginationOptionsS.InitRus();
     private row: any = {};
-    private sUrl = "/product";
+    private sRoute = "/product";
     // props
 
     // computed
     get cListLoader(): ListLoader {
-        return new ListLoader(this.sUrl, new BaseModel(config));
+        return new ListLoader(this.sRoute, new BaseModel(config));
     }
 
     get cTableInfoLoader(): TableInfoLoader {
-        return new TableInfoLoader(this.sUrl, new BaseModel(config));
+        return new TableInfoLoader(this.sRoute, new BaseModel(config));
     }
 
     // methods

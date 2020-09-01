@@ -27,7 +27,7 @@ export default class EditP extends Vue {
     //data
     private isLoading = false;
     private row: any = {};
-    private sCaption = "Редактирование товара";
+    private sCaption = "Добавление товара";
     private sRoute = "/product";
     // props
 
@@ -40,10 +40,6 @@ export default class EditP extends Vue {
     // methods
     async mounted() {
         console.log("mounted");
-        const cRowLoader = new RowInfoLoader(this.sRoute, new BaseModel(config));
-        this.row = await cRowLoader.faLoadInfo(
-            Number(this.$route.params["id"])
-        );
     }
 
     async fOk() {}

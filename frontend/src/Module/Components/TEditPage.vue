@@ -3,14 +3,15 @@
         <template v-slot:content>
             <slot name="content"></slot>
             <div class="text-right pt-4">
-                <button type="button" class="btn btn-success">Success</button>
-                <router-link :to="sRoute" class="btn btn-outline-success">Cancel</router-link>
+                <button v-on:click="fOk" type="button" class="btn btn-success">Сохранить</button>
+                <router-link :to="sRoute" class="btn btn-outline-success">Отмена</router-link>
             </div>
         </template>
     </TBasePage>
 </template>
 
 <script lang='ts'>
+
 /**
  * Компонент страницы списка
  */

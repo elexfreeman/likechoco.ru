@@ -3,9 +3,9 @@
         <template v-slot:header>
             <slot name="header"></slot>
             <div class="text-right">
-                <button type="button" class="btn btn-primary">
+                <router-link :to="`${sRoute}/add`" class="btn btn-primary">
                     <i class="fa fa-plus"></i>
-                </button>
+                </router-link>
             </div>
         </template>
         <template v-slot:content>
@@ -30,6 +30,7 @@ export default class MainP extends Vue {
 
     // props
     @Prop({ required: true }) readonly sCaption: string;
+    @Prop({ required: true }) readonly sRoute : string;
 
     // computed
 
