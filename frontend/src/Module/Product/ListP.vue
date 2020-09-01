@@ -3,8 +3,7 @@
         <template slot="content">
             <TTable
                 :cListLoader="cListLoader"
-                :paginationOptions="paginationOptions"
-                :sRoute="'/product'"
+                :sRoute="sRoute"
                 :oEditBtn="{sRoute:''}"
                 :oDelBtn="{sRoute:''}"
             >
@@ -36,15 +35,14 @@ export default class MainP extends Vue {
     //data
     private serverParams = {};
     private totalRecords = 10;
-    private isLoading = false;
-    private paginationOptions: PaginationOptionsS = PaginationOptionsS.InitRus();
-    private row: any = {};
     private sRoute = "/product";
+    private listLoader: ListLoader;
     // props
 
     // computed
     get cListLoader(): ListLoader {
-        return new ListLoader(this.sRoute, new BaseModel(config));
+        
+        return 
     }
 
     get cTableInfoLoader(): TableInfoLoader {
@@ -54,6 +52,9 @@ export default class MainP extends Vue {
     // methods
     async mounted() {
         console.log("mounted");
+
+        this.listLoader = new ListLoader(this.sRoute, new BaseModel(config));
+        await this.listLoader.faInit();
     }
 }
 </script>

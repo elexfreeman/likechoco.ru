@@ -1,5 +1,5 @@
 <template>
-    <div v-if="paginationOptions">
+    <div v-if="cListLoader">
         <vue-good-table
             mode="remote"
             @on-page-change="onPageChange"
@@ -16,14 +16,18 @@
                 <slot :tableData="props"></slot>
 
                 <div class="d-flex justify-content-end" v-if="props.column.field == 'buttons'">
-                    <router-link :to="`${sRoute}/edit/${props.formattedRow['id']}`" v-if="oEditBtn" type="button" class="btn btn-light">
+                    <router-link
+                        :to="`${sRoute}/edit/${props.formattedRow['id']}`"
+                        v-if="oEditBtn"
+                        type="button"
+                        class="btn btn-light"
+                    >
                         <i class="fa fa-edit"></i>
                     </router-link>
                     <a v-if="oDelBtn" type="button" class="btn btn-light">
                         <i class="fa fa-trash"></i>
                     </a>
                 </div>
-
             </template>
         </vue-good-table>
     </div>
@@ -73,8 +77,6 @@ export default class TTable extends Vue {
     private isLoading = false;
 
     private aRow: RowI = [];
-    private aColumn: ColumnI[] = [];
-    private paginationOptions: PaginationOptionsI = null;
 
     private bShowBtns = false;
 
@@ -86,25 +88,23 @@ export default class TTable extends Vue {
     // маршрут в vue
     @Prop({ required: true }) readonly sRoute: string;
 
-
     // computed
 
-    get isLoadin2g(): boolean {
-        return false;
+    // параметры пагинации
+    get paginationOptions(): PaginationOptionsI {
+        return this.cListLoader.fGetPaginationOptions();
+    }
+
+    get aColumn(): ColumnI[] {
+        return this.cListLoader.fGetAColumn();
     }
 
     // methods
 
     async mounted() {
-        const oInfo = await this.cListLoader.faGetInfo();
 
-        // параметры пагинации
-        this.paginationOptions = oInfo.paginationOptions;
-        // параметры столбцов
-        this.aColumn = oInfo.aColumn;
-
-        // кнопки 
-        this.bShowBtns = Boolean(this.oEditBtn)||Boolean(this.oDelBtn);
+        // кнопки
+        this.bShowBtns = Boolean(this.oEditBtn) || Boolean(this.oDelBtn);
         if (this.bShowBtns) {
             this.aColumn.push({
                 label: "",

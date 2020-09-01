@@ -40,7 +40,7 @@ import { RowInfoLoader } from "../../Sys/RowInfoLoader";
 @Component({
     name: "TEdit",
 })
-export default class TTable extends Vue {
+export default class TEdit extends Vue {
     //data
     private bIsLoad = true;
 

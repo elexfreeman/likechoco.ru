@@ -30,6 +30,7 @@ export default class EditP extends Vue {
     private row: any = {};
     private sCaption = "Редактирование товара";
     private sRoute = "/product";
+
     // props
 
     // computed
@@ -50,6 +51,9 @@ export default class EditP extends Vue {
         );
     }
 
+    /**
+     * событие сохранения
+     */
     async fOk() {
         const rowSaverS = new RowSaverS(this.sRoute, new BaseModel(config));
         this.bIsLoad = true;
