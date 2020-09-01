@@ -2,7 +2,7 @@ import { ProductI } from "../Interfaces/ProductI";
 import { ProductTagI } from "../Interfaces/ProductTagI";
 import { SearchParamI } from "../Service/SearchS";
 import { ColumnI, PaginationOptionsI, ListInfoResponseI, ListResponseI } from "../Interfaces/ListI";
-import { TableI, sGetInfoByIdR, sGetTableInfo } from "../Interfaces/TableI";
+import { TableI, sGetInfoByIdR, sGetTableInfo, sInsertRow, sUpdateRow, AddRowResponseI } from "../Interfaces/TableI";
 /**
  * Товар
  */
@@ -28,7 +28,7 @@ export namespace ProductR {
     export namespace listInfo {
 
         /** APIURL */
-        export const route = '/api/product/list/info';
+        export const route = `/api/product/list/info`;
 
         /** Alias действия */
         export const action = 'listInfo';
@@ -66,7 +66,7 @@ export namespace ProductR {
     export namespace insert {
 
         /** APIURL */
-        export const route = '/api/product/insert';
+        export const route = `/api/product/${sInsertRow}`;
 
         /** Alias действия */
         export const action = 'insert';
@@ -76,7 +76,7 @@ export namespace ProductR {
         }
 
         /** Параметры api ответа */
-        export interface ResponseI {
+        export interface ResponseI extends AddRowResponseI {
             id: number;
         }
     }
@@ -84,10 +84,10 @@ export namespace ProductR {
     export namespace update {
 
         /** APIURL */
-        export const route = '/api/product/update';
+        export const route = `/api/product/${sUpdateRow}`;
 
         /** Alias действия */
-        export const action = 'insert';
+        export const action = 'update';
 
         /** Параметры api запроса */
         export interface RequestI extends ProductI {

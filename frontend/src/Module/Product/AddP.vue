@@ -1,5 +1,5 @@
 <template>
-    <TEditPage :fOk="() => {fOk();}" :fCancel="()=>{}" :sCaption="sCaption" :sRoute="sRoute">
+    <TEditPage :bIsLoad="bIsLoad" :fOk="() => {fOk();}" :fCancel="()=>{}" :sCaption="sCaption" :sRoute="sRoute">
         <template v-slot:content>
             <TEdit v-if="row" :sRoute="sRoute" :cTableInfoLoader="cTableInfoLoader" :row="row" />
         </template>
@@ -19,13 +19,14 @@ import TEdit from "../Components/Edit/TEdit.vue";
 import { RowInfoLoader } from "../Sys/RowInfoLoader";
 import { TableInfoLoader } from "../Sys/TableInfoLoader";
 import TEditPage from "../Components/TEditPage.vue";
+import { RowSaverS } from "../Sys/RowSaverS";
 
 @Component({
     components: { TEdit, TEditPage },
 })
 export default class EditP extends Vue {
     //data
-    private isLoading = false;
+    private bIsLoad = false;
     private row: any = {};
     private sCaption = "Добавление товара";
     private sRoute = "/product";
@@ -42,7 +43,15 @@ export default class EditP extends Vue {
         console.log("mounted");
     }
 
-    async fOk() {}
+    async fOk() {
+        const rowSaverS = new RowSaverS(this.sRoute, new BaseModel(config));
+        this.bIsLoad = true;
+        const data = await rowSaverS.faAdd(this.row);
+        this.bIsLoad= false;
+        if(data.ok) {
+            this.$router.push(this.sRoute);
+        }
+    }
 }
 </script>
 

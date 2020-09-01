@@ -26,6 +26,15 @@ export interface GetRowByIdResponseI<T> {
     row: T;
 }
 
+export interface AddRowResponseI {
+    id: number;
+}
+export interface UpdateRowResponseI {
+    id: number;
+}
 
+// маршрты для основных операций
 export const sGetInfoByIdR = 'row_info';
 export const sGetTableInfo = 'info';
+export const sInsertRow = 'insert';
+export const sUpdateRow = 'update';

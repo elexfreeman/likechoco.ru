@@ -21,12 +21,6 @@ export class ProductE {
             .error('description - неверный формат')
         );
 
-        rules.set(rules.rule('price')
-            .type(ModelRulesT.int)
-            .more(0)
-            .require()
-            .error('price - неверный формат')
-        );
 
         rules.set(rules.rule('category_id')
             .type(ModelRulesT.int)

@@ -72,11 +72,6 @@ export function update(req: MainRequest, data: any) {
         .errorEx('description', 'description')
     );
 
-    rules.set(rules.rule('price')
-        .type(Components.ModelRulesT.decimal)
-        .moreOrEq(0)
-        .errorEx('price', 'price')
-    );
 
     rules.set(rules.rule('category_id')
         .type(Components.ModelRulesT.int)
@@ -138,12 +133,6 @@ export function insert(req: MainRequest, data: any) {
         .type(Components.ModelRulesT.text)
         .maxLen(1024)
         .errorEx('description', 'description')
-    );
-
-    rules.set(rules.rule('price')
-        .type(Components.ModelRulesT.decimal)
-        .require()
-        .errorEx('price', 'price')
     );
 
     rules.set(rules.rule('category_id')
