@@ -11,7 +11,7 @@
     .t-modal-bg {
         width: 100vw;
         height: 100vh;
-        background: #0000008a; 
+        background: #0000004a;
         top:0;
         left: 0;
     }
@@ -24,11 +24,21 @@
     }
     @keyframes show_modal1 {
         0% { transform: scale(0.9); }
-        90% { transform: scale(1.1); }
+        90% { transform: scale(1.02); }
         100% { transform: scale(1); }
     }
 }
 
 .t-modal.is-open{
     display: flex;
+}
+
+.t-modal.start-close.is-open {
+    .modal {
+        animation: 0.1s linear 0s 1 alternate hide_modal;
+    }
+    @keyframes hide_modal {
+        0% { transform: scale(1); }
+        100% { transform: scale(0.8); }
+    } 
 }

@@ -5,7 +5,8 @@
             <div class="top-description">Тут все и начинается</div>
         </div>
         <div class="container">
-            <TModal :sSizeClass="fModalSize" :sTitle="`Заголовок модалки`" :bIsOpen="true">
+            <button class="btn btn-primary" v-on:click="fShowModal">Show modal</button>
+            <TModal v-if="bShowModal" :fOnClose="() => {fHideModal(); }" :sSizeClass="fModalSize" :sTitle="`Заголовок модалки`" :bIsOpen="true">
                 <template v-slot:content>
                     <h2>КОнтен модалки</h2>
                 </template>
@@ -50,6 +51,7 @@ export default class MainP extends Vue {
     private isLoading = false;
     private paginationOptions: PaginationOptionsS = PaginationOptionsS.InitRus();
     private row: any = {};
+    private bShowModal = false;
     // props
 
     // computed
@@ -91,6 +93,14 @@ export default class MainP extends Vue {
         const cRowLoader = new RowInfoLoader("/product", new BaseModel(config));
         this.row = await cRowLoader.faLoadInfo(28);
         console.log(this.row);
+    }
+
+    fShowModal() {
+        this.bShowModal = true;
+    }
+
+    fHideModal() {
+        this.bShowModal = false;
     }
 
     updateParams(newProps) {
