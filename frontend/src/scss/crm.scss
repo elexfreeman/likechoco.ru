@@ -9,7 +9,8 @@ $theme-colors: (
 @import 'node_modules/vue-good-table/src/styles/style.scss';
 @import "./crm/table.scss";
 @import "./crm/t-edit.scss";
-@import "./crm//main-page.scss";
+@import "./crm/main-page.scss";
+@import "./crm/t-modal.scss";
 
 body {
     background-color: rgb(246, 247, 251);

@@ -5,6 +5,11 @@
             <div class="top-description">Тут все и начинается</div>
         </div>
         <div class="container">
+            <TModal :sTitle="`Заголовок модалки`" :bIsOpen="true">
+                <template v-slot:content>
+                    <h2>КОнтен модалки</h2>
+                </template>
+            </TModal>
             <div class="main-wraper">
                 <router-link to="/product" class="main-item">
                     <div class="item-title">Товары на складе</div>
@@ -33,9 +38,10 @@ import { BaseModel } from "../../Sys/BaseModel";
 import TEdit from "../../Components/Edit/TEdit.vue";
 import { RowInfoLoader } from "../../Sys/RowInfoLoader";
 import { TableInfoLoader } from "../../Sys/TableInfoLoader";
+import TModal from "../../Components/Modal/TModal.vue";
 
 @Component({
-    components: { TTable, TEdit },
+    components: { TTable, TEdit, TModal },
 })
 export default class MainP extends Vue {
     //data
@@ -79,9 +85,8 @@ export default class MainP extends Vue {
     async mounted() {
         console.log("mounted");
         const cRowLoader = new RowInfoLoader("/product", new BaseModel(config));
-        this.row = (await cRowLoader.faLoadInfo(28));
+        this.row = await cRowLoader.faLoadInfo(28);
         console.log(this.row);
-        
     }
 
     updateParams(newProps) {
