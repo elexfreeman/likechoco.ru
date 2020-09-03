@@ -5,7 +5,7 @@
             <div class="top-description">Тут все и начинается</div>
         </div>
         <div class="container">
-            <TModal :sTitle="`Заголовок модалки`" :bIsOpen="true">
+            <TModal :sSizeClass="fModalSize" :sTitle="`Заголовок модалки`" :bIsOpen="true">
                 <template v-slot:content>
                     <h2>КОнтен модалки</h2>
                 </template>
@@ -38,7 +38,7 @@ import { BaseModel } from "../../Sys/BaseModel";
 import TEdit from "../../Components/Edit/TEdit.vue";
 import { RowInfoLoader } from "../../Sys/RowInfoLoader";
 import { TableInfoLoader } from "../../Sys/TableInfoLoader";
-import TModal from "../../Components/Modal/TModal.vue";
+import TModal, { ModalSizeEnum } from "../../Components/Modal/TModal.vue";
 
 @Component({
     components: { TTable, TEdit, TModal },
@@ -63,6 +63,10 @@ export default class MainP extends Vue {
 
     get cTableInfoLoader(): TableInfoLoader {
         return new TableInfoLoader("/product", new BaseModel(config));
+    }
+
+    get fModalSize(): string {
+        return ModalSizeEnum.lg;
     }
 
     get totalRecord(): number {
