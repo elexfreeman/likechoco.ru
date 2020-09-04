@@ -3,6 +3,9 @@ import { ProductTagI } from "../Interfaces/ProductTagI";
 import { SearchParamI } from "../Service/SearchS";
 import { ColumnI, PaginationOptionsI, ListInfoResponseI, ListResponseI } from "../Interfaces/ListI";
 import { TableI, sGetInfoByIdR, sGetTableInfo, sInsertRow, sUpdateRow, AddRowResponseI } from "../Interfaces/TableI";
+
+export const sRoute = 'product';
+
 /**
  * Товар
  */
@@ -12,10 +15,10 @@ export namespace ProductR {
     export namespace list {
 
         /** APIURL */
-        export const route = '/api/product/list';
+        export const route = `/api/${sRoute}/list`;
 
         /** Alias действия */
-        export const action = 'list';
+        export const action = `list`;
 
         /** Параметры api запроса */
         export interface RequestI extends SearchParamI {
@@ -28,10 +31,10 @@ export namespace ProductR {
     export namespace listInfo {
 
         /** APIURL */
-        export const route = `/api/product/list/info`;
+        export const route = `/api/${sRoute}/list/info`;
 
         /** Alias действия */
-        export const action = 'listInfo';
+        export const action = `listInfo`;
 
         /** Параметры api запроса */
         export interface RequestI {
@@ -47,10 +50,10 @@ export namespace ProductR {
     export namespace getById {
 
         /** APIURL */
-        export const route = `/api/product/${sGetInfoByIdR}`;
+        export const route = `/api/${sRoute}/${sGetInfoByIdR}`;
 
         /** Alias действия */
-        export const action = 'getById';
+        export const action = `getById`;
 
         /** Параметры api запроса */
         export interface RequestI {
@@ -66,10 +69,10 @@ export namespace ProductR {
     export namespace insert {
 
         /** APIURL */
-        export const route = `/api/product/${sInsertRow}`;
+        export const route = `/api/${sRoute}/${sInsertRow}`;
 
         /** Alias действия */
-        export const action = 'insert';
+        export const action = `insert`;
 
         /** Параметры api запроса */
         export interface RequestI extends ProductI {
@@ -84,10 +87,10 @@ export namespace ProductR {
     export namespace update {
 
         /** APIURL */
-        export const route = `/api/product/${sUpdateRow}`;
+        export const route = `/api/${sRoute}/${sUpdateRow}`;
 
         /** Alias действия */
-        export const action = 'update';
+        export const action = `update`;
 
         /** Параметры api запроса */
         export interface RequestI extends ProductI {
@@ -103,10 +106,10 @@ export namespace ProductR {
     export namespace tagList {
 
         /** APIURL */
-        export const route = '/api/product/tagList';
+        export const route = `/api/${sRoute}/tagList`;
 
         /** Alias действия */
-        export const action = 'tagList';
+        export const action = `tagList`;
 
         /** Параметры api запроса */
         export interface RequestI {
@@ -122,10 +125,10 @@ export namespace ProductR {
     export namespace addTag {
 
         /** APIURL */
-        export const route = '/api/product/addTag';
+        export const route = `/api/${sRoute}/addTag`;
 
         /** Alias действия */
-        export const action = 'addTag';
+        export const action = `addTag`;
 
         /** Параметры api запроса */
         export interface RequestI {
@@ -142,10 +145,10 @@ export namespace ProductR {
     export namespace delTag {
 
         /** APIURL */
-        export const route = '/api/product/delTag';
+        export const route = `/api/${sRoute}/delTag`;
 
         /** Alias действия */
-        export const action = 'delTag';
+        export const action = `delTag`;
 
         /** Параметры api запроса */
         export interface RequestI {
@@ -165,10 +168,10 @@ export namespace ProductR {
     export namespace info {
 
         /** APIURL */
-        export const route = `/api/product/${sGetTableInfo}`;
+        export const route = `/api/${sRoute}/${sGetTableInfo}`;
 
         /** Alias действия */
-        export const action = 'info';
+        export const action = `info`;
 
         /** Параметры api запроса */
         export interface RequestI {

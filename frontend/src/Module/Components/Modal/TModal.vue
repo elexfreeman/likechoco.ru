@@ -30,7 +30,7 @@
                             type="button"
                             class="btn btn-secondary"
                             data-dismiss="modal"
-                        >Close</button>
+                        >Закрыть</button>
                     </div>
 
                 </div>

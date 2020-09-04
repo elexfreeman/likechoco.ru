@@ -15,9 +15,14 @@
     .t-modal-bg {
         width: 100vw;
         height: 100vh;
-        background: #0000004a;
+        /*background: #0000004a; */
         top:0;
         left: 0;
+    }
+
+
+    .modal-dialog {
+        box-shadow: 11px 12px 18px rgba(0, 0, 0, 0.25);
     }
 
     .modal {

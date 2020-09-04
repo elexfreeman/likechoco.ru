@@ -3,6 +3,7 @@
         <template slot="content">
             <TTable
                 :cListLoader="cListLoader"
+                v-if="cListLoader"
                 :sRoute="sRoute"
                 :oEditBtn="{sRoute:''}"
                 :oDelBtn="{sRoute:''}"
@@ -36,14 +37,8 @@ export default class MainP extends Vue {
     private serverParams = {};
     private totalRecords = 10;
     private sRoute = "/product";
-    private listLoader: ListLoader;
+    private cListLoader: ListLoader = null;
     // props
-
-    // computed
-    get cListLoader(): ListLoader {
-        
-        return 
-    }
 
     get cTableInfoLoader(): TableInfoLoader {
         return new TableInfoLoader(this.sRoute, new BaseModel(config));
@@ -53,8 +48,9 @@ export default class MainP extends Vue {
     async mounted() {
         console.log("mounted");
 
-        this.listLoader = new ListLoader(this.sRoute, new BaseModel(config));
-        await this.listLoader.faInit();
+        const list = new ListLoader("/product", new BaseModel(config));
+        await list.faInit();
+        this.cListLoader = list;
     }
 }
 </script>

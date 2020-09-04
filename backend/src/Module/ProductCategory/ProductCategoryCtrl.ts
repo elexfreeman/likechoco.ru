@@ -27,18 +27,6 @@ export class ProductCategoryController extends System.BaseCtrl {
 }
 
 /**
- * List
- */
-router.post(R.list.route, async (req: System.MainRequest, res: any, next: any) => {
-    const ctrl = new ProductCategoryController(req, res);
-    await ctrl.faInit();
-    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
-    await ctrl.faAction('Список товаров', () => {
-        return ctrl.productCategoryM.faList(req.body);
-    })
-});
-
-/**
  * insert 
  */
 router.post(R.insert.route, async (req: System.MainRequest, res: any, next: any) => {

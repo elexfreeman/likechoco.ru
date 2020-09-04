@@ -31,9 +31,9 @@
                             <button
                                 v-on:click="fSelectField(props.tableData.formattedRow)"
                                 type="button"
-                                class="btn btn-primary"
+                                class="btn btn btn-light"
                             >
-                                <i class="fas fa-check"></i>
+                                <i class="far fa-check-circle"></i>
                             </button>
                         </div>
                         <span v-else>{{props.tableData.formattedRow[props.tableData.column.field]}}</span>
@@ -76,6 +76,7 @@ export default class TTableSelector extends Vue {
     // поле для выбора
     @Prop({ required: true }) readonly sField: string;
     @Prop({ required: true }) readonly sModalCaption: string;
+    @Prop({ required: false }) readonly value: any;
 
     // computed
 
@@ -102,15 +103,16 @@ export default class TTableSelector extends Vue {
         this.bShowModal = false;
         this.selectedData = data;
         this.fOnSelect(data);
+        this.$emit("input", data);
     }
 
     get fModalSize(): string {
         return ModalSizeEnum.lg;
     }
     get fGetSelectedData(): string {
-        if (Object.keys(this.selectedData).length > 0) {
-            return `${this.selectedData["id"]}: ${
-                this.selectedData[this.sField]
+        if (this.value && Object.keys(this.value).length > 0) {
+            return `${this.value["id"]}: ${
+                this.value[this.sField]
             }`;
         }
         return "";

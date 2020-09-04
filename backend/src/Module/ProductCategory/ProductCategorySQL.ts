@@ -7,10 +7,9 @@ import { SearchS } from "../../../../Entity/Service/SearchS";
  * Продкты 
  */
 export class ProductCategorySQL extends BaseSQL {
-
     /**
-     * Список 
-     */
+        * Список 
+        */
     public async faList(search: SearchS): Promise<ProductCategoryI[]> {
         let ok = true;
         let resp: ProductCategoryI[];
@@ -23,6 +22,27 @@ export class ProductCategorySQL extends BaseSQL {
             } catch (e) {
                 ok = false;
                 this.errorSys.errorEx(e, 'ProductCategory list', 'Не удалось получить информацию о ProductCategory');
+            }
+        }
+
+        return resp;
+    }
+
+    /**
+     * Список 
+     */
+    public async faListTotal(search: SearchS): Promise<number> {
+        let ok = true;
+        let resp: number = 0;
+
+        if (ok) {
+            let sql = `SELECT count(*) cc FROM ${ProductCategoryE.NAME} p `;
+
+            try {
+                resp = (await this.db.raw(sql, search.fGetSearchParam()))[0][0]['cc'];
+            } catch (e) {
+                ok = false;
+                this.errorSys.errorEx(e, 'faListTotal', 'Не удалось получить информацию о faListTotal');
             }
         }
 

@@ -7,7 +7,9 @@
         <div class="container">
             <div class="main-wraper">
                 <div class="main-item">
+                    <div>{{selectedData}}</div>
                     <TTableSelector
+                        v-model="selectedData"
                         v-if="cListLoader"
                         :sRoute="`/product`"
                         :fOnSelect="fOnSelect"
@@ -55,6 +57,7 @@ export default class MainP extends Vue {
     private row: any = {};
     private bShowModal = false;
     private cListLoader: ListLoader = null;
+    private selectedData:any = {id: 10, 'caption': 'Товар'};
     // props
 
     // computed

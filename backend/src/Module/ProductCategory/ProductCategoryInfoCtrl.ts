@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as System from "@a-a-game-studio/aa-core/lib/Namespace/System";
-import { ProductR as R } from "../../../../Entity/Routes/ProductR";
-import { ProductInfoM } from './ProductInfoM';
+import { ProductCategoryR as R } from "../../../../Entity/Routes/ProductCategoryR";
+import { ProductCategoryInfoM } from './ProductCategoryInfoM';
 
 const router = express.Router();
 
@@ -9,9 +9,9 @@ const router = express.Router();
 /**
  * Контроллер 
  */
-export class ProductInfoController extends System.BaseCtrl {
+export class ProductCategoryInfoController extends System.BaseCtrl {
 
-    public productInfoM: ProductInfoM;
+    public productCategoryInfoM: ProductCategoryInfoM;
 
     /**
      * Конструктор
@@ -21,7 +21,7 @@ export class ProductInfoController extends System.BaseCtrl {
      */
     public async faInit() {
         // Инициализация бизнес моделей
-        this.productInfoM = new ProductInfoM(this.req);
+        this.productCategoryInfoM = new ProductCategoryInfoM(this.req);
     }
 
 }
@@ -30,15 +30,15 @@ export class ProductInfoController extends System.BaseCtrl {
  * List
  */
 router.post(R.info.route, async (req: System.MainRequest, res: any, next: any) => {
-    const ctrl = new ProductInfoController(req, res);
+    const ctrl = new ProductCategoryInfoController(req, res);
     await ctrl.faInit();
     // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
     await ctrl.faAction('Инфломация о строках товара', () => {
-        return ctrl.productInfoM.faInfo(req.body);
+        return ctrl.productCategoryInfoM.faInfo(req.body);
     })
 });
 
 
 export {
-    router as ProductInfoCtrl
+    router as ProductCategoryInfoCtrl
 }

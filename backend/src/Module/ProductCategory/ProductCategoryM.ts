@@ -27,30 +27,6 @@ export class ProductCategoryM extends System.BaseM {
         this.productCategorySQL = new ProductCategorySQL(req);
     }
 
-    public async faList(data: R.list.RequestI): Promise<R.list.ResponseI> {
-
-        data = <R.list.RequestI>V.list(this.req, data);
-        let ok = this.errorSys.isOk();
-
-        // --------------------------
-
-        let vProductCategory: ProductCategoryI[] = [];
-        if (ok) {
-            vProductCategory = await this.productCategorySQL.faList(new SearchS().fSetParam(data));
-        }
-
-        // --------------------------
-
-        let out: R.list.ResponseI = null;
-        if (ok) { // Формирование ответа
-            out = {
-                list: vProductCategory,
-            };
-        }
-
-        return out;
-    }
-
     /**
      * Получить по id 
      * @param data 
