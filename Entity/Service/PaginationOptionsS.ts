@@ -23,7 +23,7 @@ export class PaginationOptionsS implements PaginationOptionsI {
         const out = new PaginationOptionsS();
         out.nextLabel = "далее";
         out.prevLabel = "назад";
-        out.rowsPerPageLabel = "Строк на странице";
+        out.rowsPerPageLabel = "Строк";
         out.pageLabel = 'стр.';
         out.ofLabel = 'из';
         out.allLabel = 'Все';

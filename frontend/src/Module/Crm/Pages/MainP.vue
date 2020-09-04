@@ -10,8 +10,10 @@
                     <TTableSelector
                         v-if="cListLoader"
                         :sRoute="`/product`"
-                        :fOnSelect="() => {}"
+                        :fOnSelect="fOnSelect"
                         :cListLoader="cListLoader"
+                        :sField="'caption'"
+                        :sModalCaption="'Выбор товара'"
                     />
                 </div>
                 <router-link to="/product" class="main-item">
@@ -106,6 +108,11 @@ export default class MainP extends Vue {
 
     updateParams(newProps) {
         this.serverParams = Object.assign({}, this.serverParams, newProps);
+    }
+
+    fOnSelect(data: any) {
+        console.log(data);
+        
     }
 }
 </script>
