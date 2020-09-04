@@ -50,7 +50,7 @@ export class ListLoader extends BaseLoader {
      * Загрзка основного списка
      */
     public async faLoad(searchS: SearchS): Promise<ListResponseI<any>> {
-        const url = `${this.sUrl}/list`;
+        const url = `/${this.sUrl}/list`;
         const respApi: ApiResponseI<ListResponseI<any>> =
             await this.baseModel.faApiRequest(searchS, url);
         return respApi.data;
@@ -60,7 +60,7 @@ export class ListLoader extends BaseLoader {
      * Информация о таблице
      */
     public async faInit(): Promise<ListInfoResponseI> {
-        const url = `${this.sUrl}/list/info`;
+        const url = `/${this.sUrl}/list/info`;
         const respApi: ApiResponseI<ListInfoResponseI> =
             await this.baseModel.faApiRequest({}, url);
         this.data = respApi.data;

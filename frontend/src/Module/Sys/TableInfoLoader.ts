@@ -27,7 +27,7 @@ export class TableInfoLoader extends BaseLoader implements TableI.TableI {
     }
 
     public async faLoadInfo(): Promise<TableI.TableI> {
-        const url = `${this.sUrl}/info`;
+        const url = `/${this.sUrl}/info`;
 
         const respApi: ApiResponseI<TableI.TableI> =
             await this.baseModel.faApiRequest({}, url);

@@ -13,7 +13,7 @@ export class RowSaverS extends BaseLoader {
      * @param data 
      */
     public async faAdd(data: any): Promise<ApiResponseI<TableI.AddRowResponseI>> {
-        const url = `${this.sUrl}/${TableI.sInsertRow}`;
+        const url = `/${this.sUrl}/${TableI.sInsertRow}`;
 
         const respApi: ApiResponseI<TableI.AddRowResponseI> =
             await this.baseModel.faApiRequest(data, url);
@@ -27,7 +27,7 @@ export class RowSaverS extends BaseLoader {
      * @param data 
      */
     public async faUpdate(data: any): Promise<ApiResponseI<TableI.UpdateRowResponseI>> {
-        const url = `${this.sUrl}/${TableI.sUpdateRow}`;
+        const url = `/${this.sUrl}/${TableI.sUpdateRow}`;
 
         const respApi: ApiResponseI<TableI.UpdateRowResponseI> =
             await this.baseModel.faApiRequest(data, url);

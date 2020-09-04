@@ -4,6 +4,7 @@
             <span>{{fGetSelectedData}}</span>
             <i class="fas fa-caret-down"></i>
         </div>
+
         <TModal
             v-if="bShowModal"
             :fOnClose="() => {fHideModal(); }"
@@ -11,10 +12,10 @@
             :sSizeClass="fModalSize"
             :bIsOpen="true"
         >
-            <template v-if="cListLoader" v-slot:content>
+            <template v-slot:content>
+
                 <TTable
-                    :cListLoader="cListLoader"
-                    :sRoute="sRoute"
+                    :cListLoader="tableLoader.listLoader"
                     :oEditBtn="null"
                     :oDelBtn="null"
                 >
@@ -39,20 +40,20 @@
                         <span v-else>{{props.tableData.formattedRow[props.tableData.column.field]}}</span>
                     </template>
                 </TTable>
+
             </template>
         </TModal>
+
     </div>
 </template>
 
 <script lang='ts'>
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { ListLoader } from "../../Sys/ListLoader";
 
 import { RowI, ColumnI } from "../../../../../Entity/Interfaces/ListI";
 import { PaginationOptionsS } from "../../../../../Entity/Service/PaginationOptionsS";
-import { BaseModel } from "../../Sys/BaseModel";
 
-import { TableInfoLoader } from "../../Sys/TableInfoLoader";
+import { TableLoader } from "../../Sys/TableLoader";
 import TModal, { ModalSizeEnum } from "../Modal/TModal.vue";
 import TTable from "../Table/TTable.vue";
 
@@ -69,26 +70,30 @@ export default class TTableSelector extends Vue {
 
     // событие выбора
     @Prop({ required: true }) readonly fOnSelect: (data: any) => void;
-    // маршрут
-    @Prop({ required: true }) readonly sRoute: string;
     // загрузчик списка
-    @Prop({ required: true }) readonly cListLoader: ListLoader;
+    @Prop({ required: true }) readonly tableLoader: TableLoader;
     // поле для выбора
     @Prop({ required: true }) readonly sField: string;
     @Prop({ required: true }) readonly sModalCaption: string;
-    @Prop({ required: false }) readonly value: any;
+    @Prop({ required: false }) readonly value: number;
 
     // computed
 
     // methods
     async mounted() {
         console.log("mounted");
-
-        this.cListLoader.fAddColumn({
+        this.tableLoader.listLoader.fAddColumn({
             label: "",
             field: "select_button",
             sortable: false,
         });
+
+        if(this.value) {
+            const respData = await this.tableLoader.rowInfoLoader.faLoadInfo(this.value);
+            if(respData.ok) {
+                this.selectedData = respData.data.row;
+            }
+        }
     }
 
     fShowModal() {
@@ -103,20 +108,20 @@ export default class TTableSelector extends Vue {
         this.bShowModal = false;
         this.selectedData = data;
         this.fOnSelect(data);
-        this.$emit("input", data);
+        this.$emit("input", data["id"]);
     }
 
     get fModalSize(): string {
         return ModalSizeEnum.lg;
     }
+
     get fGetSelectedData(): string {
-        if (this.value && Object.keys(this.value).length > 0) {
-            return `${this.value["id"]}: ${
-                this.value[this.sField]
-            }`;
+        if (this.selectedData && Object.keys(this.selectedData).length > 0) {
+            return `${this.selectedData["id"]}: ${this.selectedData[this.sField]}`;
         }
         return "";
     }
+
 }
 </script>
 

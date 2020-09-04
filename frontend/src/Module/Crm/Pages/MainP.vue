@@ -10,10 +10,10 @@
                     <div>{{selectedData}}</div>
                     <TTableSelector
                         v-model="selectedData"
-                        v-if="cListLoader"
+                        v-if="tableLoader"
                         :sRoute="`/product`"
                         :fOnSelect="fOnSelect"
-                        :cListLoader="cListLoader"
+                        :tableLoader="tableLoader"
                         :sField="'caption'"
                         :sModalCaption="'Выбор товара'"
                     />
@@ -32,18 +32,15 @@
 <script lang='ts'>
 import { Component, Prop, Vue } from "vue-property-decorator";
 import TTable from "../../Components/Table/TTable.vue";
-import { ListLoader } from "../../Sys/ListLoader";
 
 import { RowI, ColumnI } from "../../../../../Entity/Interfaces/ListI";
 import { PaginationOptionsS } from "../../../../../Entity/Service/PaginationOptionsS";
 import { config } from "../../../Config";
-import { BaseModel } from "../../Sys/BaseModel";
 
 import TEdit from "../../Components/Edit/TEdit.vue";
-import { RowInfoLoader } from "../../Sys/RowInfoLoader";
-import { TableInfoLoader } from "../../Sys/TableInfoLoader";
 import TModal, { ModalSizeEnum } from "../../Components/Modal/TModal.vue";
 import TTableSelector from "../../Components/Table/TTableSelector.vue";
+import { TableLoader } from "../../Sys/TableLoader";
 
 @Component({
     components: { TTable, TEdit, TModal, TTableSelector },
@@ -56,19 +53,11 @@ export default class MainP extends Vue {
     private paginationOptions: PaginationOptionsS = PaginationOptionsS.InitRus();
     private row: any = {};
     private bShowModal = false;
-    private cListLoader: ListLoader = null;
-    private selectedData:any = {id: 10, 'caption': 'Товар'};
+    private selectedData: any = 23;
+    private tableLoader: TableLoader = null;
     // props
 
     // computed
-
-    get cRowInfoLoader(): RowInfoLoader {
-        return new RowInfoLoader("/product", new BaseModel(config));
-    }
-
-    get cTableInfoLoader(): TableInfoLoader {
-        return new TableInfoLoader("/product", new BaseModel(config));
-    }
 
     get fModalSize(): string {
         return ModalSizeEnum.lg;
@@ -93,12 +82,9 @@ export default class MainP extends Vue {
     // methods
     async mounted() {
         console.log("mounted");
-        const cRowLoader = new RowInfoLoader("/product", new BaseModel(config));
-        this.row = await cRowLoader.faLoadInfo(28);
-        console.log(this.row);
-        const list = new ListLoader("/product", new BaseModel(config));
-        await list.faInit();
-        this.cListLoader = list;
+        const tableLoader = new TableLoader("product", config);
+        await tableLoader.listLoader.faInit();
+        this.tableLoader = tableLoader;
     }
 
     fShowModal() {
@@ -115,7 +101,6 @@ export default class MainP extends Vue {
 
     fOnSelect(data: any) {
         console.log(data);
-        
     }
 }
 </script>

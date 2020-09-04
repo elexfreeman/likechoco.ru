@@ -17,7 +17,7 @@
 
                 <div class="d-flex justify-content-end" v-if="props.column.field == 'buttons'">
                     <router-link
-                        :to="`${sRoute}/edit/${props.formattedRow['id']}`"
+                        :to="`/${sRoute}/edit/${props.formattedRow['id']}`"
                         v-if="oEditBtn"
                         type="button"
                         class="btn btn-light"
@@ -86,7 +86,6 @@ export default class TTable extends Vue {
     @Prop({ required: false }) readonly oDelBtn: BtnI;
     @Prop({ required: false }) readonly oAddBtn: BtnI;
     // маршрут в vue
-    @Prop({ required: true }) readonly sRoute: string;
 
     // computed
 
@@ -97,6 +96,11 @@ export default class TTable extends Vue {
 
     get aColumn(): ColumnI[] {
         return this.cListLoader.fGetAColumn();
+    }
+
+
+    get sRoute(): string {
+        return this.cListLoader.fGetUrl();
     }
 
     // methods

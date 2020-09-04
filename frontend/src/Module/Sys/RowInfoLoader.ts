@@ -15,12 +15,12 @@ export class RowInfoLoader extends BaseLoader {
         super(sUrl, baseModel);
     }
 
-    public async faLoadInfo(id: number): Promise<TableI.GetRowByIdResponseI<any>> {
-        const url = `${this.sUrl}/${TableI.sGetInfoByIdR}`;
+    public async faLoadInfo(id: number): Promise<ApiResponseI<TableI.GetRowByIdResponseI<any>>> {
+        const url = `/${this.sUrl}/${TableI.sGetInfoByIdR}`;
 
         const respApi: ApiResponseI<TableI.GetRowByIdResponseI<any>> =
             await this.baseModel.faApiRequest({ id: id }, url);
 
-        return respApi.data;
+        return respApi;
     }
 }
