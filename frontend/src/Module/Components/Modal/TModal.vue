@@ -2,8 +2,10 @@
     <div class="t-modal" :class="{'is-open': bIsOpen, 'start-close': bOnStartClose}">
         <div class="t-modal-bg"></div>
         <div class="modal" tabindex="-1">
+
             <div :class="fGetModalSize" class="modal-dialog">
                 <div class="modal-content">
+                    
                     <div class="modal-header">
                         <h5 class="modal-title">{{sTitle}}</h5>
                         <button
@@ -16,9 +18,11 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+
                     <div class="modal-body">
                         <slot name="content"></slot>
                     </div>
+
                     <div class="modal-footer">
                         <slot name="buttons"></slot>
                         <button
@@ -28,7 +32,9 @@
                             data-dismiss="modal"
                         >Close</button>
                     </div>
+
                 </div>
+
             </div>
         </div>
     </div>

@@ -96,6 +96,8 @@ export default class TTable extends Vue {
     }
 
     get aColumn(): ColumnI[] {
+        console.log(this.cListLoader.fGetAColumn());
+        
         return this.cListLoader.fGetAColumn();
     }
 

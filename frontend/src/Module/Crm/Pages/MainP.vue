@@ -5,16 +5,15 @@
             <div class="top-description">Тут все и начинается</div>
         </div>
         <div class="container">
-            <button class="btn btn-primary" v-on:click="fShowModal">Show modal</button>
-            <TModal v-if="bShowModal" :fOnClose="() => {fHideModal(); }" :sSizeClass="fModalSize" :sTitle="`Заголовок модалки`" :bIsOpen="true">
-                <template v-slot:content>
-                    <h2>КОнтен модалки</h2>
-                </template>
-            </TModal>
             <div class="main-wraper">
-                <router-link to="/product" class="main-item">
-                    <div class="item-title">Товары на складе</div>
-                </router-link>
+                <div class="main-item">
+                    <TTableSelector
+                        v-if="cListLoader"
+                        :sRoute="`/product`"
+                        :fOnSelect="() => {}"
+                        :cListLoader="cListLoader"
+                    />
+                </div>
                 <router-link to="/product" class="main-item">
                     <div class="item-title">Товары на складе</div>
                 </router-link>
@@ -40,9 +39,10 @@ import TEdit from "../../Components/Edit/TEdit.vue";
 import { RowInfoLoader } from "../../Sys/RowInfoLoader";
 import { TableInfoLoader } from "../../Sys/TableInfoLoader";
 import TModal, { ModalSizeEnum } from "../../Components/Modal/TModal.vue";
+import TTableSelector from "../../Components/Table/TTableSelector.vue";
 
 @Component({
-    components: { TTable, TEdit, TModal },
+    components: { TTable, TEdit, TModal, TTableSelector },
 })
 export default class MainP extends Vue {
     //data
@@ -52,12 +52,10 @@ export default class MainP extends Vue {
     private paginationOptions: PaginationOptionsS = PaginationOptionsS.InitRus();
     private row: any = {};
     private bShowModal = false;
+    private cListLoader: ListLoader = null;
     // props
 
     // computed
-    get cListLoader(): ListLoader {
-        return new ListLoader("/product", new BaseModel(config));
-    }
 
     get cRowInfoLoader(): RowInfoLoader {
         return new RowInfoLoader("/product", new BaseModel(config));
@@ -93,6 +91,9 @@ export default class MainP extends Vue {
         const cRowLoader = new RowInfoLoader("/product", new BaseModel(config));
         this.row = await cRowLoader.faLoadInfo(28);
         console.log(this.row);
+        const list = new ListLoader("/product", new BaseModel(config));
+        await list.faInit();
+        this.cListLoader = list;
     }
 
     fShowModal() {

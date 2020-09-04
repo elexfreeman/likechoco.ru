@@ -33,6 +33,11 @@ export class ListLoader extends BaseLoader {
     }
 
 
+    public fSetAColumn(data: ColumnI[]) {
+        this.data.aColumn = data;
+    }
+
+
 
     public fGetPaginationOptions() {
         if (this.bIsInit) {
