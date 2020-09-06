@@ -1,6 +1,6 @@
 import Vue, { VNode } from "vue";
 import VueRouter from 'vue-router';
-import Crm from '../Module/Crm/Crm.vue';
+import Crm from '../Module/Crm/App.vue';
 import { store } from '../store';
 import { router } from "../Module/Crm/router";
 

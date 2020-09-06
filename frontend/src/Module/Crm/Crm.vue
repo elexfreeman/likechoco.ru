@@ -1,9 +1,11 @@
 <template>
     <div class="crm">
-        <Menu />
         <div class="main-tpl">
-            <div class="menu-tpl"></div>
+            <div class="menu-tpl">
+
+            </div>
             <div class="content-tpl">
+                <Menu />
                 <router-view class="view"></router-view>
             </div>
         </div>

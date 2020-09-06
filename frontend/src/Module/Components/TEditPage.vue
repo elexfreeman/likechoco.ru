@@ -1,17 +1,37 @@
 <template>
-    <TBasePage :sCaption="sCaption">
-        <template v-slot:content>
-            <slot name="content"></slot>
-            <div class="text-right pt-4">
-                <button :disabled="bIsLoad" v-on:click="fOk" type="button" class="btn btn-success t-button">Сохранить</button>
-                <router-link :to="'/' + sRoute" class="btn btn-outline-success t-button">Отмена</router-link>
+    <div>
+        <div class="container pt-4 page-content">
+            <div class="slot-header d-flex justify-content-between align-items-center">
+                <router-link :to="'/' + sRoute" class="header-caption">
+                    <div class="header-caption-item"><i class="fas fa-chevron-left"></i></div>
+                    <div class="header-caption-item">{{sCaption}}</div>
+                </router-link>
+                <slot name="header"></slot>
             </div>
-        </template>
-    </TBasePage>
+            <div class>
+                <div>
+                    <div class="container pt-4 page-content">
+                        <slot name="content"></slot>
+                        <div class="text-right pt-4">
+                            <button
+                                :disabled="bIsLoad"
+                                v-on:click="fOk"
+                                type="button"
+                                class="btn btn-success t-button"
+                            >Сохранить</button>
+                            <router-link
+                                :to="'/' + sRoute"
+                                class="btn btn-outline-success t-button"
+                            >Отмена</router-link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script lang='ts'>
-
 /**
  * Компонент страницы списка
  */
@@ -32,7 +52,7 @@ export default class MainP extends Vue {
 
     @Prop({ required: true }) readonly fOk: () => void;
     @Prop({ required: true }) readonly fCancel: () => void;
-    @Prop({ required: true }) readonly bIsLoad: boolean; 
+    @Prop({ required: true }) readonly bIsLoad: boolean;
 
     // computed
 

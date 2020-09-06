@@ -11,6 +11,7 @@ $theme-colors: (
 @import "./crm/t-edit.scss";
 @import "./crm/main-page.scss";
 @import "./crm/t-modal.scss";
+@import "./crm//main-tpl.scss";
 
 body {
     background-color: rgb(246, 247, 251);
@@ -21,6 +22,28 @@ body {
     font-size: 30px;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.header-caption {
+    display: flex;
+    align-items: center;
+    .header-caption-item {
+        margin-right: 10px;
+        color:#e11284;
+    }
+
+
+    i {
+        border: 1px solid #c1237a;
+        border-radius: 50%;
+        padding: 10px 13px;
+        font-size: 16px;
+    }
+}
+
+
+a.header-caption:hover {
+    text-decoration: none !important;
 }
 
 body.remove-scroll {
