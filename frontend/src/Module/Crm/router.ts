@@ -1,8 +1,13 @@
 import VueRouter from 'vue-router';
 import MainP from './Pages/MainP.vue';
+
+// модули
 import { route as aProductRoute } from "../Product/router";
 import { route as aProductCategoryRoute } from "../ProductCategory/router";
 
+/**
+ * Маршруты модулей
+ */
 const aRoute = [
     // Главная
     { path: '/', name: 'MainP', component: MainP },

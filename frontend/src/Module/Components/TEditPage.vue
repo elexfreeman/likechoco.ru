@@ -33,7 +33,7 @@
 
 <script lang='ts'>
 /**
- * Компонент страницы списка
+ * Компонент редактирование - добавления 
  */
 import { Component, Prop, Vue } from "vue-property-decorator";
 import TBasePage from "./TBasePage.vue";

@@ -20,7 +20,7 @@ import { PaginationOptionsI, ColumnI } from "../../../../Entity/Interfaces/ListI
 import * as TableI from "../../../../Entity/Interfaces/TableI";
 
 /**
- * Товыры
+ * Категории товаров 
  */
 export class ProductCategoryM extends System.BaseM {
 
