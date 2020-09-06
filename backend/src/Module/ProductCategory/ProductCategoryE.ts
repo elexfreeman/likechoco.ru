@@ -21,7 +21,6 @@ export class ProductCategoryE {
             .error('description - неверный формат')
         );
 
-
         return rules.get();
     }
 

@@ -1,8 +1,13 @@
 <template>
-  <div class="crm">
-    <Menu />
-    <router-view class="view"></router-view>
-  </div>
+    <div class="crm">
+        <Menu />
+        <div class="main-tpl">
+            <div class="menu-tpl"></div>
+            <div class="content-tpl">
+                <router-view class="view"></router-view>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script lang='ts' src="./Crm.ts" />

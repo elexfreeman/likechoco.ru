@@ -1,40 +1,38 @@
 <template>
     <div class="t-modal" :class="{'is-open': bIsOpen, 'start-close': bOnStartClose}">
         <div class="t-modal-bg"></div>
-        <div class="modal" tabindex="-1">
+        <div class="t-modal-scroll">
+            <div class="modal" tabindex="-1">
+                <div :class="fGetModalSize" class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">{{sTitle}}</h5>
+                            <button
+                                v-on:click="fOnModalClose"
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                            >
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
 
-            <div :class="fGetModalSize" class="modal-dialog">
-                <div class="modal-content">
-                    
-                    <div class="modal-header">
-                        <h5 class="modal-title">{{sTitle}}</h5>
-                        <button
-                            v-on:click="fOnModalClose"
-                            type="button"
-                            class="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                        >
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <div class="modal-body">
+                            <slot name="content"></slot>
+                        </div>
+
+                        <div class="modal-footer">
+                            <slot name="buttons"></slot>
+                            <button
+                                v-on:click="fOnModalClose"
+                                type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                            >Закрыть</button>
+                        </div>
                     </div>
-
-                    <div class="modal-body">
-                        <slot name="content"></slot>
-                    </div>
-
-                    <div class="modal-footer">
-                        <slot name="buttons"></slot>
-                        <button
-                            v-on:click="fOnModalClose"
-                            type="button"
-                            class="btn btn-secondary"
-                            data-dismiss="modal"
-                        >Закрыть</button>
-                    </div>
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -51,7 +49,7 @@ export enum ModalSizeEnum {
 /**
  * Базовый компонент страницы
  */
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 @Component({
     name: "TModal",
     components: {},
@@ -81,6 +79,7 @@ export default class MainP extends Vue {
         return resp;
     }
 
+
     // methods
     async mounted() {
         console.log("mounted");
@@ -92,6 +91,16 @@ export default class MainP extends Vue {
             this.fOnClose();
             this.bOnStartClose = false;
         }, 100);
+    }
+
+    // для скрола страницы
+    @Watch("bIsOpen") fIsOpenChanged(val: boolean, oldVal: boolean) {
+        const body = document.getElementById("body");
+        if (val) {
+            body.classList.add("modal-open");
+        } else {
+            body.classList.remove("modal-open");
+        }
     }
 }
 </script>

@@ -170,6 +170,10 @@ export class ProductM extends System.BaseM {
                 field: 'caption',
             },
             {
+                label: 'Категория',
+                field: 'category_caption',
+            },
+            {
                 label: 'Описание',
                 field: 'description',
             },

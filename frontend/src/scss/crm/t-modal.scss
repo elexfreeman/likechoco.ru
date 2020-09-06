@@ -28,7 +28,6 @@
     .modal {
         display: block;
         animation: 0.3s linear 0s 1 alternate show_modal1;
-        margin-top: 100px;
         transform: scale(1);
     }
     @keyframes show_modal1 {

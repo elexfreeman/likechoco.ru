@@ -2,7 +2,7 @@
     <TEditPage
         :bIsLoad="bIsLoad"
         :fOk="() => {fOk();}"
-        :fCancel="()=>{}"
+        :fCancel="() => {fCancel();}"
         :sCaption="sCaption"
         :sRoute="sRoute"
     >
@@ -13,22 +13,7 @@
                 :sRoute="sRoute"
                 :cTableInfoLoader="cTableInfoLoader"
                 :row="row"
-            >
-                <template v-slot:content>
-                    <div class="form-group">
-                        <label>Категория товара</label>
-                        <TTableSelector
-                            v-model="row.category_id"
-                            v-if="tableLoaderProductCategory"
-                            :sRoute="sProductCategoryR"
-                            :tableLoader="tableLoaderProductCategory"
-                            :sField="'caption'"
-                            :sModalCaption="'Выбор категории товара'"
-                            :fOnSelect="()=>{}"
-                        />
-                    </div>
-                </template>
-            </TEdit>
+            />
         </template>
     </TEditPage>
 </template>
@@ -43,32 +28,23 @@ import { config } from "../../Config";
 import { BaseModel } from "../Sys/BaseModel";
 
 import TEdit from "../Components/Edit/TEdit.vue";
-import TTableSelector from "../Components/Table/TTableSelector.vue";
-
 import { RowInfoLoader } from "../Sys/RowInfoLoader";
 import { TableInfoLoader } from "../Sys/TableInfoLoader";
 import TEditPage from "../Components/TEditPage.vue";
 import { RowSaverS } from "../Sys/RowSaverS";
 import { ErrorParseS } from "../Sys/ErrorParseS";
 
-import { sRoute } from "../../../../Entity/Routes/ProductR";
-import { sRoute as sProductCategoryR } from "../../../../Entity/Routes/ProductCategoryR";
-import { TableLoader } from "../Sys/TableLoader";
-
 @Component({
-    components: { TEdit, TEditPage, TTableSelector },
+    components: { TEdit, TEditPage },
 })
-export default class AddP extends Vue {
+export default class EditP extends Vue {
     //data
     private bIsLoad = false;
     private row: any = {};
-    private sCaption = "Добавление товара";
-    private sRoute = sRoute;
-    private sProductCategoryR = sProductCategoryR;
+    private sCaption = "Редактирование товара";
+    private sRoute = "productCategory";
+    private errorParseS: ErrorParseS;
 
-    private errorParseS: ErrorParseS = new ErrorParseS({});
-
-    private tableLoaderProductCategory: TableLoader = null;
     // props
 
     // computed
@@ -79,26 +55,33 @@ export default class AddP extends Vue {
 
     // methods
     async mounted() {
-        const tableLoaderProductCategory = new TableLoader(
-            this.sProductCategoryR,
-            config
+        this.errorParseS = new ErrorParseS({});
+        const cRowLoader = new RowInfoLoader(
+            this.sRoute,
+            new BaseModel(config)
         );
-        await tableLoaderProductCategory.listLoader.faInit();
-        this.tableLoaderProductCategory = tableLoaderProductCategory;
+        this.row = (
+            await cRowLoader.faLoadInfo(Number(this.$route.params["id"]))
+        ).data.row;
     }
 
+    /**
+     * событие сохранения
+     */
     async fOk() {
         const rowSaverS = new RowSaverS(this.sRoute, new BaseModel(config));
         this.bIsLoad = true;
-        const data = await rowSaverS.faAdd(this.row);
+        const data = await rowSaverS.faUpdate(this.row);
         this.bIsLoad = false;
         if (data.ok) {
             this.$router.push("/" + this.sRoute);
         } else {
             this.errorParseS = new ErrorParseS(data.errors);
-            console.log(this.errorParseS);
-            
         }
+    }
+
+    async fCancel() {
+        this.$router.push({ path: "/" + this.sRoute });
     }
 }
 </script>

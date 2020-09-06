@@ -6,11 +6,10 @@
         </div>
 
         <TModal
-            v-if="bShowModal"
             :fOnClose="() => {fHideModal(); }"
             :sTitle="sModalCaption"
             :sSizeClass="fModalSize"
-            :bIsOpen="true"
+            :bIsOpen="bShowModal"
         >
             <template v-slot:content>
 

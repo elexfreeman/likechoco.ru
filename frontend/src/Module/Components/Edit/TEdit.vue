@@ -2,8 +2,7 @@
     <div class="t-edit" v-if="!bIsLoad">
         <div :key="key" v-for="(column, key) in cTableInfoLoader.aColumn">
             <div class="form-group">
-                <label for="exampleInputEmail1">{{column.sCaption}}</label>
-
+                <label>{{column.sCaption}}</label>
                 <input
                     v-if="column.nType==ColumnTypeEnumInteger"
                     :disabled="column.sName=='id'"
@@ -31,6 +30,7 @@
                 ></textarea>
             </div>
         </div>
+        <slot name="content"></slot>
     </div>
 </template>
 

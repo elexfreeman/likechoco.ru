@@ -1,9 +1,9 @@
 import { ProductCategoryI } from "../Interfaces/ProductCategoryI";
 import { SearchParamI } from "../Service/SearchS";
-import { ListInfoResponseI, ListResponseI } from "../Interfaces/ListI";
-import { TableI, sGetInfoByIdR, sGetTableInfo, sInsertRow, sUpdateRow, AddRowResponseI } from "../Interfaces/TableI";
+import { ColumnI, PaginationOptionsI, ListInfoResponseI, ListResponseI } from "../Interfaces/ListI";
+import { GetRowByIdResponseI, TableI, sGetInfoByIdR, sGetTableInfo, sInsertRow, sUpdateRow, AddRowResponseI } from "../Interfaces/TableI";
 
-export const sRoute = 'product_category';
+export const sRoute = 'productCategory';
 
 /**
  * Товар
@@ -60,7 +60,7 @@ export namespace ProductCategoryR {
         }
 
         /** Параметры api ответа */
-        export interface ResponseI extends ProductCategoryI {
+        export interface ResponseI extends GetRowByIdResponseI<ProductCategoryI> {
         }
     }
 

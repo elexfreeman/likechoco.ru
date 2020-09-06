@@ -7,9 +7,10 @@ import { SearchS } from "../../../../Entity/Service/SearchS";
  * Продкты 
  */
 export class ProductCategorySQL extends BaseSQL {
+
     /**
-        * Список 
-        */
+     * Список 
+     */
     public async faList(search: SearchS): Promise<ProductCategoryI[]> {
         let ok = true;
         let resp: ProductCategoryI[];
@@ -130,6 +131,7 @@ export class ProductCategorySQL extends BaseSQL {
 
         return ok;
     }
+
 
 }
 

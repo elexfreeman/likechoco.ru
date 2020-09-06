@@ -2,9 +2,10 @@ import BaseSQL from "@a-a-game-studio/aa-core/lib/System/BaseSQL";
 import { ProductE } from "./ProductE";
 import { ProductI } from "../../../../Entity/Interfaces/ProductI";
 import { SearchS } from "../../../../Entity/Service/SearchS";
-import { ProductTagIdxE } from "./ProductTagIdxE";
+import { ProductTagIdxE } from "../ProductTag/ProductTagIdxE";
 import { ProductTagI } from "../../../../Entity/Interfaces/ProductTagI";
 import { ProductTagE } from "../ProductTag/ProductTagE";
+import { ProductCategoryE } from "../ProductCategory/ProductCategoryE";
 
 /**
  * Продкты 
@@ -19,7 +20,10 @@ export class ProductSQL extends BaseSQL {
         let resp: ProductI[];
 
         if (ok) {
-            let sql = `SELECT * FROM ${ProductE.NAME} p LIMIT :nOffset, :nLimit`;
+            let sql = `SELECT p.*, pc.caption AS category_caption FROM ${ProductE.NAME} p
+                JOIN ${ProductCategoryE.NAME} pc
+                ON pc.id=p.category_id
+            LIMIT :nOffset, :nLimit`;
 
             try {
                 resp = (await this.db.raw(sql, search.fGetSearchParam()))[0];

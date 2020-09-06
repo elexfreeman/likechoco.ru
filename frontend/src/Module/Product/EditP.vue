@@ -13,7 +13,22 @@
                 :sRoute="sRoute"
                 :cTableInfoLoader="cTableInfoLoader"
                 :row="row"
-            />
+            >
+                <template v-slot:content>
+                    <div class="form-group">
+                        <label>Категория товара</label>
+                        <TTableSelector
+                            v-model="row.category_id"
+                            v-if="tableLoaderProductCategory"
+                            :sRoute="sProductCategoryR"
+                            :tableLoader="tableLoaderProductCategory"
+                            :sField="'caption'"
+                            :sModalCaption="'Выбор категории товара'"
+                            :fOnSelect="()=>{}"
+                        />
+                    </div>
+                </template>
+            </TEdit>
         </template>
     </TEditPage>
 </template>
@@ -28,22 +43,29 @@ import { config } from "../../Config";
 import { BaseModel } from "../Sys/BaseModel";
 
 import TEdit from "../Components/Edit/TEdit.vue";
+import TTableSelector from "../Components/Table/TTableSelector.vue";
+
 import { RowInfoLoader } from "../Sys/RowInfoLoader";
 import { TableInfoLoader } from "../Sys/TableInfoLoader";
 import TEditPage from "../Components/TEditPage.vue";
 import { RowSaverS } from "../Sys/RowSaverS";
 import { ErrorParseS } from "../Sys/ErrorParseS";
+import { sRoute } from "../../../../Entity/Routes/ProductR";
+import { sRoute as sProductCategoryR } from "../../../../Entity/Routes/ProductCategoryR";
+import { TableLoader } from "../Sys/TableLoader";
 
 @Component({
-    components: { TEdit, TEditPage },
+    components: { TEdit, TEditPage, TTableSelector },
 })
 export default class EditP extends Vue {
     //data
     private bIsLoad = false;
     private row: any = {};
     private sCaption = "Редактирование товара";
-    private sRoute = "product";
-    private errorParseS: ErrorParseS;
+    private sRoute = sRoute;
+    private sProductCategoryR = sProductCategoryR;
+    private errorParseS: ErrorParseS = new ErrorParseS({});
+    private tableLoaderProductCategory: TableLoader = null;
 
     // props
 
@@ -63,6 +85,13 @@ export default class EditP extends Vue {
         this.row = (
             await cRowLoader.faLoadInfo(Number(this.$route.params["id"]))
         ).data.row;
+
+        const tableLoaderProductCategory = new TableLoader(
+            this.sProductCategoryR,
+            config
+        );
+        await tableLoaderProductCategory.listLoader.faInit();
+        this.tableLoaderProductCategory = tableLoaderProductCategory;
     }
 
     /**

@@ -29,7 +29,6 @@ export function list(req: MainRequest, data: any) {
 
     rules.set(rules.rule('sSearchString')
         .type(Components.ModelRulesT.text)
-        .minLen(2)
         .maxLen(100)
         .errorEx('sSearchString', 'sSearchString')
     );
@@ -69,10 +68,10 @@ export function update(req: MainRequest, data: any) {
 
     rules.set(rules.rule('description')
         .type(Components.ModelRulesT.text)
-        .maxLen(100)
+        .maxLen(1024)
         .errorEx('description', 'description')
     );
-    
+
     // ---------------------------------------
     let validator = new Components.ModelValidatorSys(req.sys.errorSys);
     validator.fValid(rules.get(), data);
