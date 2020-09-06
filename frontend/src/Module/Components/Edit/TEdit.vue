@@ -10,6 +10,7 @@
                     v-model="row[column.sName]"
                     type="text"
                     class="form-control"
+                    :class="{'is-invalid':errorParseS.fIsError(column.sName) }"
                 />
                 <input
                     v-if="column.nType==ColumnTypeEnumString"
@@ -17,8 +18,10 @@
                     v-model="row[column.sName]"
                     type="text"
                     class="form-control"
+                    :class="{'is-invalid':errorParseS.fIsError(column.sName) }"
                 />
                 <textarea
+                    :class="{'is-invalid':errorParseS.fIsError(column.sName) }"
                     v-if="column.nType==ColumnTypeEnumText"
                     :disabled="column.sName=='id'"
                     v-model="row[column.sName]"
@@ -36,6 +39,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import * as TableI from "../../../../../Entity/Interfaces/TableI";
 import { TableInfoLoader } from "../../Sys/TableInfoLoader";
 import { RowInfoLoader } from "../../Sys/RowInfoLoader";
+import { ErrorParseS } from "../../Sys/ErrorParseS";
 
 @Component({
     name: "TEdit",
@@ -51,6 +55,8 @@ export default class TEdit extends Vue {
     @Prop({ required: true }) readonly row: any;
     // маршрут в vue
     @Prop({ required: true }) readonly sRoute: string;
+    // ошибки
+    @Prop({ required: true }) readonly errorParseS: ErrorParseS;
 
     get ColumnTypeEnumText(): number {
         return TableI.ColumnTypeEnum.Text;

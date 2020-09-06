@@ -7,7 +7,13 @@
         :sRoute="sRoute"
     >
         <template v-slot:content>
-            <TEdit v-if="row" :sRoute="sRoute" :cTableInfoLoader="cTableInfoLoader" :row="row" />
+            <TEdit
+                v-if="row"
+                :errorParseS="errorParseS"
+                :sRoute="sRoute"
+                :cTableInfoLoader="cTableInfoLoader"
+                :row="row"
+            />
         </template>
     </TEditPage>
 </template>
@@ -26,6 +32,7 @@ import { RowInfoLoader } from "../Sys/RowInfoLoader";
 import { TableInfoLoader } from "../Sys/TableInfoLoader";
 import TEditPage from "../Components/TEditPage.vue";
 import { RowSaverS } from "../Sys/RowSaverS";
+import { ErrorParseS } from "../Sys/ErrorParseS";
 
 @Component({
     components: { TEdit, TEditPage },
@@ -36,6 +43,7 @@ export default class EditP extends Vue {
     private row: any = {};
     private sCaption = "Редактирование товара";
     private sRoute = "product";
+    private errorParseS: ErrorParseS;
 
     // props
 
@@ -47,7 +55,7 @@ export default class EditP extends Vue {
 
     // methods
     async mounted() {
-        console.log("mounted");
+        this.errorParseS = new ErrorParseS({});
         const cRowLoader = new RowInfoLoader(
             this.sRoute,
             new BaseModel(config)
@@ -67,13 +75,13 @@ export default class EditP extends Vue {
         this.bIsLoad = false;
         if (data.ok) {
             this.$router.push("/" + this.sRoute);
+        } else {
+            this.errorParseS = new ErrorParseS(data.errors);
         }
     }
 
     async fCancel() {
-        console.log('cancel');
-        
-        this.$router.push({ path: "/" + this.sRoute })
+        this.$router.push({ path: "/" + this.sRoute });
     }
 }
 </script>

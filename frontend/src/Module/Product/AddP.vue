@@ -7,7 +7,13 @@
         :sRoute="sRoute"
     >
         <template v-slot:content>
-            <TEdit v-if="row" :sRoute="sRoute" :cTableInfoLoader="cTableInfoLoader" :row="row" />
+            <TEdit
+                :errorParseS="errorParseS"
+                v-if="row"
+                :sRoute="sRoute"
+                :cTableInfoLoader="cTableInfoLoader"
+                :row="row"
+            />
         </template>
     </TEditPage>
 </template>
@@ -26,6 +32,7 @@ import { RowInfoLoader } from "../Sys/RowInfoLoader";
 import { TableInfoLoader } from "../Sys/TableInfoLoader";
 import TEditPage from "../Components/TEditPage.vue";
 import { RowSaverS } from "../Sys/RowSaverS";
+import { ErrorParseS } from "../Sys/ErrorParseS";
 
 @Component({
     components: { TEdit, TEditPage },
@@ -36,6 +43,8 @@ export default class AddP extends Vue {
     private row: any = {};
     private sCaption = "Добавление товара";
     private sRoute = "product";
+
+    private errorParseS: ErrorParseS = new ErrorParseS({});
     // props
 
     // computed
@@ -56,6 +65,10 @@ export default class AddP extends Vue {
         this.bIsLoad = false;
         if (data.ok) {
             this.$router.push("/" + this.sRoute);
+        } else {
+            this.errorParseS = new ErrorParseS(data.errors);
+            console.log(this.errorParseS);
+            
         }
     }
 }
