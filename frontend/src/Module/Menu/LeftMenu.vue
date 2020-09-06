@@ -3,7 +3,7 @@
         <div class="menu-group">
             <router-link :to="'/' + sProductR" class="h1-item">Товары</router-link>
             <div class="h2-item">Добавить</div>
-            <div class="h2-item">Категории</div>
+            <router-link :to="'/'+ sProductCategoryR" class="h2-item">Категории</router-link>
         </div>
     </div>
 </template>
@@ -14,6 +14,7 @@
  */
 
 import { sRoute as sProductR  } from "../../../../Entity/Routes/ProductR";
+import { sRoute as sProductCategoryR  } from "../../../../Entity/Routes/ProductCategoryR";
 import { Component, Prop, Vue } from "vue-property-decorator";
 @Component({
     name: "LeftMenu",
@@ -22,6 +23,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 export default class TopBaner extends Vue {
     //data
     private sProductR = sProductR;
+    private sProductCategoryR = sProductCategoryR;
 
     // props
 

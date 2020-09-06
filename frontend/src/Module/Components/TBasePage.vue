@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container pt-4 page-content">
+        <div class="container-fluid pt-4 page-content">
             <div class="slot-header d-flex justify-content-between align-items-center">
                 <div class="header-caption">
                     <div class="header-caption-item">{{sCaption}}</div>

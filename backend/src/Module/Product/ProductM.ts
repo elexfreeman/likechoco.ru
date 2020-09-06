@@ -168,6 +168,7 @@ export class ProductM extends System.BaseM {
             {
                 label: 'Название',
                 field: 'caption',
+                width: '40%',
             },
             {
                 label: 'Категория',

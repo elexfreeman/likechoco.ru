@@ -41,7 +41,7 @@ export default class AddP extends Vue {
     //data
     private bIsLoad = false;
     private row: any = {};
-    private sCaption = "Добавление товара";
+    private sCaption = "Добавление категории товара";
     private sRoute = "productCategory";
 
     private errorParseS: ErrorParseS = new ErrorParseS({});
