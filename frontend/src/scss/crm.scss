@@ -49,3 +49,11 @@ a.header-caption:hover {
 body.remove-scroll {
     overflow: hidden;
 }
+
+.left-menu {
+    .menu-group {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+}

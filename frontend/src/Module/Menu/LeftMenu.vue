@@ -2,7 +2,7 @@
     <div class="left-menu">
         <div class="menu-group">
             <router-link :to="'/' + sProductR" class="h1-item">Товары</router-link>
-            <div class="h2-item">Добавить</div>
+            <router-link :to="'/' + sProductR + '/add'" class="h2-item">Добавить</router-link>
             <router-link :to="'/'+ sProductCategoryR" class="h2-item">Категории</router-link>
         </div>
     </div>

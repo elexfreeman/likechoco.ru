@@ -21,11 +21,22 @@ $border-color: #f1f1f1;
             border-radius: 20px;
             padding: 5px 20px;
         }
+        .h1-item:hover {
+            font-size: 20px;
+            background: #e01484;
+            color: #fff;
+            text-decoration: none; 
+        }
+
+        .h1-item:active, .h2-item:active {
+            transform: scale(0.95);
+        }
 
         .h2-item {
             font-size: 18px;
             padding-left: 20px;
             padding-top: 5px;
+            color: #a9045f;
         }
 
     }
