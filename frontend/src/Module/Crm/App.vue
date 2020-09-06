@@ -3,11 +3,7 @@
         <div class="main-tpl">
             <div class="menu-tpl">
                 <TopBaner />
-                <div class="menu-group">
-                    <div class="h1-item">Товары</div>
-                    <div class="h2-item">Добавить</div>
-                    <div class="h2-item">Категории</div>
-                </div>
+                <LeftMenu />
             </div>
             <div class="content-tpl">
                 <Menu />
@@ -24,10 +20,12 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import Menu from "../Menu/Menu.vue";
 import TopBaner from "../Menu/TopBaner.vue";
+import LeftMenu from "../Menu/LeftMenu.vue";
+
 
 @Component({
     name: "App",
-    components: { Menu, TopBaner },
+    components: { Menu, TopBaner, LeftMenu },
 })
 export default class App extends Vue {
     //data
