@@ -7,8 +7,6 @@ import { ProductTagCtrl } from "./Module/ProductTag/ProductTagCtrl";
 import { ProductCategoryCtrl } from "./Module/ProductCategory/ProductCategoryCtrl";
 import { ProductVarCtrl } from "./Module/ProductVar/ProductVarCtrl";
 import { ProductCategoryVarCtrl } from "./Module/ProductCategoryVar/ProductCategoryVarCtrl";
-import { ProductListCtrl } from "./Module/Product/ProductListCtrl";
-import { ProductInfoCtrl } from "./Module/Product/ProductInfoCtrl";
 
 
 const mem: MemSysI = {}
@@ -18,8 +16,6 @@ class MyApp extends App {
     public fUseProduct(): App {
         console.log('+ Use product');
         this.objExpress.use(ProductCtrl)
-        this.objExpress.use(ProductListCtrl)
-        this.objExpress.use(ProductInfoCtrl)
         return this;
     }
     public fUseProductTag(): App {
@@ -59,8 +55,8 @@ const app: MyApp = new MyApp(config);
 app.fDisableCors(); // отключаем cors
 app.fUseBodyParser(); // используем дефолтный BodyParser
 app.fUseMySql();
-app.fUseSharedMem(mem);
-app.faUseAuthSys()
+app.fUseReddis();
+app.faUseAuthSys();
 app.fUseLoger();
 
 app.fUseProduct();

@@ -1,5 +1,11 @@
 <template>
-    <TEditPage :bIsLoad="bIsLoad" :fOk="() => {fOk();}" :fCancel="()=>{}" :sCaption="sCaption" :sRoute="sRoute">
+    <TEditPage
+        :bIsLoad="bIsLoad"
+        :fOk="() => {fOk();}"
+        :fCancel="()=>{}"
+        :sCaption="sCaption"
+        :sRoute="sRoute"
+    >
         <template v-slot:content>
             <TEdit v-if="row" :sRoute="sRoute" :cTableInfoLoader="cTableInfoLoader" :row="row" />
         </template>
@@ -24,12 +30,12 @@ import { RowSaverS } from "../Sys/RowSaverS";
 @Component({
     components: { TEdit, TEditPage },
 })
-export default class EditP extends Vue {
+export default class AddP extends Vue {
     //data
     private bIsLoad = false;
     private row: any = {};
     private sCaption = "Добавление товара";
-    private sRoute = "/product";
+    private sRoute = "product";
     // props
 
     // computed
@@ -47,9 +53,9 @@ export default class EditP extends Vue {
         const rowSaverS = new RowSaverS(this.sRoute, new BaseModel(config));
         this.bIsLoad = true;
         const data = await rowSaverS.faAdd(this.row);
-        this.bIsLoad= false;
-        if(data.ok) {
-            this.$router.push(this.sRoute);
+        this.bIsLoad = false;
+        if (data.ok) {
+            this.$router.push("/" + this.sRoute);
         }
     }
 }

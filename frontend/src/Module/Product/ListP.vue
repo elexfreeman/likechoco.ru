@@ -36,7 +36,7 @@ export default class MainP extends Vue {
     //data
     private serverParams = {};
     private totalRecords = 10;
-    private sRoute = "/product";
+    private sRoute = "product";
     private cListLoader: ListLoader = null;
     // props
 
@@ -48,7 +48,7 @@ export default class MainP extends Vue {
     async mounted() {
         console.log("mounted");
 
-        const list = new ListLoader("/product", new BaseModel(config));
+        const list = new ListLoader(this.sRoute, new BaseModel(config));
         await list.faInit();
         this.cListLoader = list;
     }

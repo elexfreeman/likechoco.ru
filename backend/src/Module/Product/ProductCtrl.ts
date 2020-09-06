@@ -26,17 +26,6 @@ export class ProductController extends System.BaseCtrl {
 
 }
 
-/**
- * List
- */
-router.post(R.list.route, async (req: System.MainRequest, res: any, next: any) => {
-    const ctrl = new ProductController(req, res);
-    await ctrl.faInit();
-    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
-    await ctrl.faAction('Список товаров', () => {
-        return ctrl.productM.faList(req.body);
-    })
-});
 
 /**
  * insert 
@@ -44,8 +33,8 @@ router.post(R.list.route, async (req: System.MainRequest, res: any, next: any) =
 router.post(R.insert.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductController(req, res);
     await ctrl.faInit();
-    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
-    await ctrl.faAction('Добавление товаров', () => {
+    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    await ctrl.faAction('Product add', () => {
         return ctrl.productM.faInsert(req.body);
     })
 });
@@ -57,8 +46,8 @@ router.post(R.insert.route, async (req: System.MainRequest, res: any, next: any)
 router.post(R.update.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductController(req, res);
     await ctrl.faInit();
-    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
-    await ctrl.faAction('Обновленеи товара', () => {
+    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    await ctrl.faAction('Product update', () => {
         return ctrl.productM.faUpdate(req.body);
     })
 });
@@ -69,48 +58,48 @@ router.post(R.update.route, async (req: System.MainRequest, res: any, next: any)
 router.post(R.getById.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductController(req, res);
     await ctrl.faInit();
-    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
-    await ctrl.faAction('Получение товара', () => {
+    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    await ctrl.faAction('Product get', () => {
         return ctrl.productM.faGetById(req.body);
     })
 });
 
 /**
- * Tag list 
+ * List
  */
-router.post(R.tagList.route, async (req: System.MainRequest, res: any, next: any) => {
+router.post(R.list.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductController(req, res);
     await ctrl.faInit();
-    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
-    await ctrl.faAction('Получение списка тэгов товара', () => {
-        return ctrl.productM.faProductTagList(req.body);
+    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    await ctrl.faAction('Product list', () => {
+        return ctrl.productM.faList(req.body);
     })
 });
 
 /**
- * Tag add 
+ * List info
  */
-router.post(R.addTag.route, async (req: System.MainRequest, res: any, next: any) => {
+router.post(R.listInfo.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductController(req, res);
     await ctrl.faInit();
-    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
-    await ctrl.faAction('Добавление тега товара', () => {
-        return ctrl.productM.faAddTag(req.body);
+    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    await ctrl.faAction('Product list info', () => {
+        return ctrl.productM.faListInfo(req.body);
     })
 });
+
 
 /**
- * Tag delete 
+ * Product column 
  */
-router.post(R.delTag.route, async (req: System.MainRequest, res: any, next: any) => {
+router.post(R.info.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new ProductController(req, res);
     await ctrl.faInit();
-    // await ctrl.userSys.isAuth(); // Пробуем авторизироваться
-    await ctrl.faAction('Удаление тега товара', () => {
-        return ctrl.productM.faDelTag(req.body);
+    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
+    await ctrl.faAction('Product column info', () => {
+        return ctrl.productM.faInfo(req.body);
     })
 });
-
 export {
     router as ProductCtrl
 }

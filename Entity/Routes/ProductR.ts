@@ -2,7 +2,7 @@ import { ProductI } from "../Interfaces/ProductI";
 import { ProductTagI } from "../Interfaces/ProductTagI";
 import { SearchParamI } from "../Service/SearchS";
 import { ColumnI, PaginationOptionsI, ListInfoResponseI, ListResponseI } from "../Interfaces/ListI";
-import { TableI, sGetInfoByIdR, sGetTableInfo, sInsertRow, sUpdateRow, AddRowResponseI } from "../Interfaces/TableI";
+import { GetRowByIdResponseI, TableI, sGetInfoByIdR, sGetTableInfo, sInsertRow, sUpdateRow, AddRowResponseI } from "../Interfaces/TableI";
 
 export const sRoute = 'product';
 
@@ -61,7 +61,7 @@ export namespace ProductR {
         }
 
         /** Параметры api ответа */
-        export interface ResponseI extends ProductI {
+        export interface ResponseI extends GetRowByIdResponseI<ProductI> {
         }
     }
 

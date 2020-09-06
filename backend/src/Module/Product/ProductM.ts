@@ -13,7 +13,11 @@ import R = ProductR
 import * as V from './ProductV'
 import { SearchS } from "../../../../Entity/Service/SearchS";
 import { ProductI } from "../../../../Entity/Interfaces/ProductI";
-import { ProductTagI } from "../../../../Entity/Interfaces/ProductTagI";
+import { PaginationOptionsS } from "../../../../Entity/Service/PaginationOptionsS";
+import { PaginationOptionsI, ColumnI } from "../../../../Entity/Interfaces/ListI";
+
+
+import * as TableI from "../../../../Entity/Interfaces/TableI";
 
 /**
  * Товыры
@@ -28,32 +32,6 @@ export class ProductM extends System.BaseM {
         this.productSQL = new ProductSQL(req);
     }
 
-    public async faList(data: R.list.RequestI): Promise<R.list.ResponseI> {
-
-        data = <R.list.RequestI>V.list(this.req, data);
-        let ok = this.errorSys.isOk();
-
-        // --------------------------
-
-        let aList: ProductI[] = [];
-        let nTotal = 0;
-        if (ok) {
-            aList = await this.productSQL.faList(new SearchS().fSetParam(data));
-            nTotal = await this.productSQL.faListTotal(new SearchS().fSetParam(data));
-        }
-
-        // --------------------------
-
-        let out: R.list.ResponseI = null;
-        if (ok) { // Формирование ответа
-            out = {
-                list: aList,
-                total: nTotal,
-            };
-        }
-
-        return out;
-    }
 
     /**
      * Получить по id 
@@ -75,7 +53,9 @@ export class ProductM extends System.BaseM {
 
         let out: R.getById.ResponseI = null;
         if (ok) { // Формирование ответа
-            out = item;
+            out = {
+                row: item,
+            }
         }
 
         return out;
@@ -143,88 +123,111 @@ export class ProductM extends System.BaseM {
 
 
     /**
-     * Тэги товара
+     * Product list
      * @param data 
      */
-    public async faProductTagList(data: R.tagList.RequestI): Promise<R.tagList.ResponseI> {
+    public async faList(data: R.list.RequestI): Promise<R.list.ResponseI> {
 
-        data = <R.tagList.RequestI>V.list(this.req, data);
+        data = <R.list.RequestI>V.list(this.req, data);
         let ok = this.errorSys.isOk();
 
         // --------------------------
 
-        let list: ProductTagI[] = null;
+        let aList: ProductI[] = [];
+        let nTotal = 0;
         if (ok) {
-            list = await this.productSQL.faGetTagList(data.product_id);
+            aList = await this.productSQL.faList(new SearchS().fSetParam(data));
+            nTotal = await this.productSQL.faListTotal(new SearchS().fSetParam(data));
         }
 
         // --------------------------
 
-        let out: R.tagList.ResponseI = null;
+        let out: R.list.ResponseI = null;
         if (ok) { // Формирование ответа
             out = {
-                list: list,
+                list: aList,
+                total: nTotal,
             };
         }
 
         return out;
     }
 
+    public async faListInfo(data: R.listInfo.RequestI): Promise<R.listInfo.ResponseI> {
 
-
-    /**
-     * Добавить тэг 
-     * @param data 
-     */
-    public async faAddTag(data: R.addTag.RequestI): Promise<R.addTag.ResponseI> {
-
-        data = <R.addTag.RequestI>V.addTag(this.req, data);
         let ok = this.errorSys.isOk();
 
         // --------------------------
 
-        const aTag = await this.productSQL.faGetTagList(data.product_id);
-        const tagIdx = aTag.findIndex(item => item.id == data.tag_id);
+        const paginationOptions: PaginationOptionsI = PaginationOptionsS.InitRus();
+        const aColumn: ColumnI[] = [
+            {
+                label: 'id',
+                field: 'id',
+            },
+            {
+                label: 'Название',
+                field: 'caption',
+            },
+            {
+                label: 'Описание',
+                field: 'description',
+            },
+        ];
 
-        let id: number = null;
-        if (tagIdx == -1) {
-            id = await this.productSQL.faAddTag(data.product_id, data.tag_id);
-        }
 
         // --------------------------
 
-        let out: R.addTag.ResponseI = null;
+        let out: R.listInfo.ResponseI = null;
         if (ok) { // Формирование ответа
             out = {
-                id,
+                paginationOptions: paginationOptions,
+                aColumn: aColumn,
             };
         }
 
         return out;
     }
-    // =====================================
 
-    /**
-     * Удалить тег товара 
-     * @param data 
-     */
-    public async faDelTag(data: R.delTag.RequestI): Promise<R.delTag.ResponseI> {
 
-        data = <R.delTag.RequestI>V.delTag(this.req, data);
+
+    public async faInfo(data: R.info.RequestI): Promise<R.info.ResponseI> {
+
         let ok = this.errorSys.isOk();
 
         // --------------------------
-        await this.productSQL.faDelTag(data.product_id, data.tag_id);
+        const sCaption = 'Товар';
+        const aColumn: TableI.ColumnI[] = [
+            {
+                sName: 'id',
+                sCaption: 'Id',
+                nType: TableI.ColumnTypeEnum.Integer,
+                bPrimaryKey: true,
+            },
+            {
+                sName: 'caption',
+                sCaption: 'Название',
+                nType: TableI.ColumnTypeEnum.String,
+                bPrimaryKey: false,
+            },
+            {
+                sName: 'description',
+                sCaption: 'Описание',
+                nType: TableI.ColumnTypeEnum.Text,
+                bPrimaryKey: false,
+            },
+        ];
 
         // --------------------------
 
-        let out: R.delTag.ResponseI = null;
+        let out: R.info.ResponseI = null;
         if (ok) { // Формирование ответа
             out = {
+                sCaption: sCaption,
+                aColumn: aColumn,
             };
         }
 
         return out;
     }
-    // =====================================
 }

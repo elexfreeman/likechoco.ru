@@ -1,5 +1,11 @@
 <template>
-    <TEditPage :bIsLoad="bIsLoad" :fOk="() => {fOk();}" :fCancel="()=>{}" :sCaption="sCaption" :sRoute="sRoute">
+    <TEditPage
+        :bIsLoad="bIsLoad"
+        :fOk="() => {fOk();}"
+        :fCancel="() => {fCancel();}"
+        :sCaption="sCaption"
+        :sRoute="sRoute"
+    >
         <template v-slot:content>
             <TEdit v-if="row" :sRoute="sRoute" :cTableInfoLoader="cTableInfoLoader" :row="row" />
         </template>
@@ -29,7 +35,7 @@ export default class EditP extends Vue {
     private bIsLoad = false;
     private row: any = {};
     private sCaption = "Редактирование товара";
-    private sRoute = "/product";
+    private sRoute = "product";
 
     // props
 
@@ -46,9 +52,9 @@ export default class EditP extends Vue {
             this.sRoute,
             new BaseModel(config)
         );
-        this.row = await cRowLoader.faLoadInfo(
-            Number(this.$route.params["id"])
-        );
+        this.row = (
+            await cRowLoader.faLoadInfo(Number(this.$route.params["id"]))
+        ).data.row;
     }
 
     /**
@@ -58,10 +64,16 @@ export default class EditP extends Vue {
         const rowSaverS = new RowSaverS(this.sRoute, new BaseModel(config));
         this.bIsLoad = true;
         const data = await rowSaverS.faUpdate(this.row);
-        this.bIsLoad= false;
-        if(data.ok) {
-            this.$router.push(this.sRoute);
+        this.bIsLoad = false;
+        if (data.ok) {
+            this.$router.push("/" + this.sRoute);
         }
+    }
+
+    async fCancel() {
+        console.log('cancel');
+        
+        this.$router.push({ path: "/" + this.sRoute })
     }
 }
 </script>

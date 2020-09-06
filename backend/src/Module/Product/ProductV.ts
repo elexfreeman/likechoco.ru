@@ -68,7 +68,7 @@ export function update(req: MainRequest, data: any) {
 
     rules.set(rules.rule('description')
         .type(Components.ModelRulesT.text)
-        .maxLen(100)
+        .maxLen(1024)
         .errorEx('description', 'description')
     );
 

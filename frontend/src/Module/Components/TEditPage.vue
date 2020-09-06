@@ -4,7 +4,7 @@
             <slot name="content"></slot>
             <div class="text-right pt-4">
                 <button :disabled="bIsLoad" v-on:click="fOk" type="button" class="btn btn-success t-button">Сохранить</button>
-                <router-link :to="sRoute" class="btn btn-outline-success t-button">Отмена</router-link>
+                <router-link :to="'/' + sRoute" class="btn btn-outline-success t-button">Отмена</router-link>
             </div>
         </template>
     </TBasePage>
