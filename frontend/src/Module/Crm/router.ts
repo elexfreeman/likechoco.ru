@@ -4,6 +4,7 @@ import MainP from './Pages/MainP.vue';
 // модули
 import { route as aProductRoute } from "../Product/router";
 import { route as aProductCategoryRoute } from "../ProductCategory/router";
+import { route as aClientRoute } from "../Client/router";
 
 /**
  * Маршруты модулей
@@ -13,6 +14,7 @@ const aRoute = [
     { path: '/', name: 'MainP', component: MainP },
     ... aProductRoute,
     ... aProductCategoryRoute,
+    ... aClientRoute,
 ];
 
 

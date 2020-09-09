@@ -7,6 +7,7 @@ import { ProductTagCtrl } from "./Module/ProductTag/ProductTagCtrl";
 import { ProductCategoryCtrl } from "./Module/ProductCategory/ProductCategoryCtrl";
 import { ProductVarCtrl } from "./Module/ProductVar/ProductVarCtrl";
 import { ProductCategoryVarCtrl } from "./Module/ProductCategoryVar/ProductCategoryVarCtrl";
+import { ClientCtrl } from "./Module/Client/ClientCtrl";
 
 
 const mem: MemSysI = {}
@@ -38,7 +39,11 @@ class MyApp extends App {
         this.objExpress.use(ProductCategoryVarCtrl)
         return this;
     }
-
+    public fUseClient(): App {
+        console.log('+ Use client');
+        this.objExpress.use(ClientCtrl)
+        return this;
+    }
     public fUseLoger(): App {
         this.objExpress.use((req, resp, next) => {
             console.log(req.headers.token);
@@ -64,5 +69,6 @@ app.fUseProductTag();
 app.fUseProductCategory();
 app.fUseProductVar();
 app.fUseProductCategoryVar();
+app.fUseClient();
 
 app.fStart(); // Запускаем приложение
