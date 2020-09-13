@@ -1,3 +1,6 @@
+/**
+ * Типы полей
+ */
 export enum ColumnTypeEnum {
     String = 0,
     Text = 1,
@@ -5,6 +8,10 @@ export enum ColumnTypeEnum {
     Float = 3,
     Data = 4,
 }
+
+/**
+ * Столбцы в таблице
+ */
 export interface ColumnI {
     sName: string; // поле в таблице
     sCaption: string; // название в редактирование
@@ -12,16 +19,26 @@ export interface ColumnI {
     bPrimaryKey: boolean; // признак id
 }
 
-
+/**
+ * Таблица в DB 
+ */
 export interface TableI {
-    sCaption: string;
-    sDescription?: string;
-    aColumn: ColumnI[];
+    sCaption: string; // название
+    sDescription?: string; // описание
+    aColumn: ColumnI[]; // столбцы
 }
 
+
+/**
+ * Запрос-ответ для получения по ID
+ */
 export interface GetRowByIdRequestI {
     id: number;
 }
+
+/**
+ * Запрос-ответ для получения по ID
+ */
 export interface GetRowByIdResponseI<T> {
     row: T;
 }

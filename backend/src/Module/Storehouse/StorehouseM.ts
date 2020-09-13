@@ -3,16 +3,16 @@ import * as System from "@a-a-game-studio/aa-core/lib/Namespace/System";
 // Системные классы
 
 // Классы SQL Запросов
-import { ClientSQL } from './ClientSQL';
+import { StorehouseSQL } from './StorehouseSQL';
 
 // Роутинг
-import { ClientR } from '../../../../Entity/Routes/ClientR';
-import R = ClientR
+import { StorehouseR } from '../../../../Entity/Routes/StorehouseR';
+import R = StorehouseR
 
 // Валидация
-import * as V from './ClientV'
+import * as V from './StorehouseV'
 import { SearchS } from "../../../../Entity/Service/SearchS";
-import { ClientI } from "../../../../Entity/Interfaces/ClientI";
+import { StorehouseI } from "../../../../Entity/Interfaces/StorehouseI";
 import { PaginationOptionsS } from "../../../../Entity/Service/PaginationOptionsS";
 import { PaginationOptionsI, ColumnI } from "../../../../Entity/Interfaces/ListI";
 
@@ -22,14 +22,14 @@ import * as TableI from "../../../../Entity/Interfaces/TableI";
 /**
  * Категории товаров 
  */
-export class ClientM extends System.BaseM {
+export class StorehouseM extends System.BaseM {
 
-    private clientSQL: ClientSQL;
+    private storehouseSQL: StorehouseSQL;
 
     constructor(req: any) {
         super(req);
 
-        this.clientSQL = new ClientSQL(req);
+        this.storehouseSQL = new StorehouseSQL(req);
     }
 
 
@@ -44,9 +44,9 @@ export class ClientM extends System.BaseM {
 
         // --------------------------
 
-        let item: ClientI = null;
+        let item: StorehouseI = null;
         if (ok) {
-            item = await this.clientSQL.faGetById(data.id);
+            item = await this.storehouseSQL.faGetById(data.id);
         }
 
         // --------------------------
@@ -75,7 +75,7 @@ export class ClientM extends System.BaseM {
 
         let id: number = data.id;
         if (ok) {
-            await this.clientSQL.faUpdate(id, data);
+            await this.storehouseSQL.faUpdate(id, data);
         }
 
         // --------------------------
@@ -105,7 +105,7 @@ export class ClientM extends System.BaseM {
 
         let id: number = null;
         if (ok) {
-            id = await this.clientSQL.faInsert(data);
+            id = await this.storehouseSQL.faInsert(data);
         }
 
         // --------------------------
@@ -123,7 +123,7 @@ export class ClientM extends System.BaseM {
 
 
     /**
-     * Client list
+     * Storehouse list
      * @param data 
      */
     public async faList(data: R.list.RequestI): Promise<R.list.ResponseI> {
@@ -133,11 +133,11 @@ export class ClientM extends System.BaseM {
 
         // --------------------------
 
-        let aList: ClientI[] = [];
+        let aList: StorehouseI[] = [];
         let nTotal = 0;
         if (ok) {
-            aList = await this.clientSQL.faList(new SearchS().fSetParam(data));
-            nTotal = await this.clientSQL.faListTotal(new SearchS().fSetParam(data));
+            aList = await this.storehouseSQL.faList(new SearchS().fSetParam(data));
+            nTotal = await this.storehouseSQL.faListTotal(new SearchS().fSetParam(data));
         }
 
         // --------------------------
@@ -166,16 +166,8 @@ export class ClientM extends System.BaseM {
                 field: 'id',
             },
             {
-                label: 'Фамилия',
-                field: 'surname',
-            },
-            {
-                label: 'Имя',
-                field: 'name',
-            },
-            {
-                label: 'Отчество',
-                field: 'patronymic',
+                label: 'Название',
+                field: 'caption',
             },
             {
                 label: 'Описание',
@@ -204,7 +196,7 @@ export class ClientM extends System.BaseM {
         let ok = this.errorSys.isOk();
 
         // --------------------------
-        const sCaption = 'Клиент';
+        const sCaption = 'Товар';
         const aColumn: TableI.ColumnI[] = [
             {
                 sName: 'id',
@@ -213,20 +205,8 @@ export class ClientM extends System.BaseM {
                 bPrimaryKey: true,
             },
             {
-                sName: 'surname',
-                sCaption: 'Фамилия',
-                nType: TableI.ColumnTypeEnum.String,
-                bPrimaryKey: false,
-            },
-            {
-                sName: 'name',
-                sCaption: 'Имя',
-                nType: TableI.ColumnTypeEnum.String,
-                bPrimaryKey: false,
-            },
-            {
-                sName: 'patronymic',
-                sCaption: 'Отчество',
+                sName: 'caption',
+                sCaption: 'Название',
                 nType: TableI.ColumnTypeEnum.String,
                 bPrimaryKey: false,
             },

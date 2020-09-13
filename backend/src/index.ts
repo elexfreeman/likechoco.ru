@@ -8,6 +8,7 @@ import { ProductCategoryCtrl } from "./Module/ProductCategory/ProductCategoryCtr
 import { ProductVarCtrl } from "./Module/ProductVar/ProductVarCtrl";
 import { ProductCategoryVarCtrl } from "./Module/ProductCategoryVar/ProductCategoryVarCtrl";
 import { ClientCtrl } from "./Module/Client/ClientCtrl";
+import { StorehouseCtrl } from "./Module/Storehouse/StorehouseCtrl";
 
 
 const mem: MemSysI = {}
@@ -44,6 +45,11 @@ class MyApp extends App {
         this.objExpress.use(ClientCtrl)
         return this;
     }
+    public fUseStorehouse(): App {
+        console.log('+ Use storehouse');
+        this.objExpress.use(StorehouseCtrl)
+        return this;
+    }
     public fUseLoger(): App {
         this.objExpress.use((req, resp, next) => {
             console.log(req.headers.token);
@@ -70,5 +76,6 @@ app.fUseProductCategory();
 app.fUseProductVar();
 app.fUseProductCategoryVar();
 app.fUseClient();
+app.fUseStorehouse();
 
 app.fStart(); // Запускаем приложение
