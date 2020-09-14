@@ -43,7 +43,7 @@ export default class EditP extends Vue {
     private row: any = {};
     private sCaption = "Редактирование категории товара";
     private sRoute = "productCategory";
-    private errorParseS: ErrorParseS;
+    private errorParseS: ErrorParseS = new ErrorParseS({});
 
     // props
 

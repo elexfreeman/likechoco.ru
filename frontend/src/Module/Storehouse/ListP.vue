@@ -28,6 +28,9 @@ import { BaseModel } from "../Sys/BaseModel";
 
 import { TableInfoLoader } from "../Sys/TableInfoLoader";
 import TListPage from "../Components/TListPage.vue";
+import { SearchS } from "../../../../Entity/Service/SearchS";
+
+
 @Component({
     name: "ListP",
     components: { TTable, TListPage },
@@ -51,6 +54,14 @@ export default class MainP extends Vue {
         const list = new ListLoader(this.sRoute, new BaseModel(config));
         await list.faInit();
         this.cListLoader = list;
+
+        // при загрузки списка обновлем меню
+        const searchS = new SearchS();
+        searchS.fSetOffest(0);
+        searchS.fSetLimit(1000);
+
+        const resp = await this.cListLoader.faLoad(searchS);
+        this.$store.commit("setMenuStoreAStorehouse", resp.list);
     }
 }
 </script>
