@@ -39,7 +39,7 @@ import { config } from "../../../Config";
 
 import TEdit from "../../Components/Edit/TEdit.vue";
 import TModal, { ModalSizeEnum } from "../../Components/Modal/TModal.vue";
-import TTableSelector from "../../Components/Table/TTableSelector.vue";
+import TTableSelector from "../../Components/TTableSelector/TTableSelector.vue";
 import { TableLoader } from "../../Sys/TableLoader";
 
 @Component({

@@ -18,14 +18,20 @@
                     <div class="form-group">
                         <label>Категория товара</label>
                         <TTableSelector
-                            v-model="row.category_id"
                             v-if="tableLoaderProductCategory"
+                            v-model="row.category_id"
+                            :bCanEdit="true"
+                            :bCanAdd="true"
                             :sRoute="sProductCategoryR"
                             :tableLoader="tableLoaderProductCategory"
                             :sField="'caption'"
                             :sModalCaption="'Выбор категории товара'"
                             :fOnSelect="()=>{}"
-                        />
+                        >
+                            <template v-slot:add>
+                                <div>ADD category</div>
+                            </template>
+                        </TTableSelector>
                     </div>
                 </template>
             </TEdit>
@@ -43,7 +49,7 @@ import { config } from "../../Config";
 import { BaseModel } from "../Sys/BaseModel";
 
 import TEdit from "../Components/Edit/TEdit.vue";
-import TTableSelector from "../Components/Table/TTableSelector.vue";
+import TTableSelector from "../Components/TTableSelector/TTableSelector.vue";
 
 import { RowInfoLoader } from "../Sys/RowInfoLoader";
 import { TableInfoLoader } from "../Sys/TableInfoLoader";

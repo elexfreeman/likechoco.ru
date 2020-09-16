@@ -12,37 +12,21 @@
             :bIsOpen="bShowModal"
         >
             <template v-slot:content>
+                <List
+                    v-if="nModalRoute==0"
+                    :tableLoader="tableLoader"
+                    :fSelectField="fSelectField"
+                    :sField="sField"
+                    :bCanAdd="bCanAdd"
+                    :fSetModalRoute="fSetModalRoute"
+                />
 
-                <TTable
-                    :cListLoader="tableLoader.listLoader"
-                    :oEditBtn="null"
-                    :oDelBtn="null"
-                >
-                    <template slot="default" slot-scope="props">
-                        <div
-                            v-on:click="fSelectField(props.tableData.formattedRow)"
-                            v-if="props.tableData.column.field == sField"
-                            class="t-selected-field text-primary"
-                        >{{props.tableData.formattedRow[props.tableData.column.field]}}</div>
-                        <div
-                            class="d-flex justify-content-end"
-                            v-else-if="props.tableData.column.field == 'select_button'"
-                        >
-                            <button
-                                v-on:click="fSelectField(props.tableData.formattedRow)"
-                                type="button"
-                                class="btn btn btn-light"
-                            >
-                                <i class="far fa-check-circle"></i>
-                            </button>
-                        </div>
-                        <span v-else>{{props.tableData.formattedRow[props.tableData.column.field]}}</span>
-                    </template>
-                </TTable>
-
+                <!-- Компонент доавления в модалке -->
+                <div :style="fShowAddModal">
+                    <slot :fOnAddHandler="fOnAddHandler" name="add"></slot>
+                </div>
             </template>
         </TModal>
-
     </div>
 </template>
 
@@ -55,26 +39,44 @@ import { PaginationOptionsS } from "../../../../../Entity/Service/PaginationOpti
 import { TableLoader } from "../../Sys/TableLoader";
 import TModal, { ModalSizeEnum } from "../Modal/TModal.vue";
 import TTable from "../Table/TTable.vue";
+import List from "./List.vue";
 
 @Component({
     name: "TTableSelector",
-    components: { TTable, TModal },
+    components: { TTable, TModal, List },
 })
 export default class TTableSelector extends Vue {
     //data
     private bShowModal = false;
     private selectedData: any = new Object();
 
+    /**
+     * Мрашрут модалки
+     * 0 - list
+     * 1 - add
+     * 2 - edit
+     */
+    private nModalRoute: number = 0;
+
     // props
 
     // событие выбора
     @Prop({ required: true }) readonly fOnSelect: (data: any) => void;
+
     // загрузчик списка
     @Prop({ required: true }) readonly tableLoader: TableLoader;
+
     // поле для выбора
     @Prop({ required: true }) readonly sField: string;
+
+    //Заголовок
     @Prop({ required: true }) readonly sModalCaption: string;
+
+    // Для v-model
     @Prop({ required: false }) readonly value: number;
+
+    // можно добавлять записи
+    @Prop({ required: false, default: false }) readonly bCanAdd: boolean;
 
     // computed
 
@@ -87,9 +89,11 @@ export default class TTableSelector extends Vue {
             sortable: false,
         });
 
-        if(this.value) {
-            const respData = await this.tableLoader.rowInfoLoader.faLoadInfo(this.value);
-            if(respData.ok) {
+        if (this.value) {
+            const respData = await this.tableLoader.rowInfoLoader.faLoadInfo(
+                this.value
+            );
+            if (respData.ok) {
                 this.selectedData = respData.data.row;
             }
         }
@@ -97,10 +101,12 @@ export default class TTableSelector extends Vue {
 
     fShowModal() {
         this.bShowModal = true;
+        this.nModalRoute = 0;
     }
 
     fHideModal() {
         this.bShowModal = false;
+        this.nModalRoute = 0;
     }
 
     fSelectField(data: any) {
@@ -110,17 +116,41 @@ export default class TTableSelector extends Vue {
         this.$emit("input", data["id"]);
     }
 
+    fSetModalRoute(nModalRoute: number) {
+        this.nModalRoute = nModalRoute;
+    }
+
+    /**
+     * событие добавления строчки
+     * вызывается как колбэк в слоте добавления
+     * это важно
+     */
+    fOnAddHandler() {
+        this.fSetModalRoute(0);
+    }
+
     get fModalSize(): string {
         return ModalSizeEnum.lg;
     }
 
+    // показать добавление
+    get fShowAddModal(): Object {
+        let resp = {};
+        if (this.nModalRoute == 0) {
+            resp = { display: "none" };
+        }
+
+        return resp;
+    }
+
     get fGetSelectedData(): string {
         if (this.selectedData && Object.keys(this.selectedData).length > 0) {
-            return `${this.selectedData["id"]}: ${this.selectedData[this.sField]}`;
+            return `${this.selectedData["id"]}: ${
+                this.selectedData[this.sField]
+            }`;
         }
         return "";
     }
-
 }
 </script>
 

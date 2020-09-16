@@ -43,7 +43,7 @@ import { config } from "../../Config";
 import { BaseModel } from "../Sys/BaseModel";
 
 import TEdit from "../Components/Edit/TEdit.vue";
-import TTableSelector from "../Components/Table/TTableSelector.vue";
+import TTableSelector from "../Components/TTableSelector/TTableSelector.vue";
 
 import { RowInfoLoader } from "../Sys/RowInfoLoader";
 import { TableInfoLoader } from "../Sys/TableInfoLoader";
