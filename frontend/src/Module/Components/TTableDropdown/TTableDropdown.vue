@@ -22,7 +22,7 @@
 
             <!-- Компонент доавления в модалке -->
             <div :style="fShowAddModal">
-                <slot :fOnAddHandler="fOnAddHandler" name="add"></slot>
+                <slot :fOnAddHandler="fOnAddHandler" :fOnAddCancelHandler="fOnAddCancelHandler" name="add"></slot>
             </div>
         </div>
     </div>
@@ -129,6 +129,9 @@ export default class TTableDropdown extends Vue {
      * это важно
      */
     fOnAddHandler() {
+        this.fSetModalRoute(0);
+    }
+    fOnAddCancelHandler() {
         this.fSetModalRoute(0);
     }
 

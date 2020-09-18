@@ -28,8 +28,11 @@
                             :sModalCaption="'Выбор категории товара'"
                             :fOnSelect="()=>{}"
                         >
-                            <template v-slot:add>
-                                <div>ADD category</div>
+                            <template slot-scope="props" slot="add">
+                                <ProductCategoryAddCmp
+                                    :fOnAddClb="props.fOnAddHandler"
+                                    :fCancel="props.fOnAddCancelHandler"
+                                />
                             </template>
                         </TTableSelector>
                     </div>
@@ -42,6 +45,7 @@
 <script lang='ts'>
 import { Component, Prop, Vue } from "vue-property-decorator";
 import TTable from "../../Components/Table/TTable.vue";
+import ProductCategoryAddCmp from "../ProductCategory/AddCmp.vue";
 
 import { RowI, ColumnI } from "../../../../Entity/Interfaces/ListI";
 import { PaginationOptionsS } from "../../../../Entity/Service/PaginationOptionsS";
@@ -61,7 +65,7 @@ import { sRoute as sProductCategoryR } from "../../../../Entity/Routes/ProductCa
 import { TableLoader } from "../Sys/TableLoader";
 
 @Component({
-    components: { TEdit, TEditPage, TTableSelector },
+    components: { TEdit, TEditPage, TTableSelector, ProductCategoryAddCmp },
 })
 export default class EditP extends Vue {
     //data
@@ -118,6 +122,8 @@ export default class EditP extends Vue {
     async fCancel() {
         this.$router.push({ path: "/" + this.sRoute });
     }
+
+    fOnAddCategory(id: number) {}
 }
 </script>
 

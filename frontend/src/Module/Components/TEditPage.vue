@@ -33,13 +33,13 @@
 
 <script lang='ts'>
 /**
- * Компонент редактирование - добавления 
+ * Компонент страницы редактирование - добавления 
  */
 import { Component, Prop, Vue } from "vue-property-decorator";
 import TBasePage from "./TBasePage.vue";
 
 @Component({
-    name: "TListPage",
+    name: "TEditPage",
     components: { TBasePage },
 })
 export default class MainP extends Vue {
