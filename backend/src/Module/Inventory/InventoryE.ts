@@ -10,15 +10,30 @@ export class InventoryE {
     public getRulesInsert() {
         let rules = new Components.ModelRulesC();
 
-        rules.set(rules.rule('caption')
+        rules.set(rules.rule('date')
             .type(ModelRulesT.text)
             .require()
-            .error('caption - неверный формат')
+            .error('date - неверный формат')
         );
 
-        rules.set(rules.rule('description')
-            .type(ModelRulesT.text)
-            .error('description - неверный формат')
+        rules.set(rules.rule('checkout')
+            .type(ModelRulesT.int)
+            .moreOrEq(0)
+            .less(2)
+            .error('checkout - неверный формат')
+        );
+        rules.set(rules.rule('deleted')
+            .type(ModelRulesT.int)
+            .moreOrEq(0)
+            .less(2)
+            .error('deleted - неверный формат')
+        );
+
+        rules.set(rules.rule('user_id')
+            .type(ModelRulesT.int)
+            .require()
+            .more(0)
+            .error('user_id - неверный формат')
         );
 
         return rules.get();
@@ -27,15 +42,17 @@ export class InventoryE {
     public getRulesUpdate() {
         let rules = new Components.ModelRulesC();
 
-        rules.set(rules.rule('caption')
-            .type(ModelRulesT.text)
-            .require()
-            .error('caption - неверный формат')
+        rules.set(rules.rule('checkout')
+            .type(ModelRulesT.int)
+            .moreOrEq(0)
+            .less(2)
+            .error('checkout - неверный формат')
         );
-
-        rules.set(rules.rule('description')
-            .type(ModelRulesT.text)
-            .error('description - неверный формат')
+        rules.set(rules.rule('deleted')
+            .type(ModelRulesT.int)
+            .moreOrEq(0)
+            .less(2)
+            .error('deleted - неверный формат')
         );
 
         return rules.get();
