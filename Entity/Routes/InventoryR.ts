@@ -1,12 +1,12 @@
-import { InventoryI } from "../Interfaces/InventoryI";
+import { InventoryI, InventoryRowI } from "../Interfaces/InventoryI";
 import { SearchParamI } from "../Service/SearchS";
 import { ColumnI, PaginationOptionsI, ListInfoResponseI, ListResponseI } from "../Interfaces/ListI";
-import { GetRowByIdResponseI, TableI, sGetInfoByIdR, sGetTableInfo, sInsertRow, sUpdateRow, AddRowResponseI } from "../Interfaces/TableI";
+import { GetRowByIdResponseI, TableI, sGetInfoByIdR, sGetTableInfo, sInsertRow, sUpdateRow, InsertRowResponseI as InsertRowResponseI, sInsertDocRow } from "../Interfaces/TableI";
 
 export const sRoute = 'inventory';
 
 /**
- * Товар
+ * Инвентаризация 
  */
 export namespace InventoryR {
     // =======================================================
@@ -78,8 +78,27 @@ export namespace InventoryR {
         }
 
         /** Параметры api ответа */
-        export interface ResponseI extends AddRowResponseI {
-            id: number;
+        export interface ResponseI extends InsertRowResponseI {
+        }
+    }
+
+    /**
+     * Вставить строку документа инфентаризации
+     */
+    export namespace insertDocRow {
+
+        /** APIURL */
+        export const route = `/api/${sRoute}/${sInsertDocRow}`;
+
+        /** Alias действия */
+        export const action = `insertDocRow`;
+
+        /** Параметры api запроса */
+        export interface RequestI extends InventoryRowI { 
+        }
+
+        /** Параметры api ответа */
+        export interface ResponseI extends InsertRowResponseI {
         }
     }
 

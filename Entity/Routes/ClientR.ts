@@ -1,7 +1,7 @@
 import { ClientI } from "../Interfaces/ClientI";
 import { SearchParamI } from "../Service/SearchS";
 import { ColumnI, PaginationOptionsI, ListInfoResponseI, ListResponseI } from "../Interfaces/ListI";
-import { GetRowByIdResponseI, TableI, sGetInfoByIdR, sGetTableInfo, sInsertRow, sUpdateRow, AddRowResponseI } from "../Interfaces/TableI";
+import { GetRowByIdResponseI, TableI, sGetInfoByIdR, sGetTableInfo, sInsertRow, sUpdateRow, InsertRowResponseI } from "../Interfaces/TableI";
 
 export const sRoute = 'client';
 
@@ -78,7 +78,7 @@ export namespace ClientR {
         }
 
         /** Параметры api ответа */
-        export interface ResponseI extends AddRowResponseI {
+        export interface ResponseI extends InsertRowResponseI {
             id: number;
         }
     }

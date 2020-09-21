@@ -3,16 +3,16 @@ import * as System from "@a-a-game-studio/aa-core/lib/Namespace/System";
 // Системные классы
 
 // Классы SQL Запросов
-import { InventorySQL } from './InventorySQL';
+import { InventoryDocRowSQL } from './InventoryDocRowSQL';
 
 // Роутинг
-import { InventoryR } from '../../../../Entity/Routes/InventoryR';
-import R = InventoryR
+import { InventoryDocRowR } from '../../../../Entity/Routes/InventoryDocRowR';
+import R = InventoryDocRowR
 
 // Валидация
-import * as V from './InventoryV'
+import * as V from './InventoryDocRowV'
 import { SearchS } from "../../../../Entity/Service/SearchS";
-import { InventoryI } from "../../../../Entity/Interfaces/InventoryI";
+import { InventoryDocRowI } from "../../../../Entity/Interfaces/InventoryDocRowI";
 import { PaginationOptionsS } from "../../../../Entity/Service/PaginationOptionsS";
 import { PaginationOptionsI, ColumnI } from "../../../../Entity/Interfaces/ListI";
 
@@ -22,14 +22,14 @@ import * as TableI from "../../../../Entity/Interfaces/TableI";
 /**
  * Категории товаров 
  */
-export class InventoryM extends System.BaseM {
+export class InventoryDocRowM extends System.BaseM {
 
-    private inventorySQL: InventorySQL;
+    private inventoryDocRowSQL: InventoryDocRowSQL;
 
     constructor(req: any) {
         super(req);
 
-        this.inventorySQL = new InventorySQL(req);
+        this.inventoryDocRowSQL = new InventoryDocRowSQL(req);
     }
 
 
@@ -44,9 +44,9 @@ export class InventoryM extends System.BaseM {
 
         // --------------------------
 
-        let item: InventoryI = null;
+        let item: InventoryDocRowI = null;
         if (ok) {
-            item = await this.inventorySQL.faGetById(data.id);
+            item = await this.inventoryDocRowSQL.faGetById(data.id);
         }
 
         // --------------------------
@@ -75,7 +75,7 @@ export class InventoryM extends System.BaseM {
 
         let id: number = data.id;
         if (ok) {
-            await this.inventorySQL.faUpdate(id, data);
+            await this.inventoryDocRowSQL.faUpdate(id, data);
         }
 
         // --------------------------
@@ -105,7 +105,7 @@ export class InventoryM extends System.BaseM {
 
         let id: number = null;
         if (ok) {
-            id = await this.inventorySQL.faInsert(data);
+            id = await this.inventoryDocRowSQL.faInsert(data);
         }
 
         // --------------------------
@@ -123,7 +123,7 @@ export class InventoryM extends System.BaseM {
 
 
     /**
-     * Inventory list
+     * InventoryDocRow list
      * @param data 
      */
     public async faList(data: R.list.RequestI): Promise<R.list.ResponseI> {
@@ -133,11 +133,11 @@ export class InventoryM extends System.BaseM {
 
         // --------------------------
 
-        let aList: InventoryI[] = [];
+        let aList: InventoryDocRowI[] = [];
         let nTotal = 0;
         if (ok) {
-            aList = await this.inventorySQL.faList(new SearchS().fSetParam(data));
-            nTotal = await this.inventorySQL.faListTotal(new SearchS().fSetParam(data));
+            aList = await this.inventoryDocRowSQL.faList(new SearchS().fSetParam(data));
+            nTotal = await this.inventoryDocRowSQL.faListTotal(new SearchS().fSetParam(data));
         }
 
         // --------------------------
@@ -222,4 +222,33 @@ export class InventoryM extends System.BaseM {
     }
 
 
+
+    /**
+     * Вставка 
+     * @param data 
+     */
+    public async faInsertARow(data: R.insertRows.RequestI): Promise<R.insert.ResponseI> {
+
+        data = <R.insert.RequestI>V.insert(this.req, data);
+        let ok = this.errorSys.isOk();
+
+        // --------------------------
+
+        let id: number = null;
+        if (ok) {
+            id = await this.inventoryDocRowSQL.faInsert(data);
+        }
+
+        // --------------------------
+
+        let out: R.insert.ResponseI = null;
+        if (ok) { // Формирование ответа
+            out = {
+                id,
+            };
+        }
+
+        return out;
+    }
+    // =====================================
 }

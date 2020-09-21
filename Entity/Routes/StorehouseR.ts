@@ -1,7 +1,7 @@
 import { StorehouseI } from "../Interfaces/StorehouseI";
 import { SearchParamI } from "../Service/SearchS";
 import { ColumnI, PaginationOptionsI, ListInfoResponseI, ListResponseI } from "../Interfaces/ListI";
-import { GetRowByIdResponseI, TableI, sGetInfoByIdR, sGetTableInfo, sInsertRow, sUpdateRow, AddRowResponseI } from "../Interfaces/TableI";
+import { GetRowByIdResponseI, TableI, sGetInfoByIdR, sGetTableInfo, sInsertRow, sUpdateRow, InsertRowResponseI } from "../Interfaces/TableI";
 
 export const sRoute = 'storehouse';
 
@@ -78,7 +78,7 @@ export namespace StorehouseR {
         }
 
         /** Параметры api ответа */
-        export interface ResponseI extends AddRowResponseI {
+        export interface ResponseI extends InsertRowResponseI {
             id: number;
         }
     }

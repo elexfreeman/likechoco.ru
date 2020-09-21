@@ -36,6 +36,13 @@ export class InventoryE {
             .error('user_id - неверный формат')
         );
 
+        rules.set(rules.rule('storehouse_id')
+            .type(ModelRulesT.int)
+            .require()
+            .more(0)
+            .error('storehouse_id - неверный формат')
+        );
+
         return rules.get();
     }
 
@@ -57,5 +64,7 @@ export class InventoryE {
 
         return rules.get();
     }
+
+
 
 }

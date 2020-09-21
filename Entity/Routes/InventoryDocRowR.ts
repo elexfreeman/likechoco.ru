@@ -1,14 +1,14 @@
-import { ProductCategoryI } from "../Interfaces/ProductCategoryI";
+import { InventoryDocRowI } from "../Interfaces/InventoryDocRowI";
 import { SearchParamI } from "../Service/SearchS";
 import { ColumnI, PaginationOptionsI, ListInfoResponseI, ListResponseI } from "../Interfaces/ListI";
-import { GetRowByIdResponseI, TableI, sGetInfoByIdR, sGetTableInfo, sInsertRow, sUpdateRow, InsertRowResponseI } from "../Interfaces/TableI";
+import { GetRowByIdResponseI, TableI, sGetInfoByIdR, sGetTableInfo, sInsertRow, sUpdateRow, InsertRowResponseI as InsertRowResponseI, sInsertDocRow } from "../Interfaces/TableI";
 
-export const sRoute = 'productCategory';
+export const sRoute = 'inventory_doc_row';
 
 /**
- * Товар
+ * Инвентаризация 
  */
-export namespace ProductCategoryR {
+export namespace InventoryDocRowR {
     // =======================================================
     /** Начальные данные */
     export namespace list {
@@ -24,7 +24,7 @@ export namespace ProductCategoryR {
         }
 
         /** Параметры api ответа */
-        export interface ResponseI extends ListResponseI<ProductCategoryI> {
+        export interface ResponseI extends ListResponseI<InventoryDocRowI> {
         }
     }
     export namespace listInfo {
@@ -60,7 +60,7 @@ export namespace ProductCategoryR {
         }
 
         /** Параметры api ответа */
-        export interface ResponseI extends GetRowByIdResponseI<ProductCategoryI> {
+        export interface ResponseI extends GetRowByIdResponseI<InventoryDocRowI> {
         }
     }
 
@@ -74,12 +74,31 @@ export namespace ProductCategoryR {
         export const action = `insert`;
 
         /** Параметры api запроса */
-        export interface RequestI extends ProductCategoryI {
+        export interface RequestI extends InventoryDocRowI {
         }
 
         /** Параметры api ответа */
         export interface ResponseI extends InsertRowResponseI {
-            id: number;
+        }
+    }
+
+    /**
+     * Вставить строку документа инфентаризации
+     */
+    export namespace insertDocRow {
+
+        /** APIURL */
+        export const route = `/api/${sRoute}/${sInsertDocRow}`;
+
+        /** Alias действия */
+        export const action = `insertDocRow`;
+
+        /** Параметры api запроса */
+        export interface RequestI extends InventoryDocRowI { 
+        }
+
+        /** Параметры api ответа */
+        export interface ResponseI extends InsertRowResponseI {
         }
     }
 
@@ -92,7 +111,7 @@ export namespace ProductCategoryR {
         export const action = `update`;
 
         /** Параметры api запроса */
-        export interface RequestI extends ProductCategoryI {
+        export interface RequestI extends InventoryDocRowI {
         }
 
         /** Параметры api ответа */

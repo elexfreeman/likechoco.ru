@@ -1,29 +1,29 @@
 import BaseSQL from "@a-a-game-studio/aa-core/lib/System/BaseSQL";
-import { InventoryE } from "./InventoryE";
-import { InventoryI, InventoryRowI } from "../../../../Entity/Interfaces/InventoryI";
+import { InventoryDocRowE } from "./InventoryDocRowE";
+import { InventoryDocRowI, InventoryDocRowRowI } from "../../../../Entity/Interfaces/InventoryDocRowI";
 import { SearchS } from "../../../../Entity/Service/SearchS";
-import { InventoryRowE } from "./InventoryRowE";
+import { InventoryDocRowRowE } from "./InventoryDocRowRowE";
 
 /**
  * Продкты 
  */
-export class InventorySQL extends BaseSQL {
+export class InventoryDocRowSQL extends BaseSQL {
 
     /**
      * Список 
      */
-    public async faList(search: SearchS): Promise<InventoryI[]> {
+    public async faList(search: SearchS): Promise<InventoryDocRowI[]> {
         let ok = true;
-        let resp: InventoryI[];
+        let resp: InventoryDocRowI[];
 
         if (ok) {
-            let sql = `SELECT * FROM ${InventoryE.NAME} p LIMIT :nOffset, :nLimit`;
+            let sql = `SELECT * FROM ${InventoryDocRowE.NAME} p LIMIT :nOffset, :nLimit`;
 
             try {
                 resp = (await this.db.raw(sql, search.fGetSearchParam()))[0];
             } catch (e) {
                 ok = false;
-                this.errorSys.errorEx(e, 'Inventory list', 'Не удалось получить информацию о Inventory');
+                this.errorSys.errorEx(e, 'InventoryDocRow list', 'Не удалось получить информацию о InventoryDocRow');
             }
         }
 
@@ -38,7 +38,7 @@ export class InventorySQL extends BaseSQL {
         let resp: number = 0;
 
         if (ok) {
-            let sql = `SELECT count(*) cc FROM ${InventoryE.NAME} p `;
+            let sql = `SELECT count(*) cc FROM ${InventoryDocRowE.NAME} p `;
 
             try {
                 resp = (await this.db.raw(sql, search.fGetSearchParam()))[0][0]['cc'];
@@ -53,15 +53,15 @@ export class InventorySQL extends BaseSQL {
 
 
     /**
-     * Получить InventoryI
+     * Получить InventoryDocRowI
      * @param id 
      */
-    public async faGetById(id: number): Promise<InventoryI> {
+    public async faGetById(id: number): Promise<InventoryDocRowI> {
         let ok = true;
-        let resp: InventoryI = null;
+        let resp: InventoryDocRowI = null;
 
         if (ok) {
-            let sql = `SELECT p.* FROM ${InventoryE.NAME} p
+            let sql = `SELECT p.* FROM ${InventoryDocRowE.NAME} p
             where p.id=:id`;
 
             try {
@@ -69,7 +69,7 @@ export class InventorySQL extends BaseSQL {
 
             } catch (e) {
                 ok = false;
-                this.errorSys.errorEx(e, 'faGetById', 'Не удалось получить информацию о InventoryI');
+                this.errorSys.errorEx(e, 'faGetById', 'Не удалось получить информацию о InventoryDocRowI');
             }
         }
 
@@ -82,24 +82,24 @@ export class InventorySQL extends BaseSQL {
      * Добавить 
      * @param data 
      */
-    public async faInsert(data: InventoryI): Promise<number> {
+    public async faInsert(data: InventoryDocRowI): Promise<number> {
         let resp: number = 0;
-        let inventoryE = new InventoryE();
+        let inventoryDocRowE = new InventoryDocRowE();
 
         try {
 
             // Валидируем входящие данные
-            if (!this.modelValidatorSys.fValid(inventoryE.getRulesInsert(), data)) {
+            if (!this.modelValidatorSys.fValid(inventoryDocRowE.getRulesInsert(), data)) {
                 throw 'validation error';
             }
 
-            resp = (await this.db(InventoryE.NAME)
+            resp = (await this.db(InventoryDocRowE.NAME)
                 .insert(this.modelValidatorSys.getResult())
             )[0];
 
 
         } catch (e) {
-            this.errorSys.errorEx(e, 'faInventoryInsert', 'Не удалось вставить заказ');
+            this.errorSys.errorEx(e, 'faInventoryDocRowInsert', 'Не удалось вставить заказ');
         }
 
         return resp;
@@ -110,18 +110,18 @@ export class InventorySQL extends BaseSQL {
      * Добавить 
      * @param data 
      */
-    public async faInsertRow(data: InventoryRowI): Promise<number> {
+    public async faInsertRow(data: InventoryDocRowRowI): Promise<number> {
         let resp: number = 0;
-        let inventoryRowE = new InventoryRowE();
+        let inventoryDocRowRowE = new InventoryDocRowRowE();
 
         try {
 
             // Валидируем входящие данные
-            if (!this.modelValidatorSys.fValid(inventoryRowE.getRulesInsert(), data)) {
+            if (!this.modelValidatorSys.fValid(inventoryDocRowRowE.getRulesInsert(), data)) {
                 throw 'validation error';
             }
 
-            resp = (await this.db(InventoryE.NAME)
+            resp = (await this.db(InventoryDocRowE.NAME)
                 .insert(this.modelValidatorSys.getResult())
             )[0];
 
@@ -139,23 +139,23 @@ export class InventorySQL extends BaseSQL {
      * @param id 
      * @param data 
      */
-    public async faUpdate(id: number, data: InventoryI): Promise<boolean> {
+    public async faUpdate(id: number, data: InventoryDocRowI): Promise<boolean> {
         let ok = this.errorSys.isOk();
-        let inventoryE = new InventoryE();
+        let inventoryDocRowE = new InventoryDocRowE();
 
         try {
             // Валидируем входящие данные
-            if (!this.modelValidatorSys.fValid(inventoryE.getRulesUpdate(), data)) {
+            if (!this.modelValidatorSys.fValid(inventoryDocRowE.getRulesUpdate(), data)) {
                 throw 'validation error';
             }
 
-            await this.db(InventoryE.NAME)
+            await this.db(InventoryDocRowE.NAME)
                 .where({
                     id: id
                 })
                 .update(this.modelValidatorSys.getResult());
         } catch (e) {
-            this.errorSys.errorEx(e, 'faInventoryUpdate', 'Не удалось обновить');
+            this.errorSys.errorEx(e, 'faInventoryDocRowUpdate', 'Не удалось обновить');
         }
 
         return ok;
