@@ -6,23 +6,30 @@
         </div>
 
         <div class="card t-shadow t-drop-form" v-if="bShowModal">
-            <div class="text-right" v-on:click="fHideModal()">
-                <button class="btn">
-                    <i class="fas fa-times"></i>
-                </button>
+            <div class="t-edit">
+                <List
+                    v-if="nModalRoute==0"
+                    :tableLoader="tableLoader"
+                    :fSelectField="fSelectField"
+                    :sField="sField"
+                    :bCanAdd="bCanAdd"
+                    :fSetModalRoute="fSetModalRoute"
+                />
             </div>
-            <List
-                v-if="nModalRoute==0"
-                :tableLoader="tableLoader"
-                :fSelectField="fSelectField"
-                :sField="sField"
-                :bCanAdd="bCanAdd"
-                :fSetModalRoute="fSetModalRoute"
-            />
+            <div v-if="nModalRoute==0" class="t-edit-p pb-4 text-right">
+                <button
+                    v-on:click="fHideModal"
+                    class="btn btn-sm btn-outline-success t-button"
+                >Отмена</button>
+            </div>
 
             <!-- Компонент доавления в модалке -->
             <div :style="fShowAddModal">
-                <slot :fOnAddHandler="fOnAddHandler" :fOnAddCancelHandler="fOnAddCancelHandler" name="add"></slot>
+                <slot
+                    :fOnAddHandler="fOnAddHandler"
+                    :fOnAddCancelHandler="fOnAddCancelHandler"
+                    name="add"
+                ></slot>
             </div>
         </div>
     </div>
@@ -159,10 +166,10 @@ export default class TTableDropdown extends Vue {
     }
 
     get fCaretStyle(): Object {
-        let resp = {}
+        let resp = {};
 
-        if(this.bShowModal) {
-            resp = {'transform': 'rotate(180deg)'}
+        if (this.bShowModal) {
+            resp = { transform: "rotate(180deg)" };
         }
         return resp;
     }

@@ -5,6 +5,7 @@
 .t-edit-p {
     padding-left: 20px;
     padding-right: 20px;
+    background-color: #fff;
 }
 
 .t-button {
@@ -18,6 +19,7 @@
         justify-content: space-between;
         width: 100%;
         align-items: center;
+        cursor: pointer;
     }
     .t-btn-input {
         padding: 10px;
@@ -37,7 +39,6 @@
         padding-top: 5px;
     }
     .btn-plus {
-        padding-right: 32px;
     }
 
     .t-drop-form {

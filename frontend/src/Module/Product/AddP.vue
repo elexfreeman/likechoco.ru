@@ -1,7 +1,7 @@
 <template>
     <TEditPage
         :bIsLoad="bIsLoad"
-        :fOk="() => {fOk();}"
+        :fOk="() => fOk()"
         :fCancel="()=>{}"
         :sCaption="sCaption"
         :sRoute="sRoute"
@@ -18,14 +18,23 @@
                     <div class="form-group">
                         <label>Категория товара</label>
                         <TTableSelector
-                            v-model="row.category_id"
                             v-if="tableLoaderProductCategory"
+                            v-model="row.category_id"
+                            :bCanEdit="true"
+                            :bCanAdd="true"
                             :sRoute="sProductCategoryR"
                             :tableLoader="tableLoaderProductCategory"
                             :sField="'caption'"
                             :sModalCaption="'Выбор категории товара'"
                             :fOnSelect="()=>{}"
-                        />
+                        >
+                            <template slot-scope="props" slot="add">
+                                <ProductCategoryAddCmp
+                                    :fOnAddClb="props.fOnAddHandler"
+                                    :fCancel="props.fOnAddCancelHandler"
+                                />
+                            </template>
+                        </TTableSelector>
                     </div>
                 </template>
             </TEdit>
@@ -36,6 +45,7 @@
 <script lang='ts'>
 import { Component, Prop, Vue } from "vue-property-decorator";
 import TTable from "../../Components/Table/TTable.vue";
+import ProductCategoryAddCmp from "../ProductCategory/AddCmp.vue";
 
 import { RowI, ColumnI } from "../../../../Entity/Interfaces/ListI";
 import { PaginationOptionsS } from "../../../../Entity/Service/PaginationOptionsS";
@@ -43,7 +53,7 @@ import { config } from "../../Config";
 import { BaseModel } from "../Sys/BaseModel";
 
 import TEdit from "../Components/Edit/TEdit.vue";
-import TTableSelector from "../Components/TTableSelector/TTableSelector.vue";
+import TTableSelector from "../Components/TTableDropdown/TTableDropdown.vue";
 
 import { RowInfoLoader } from "../Sys/RowInfoLoader";
 import { TableInfoLoader } from "../Sys/TableInfoLoader";
@@ -56,7 +66,7 @@ import { sRoute as sProductCategoryR } from "../../../../Entity/Routes/ProductCa
 import { TableLoader } from "../Sys/TableLoader";
 
 @Component({
-    components: { TEdit, TEditPage, TTableSelector },
+    components: { TEdit, TEditPage, TTableSelector, ProductCategoryAddCmp },
 })
 export default class AddP extends Vue {
     //data
@@ -79,6 +89,7 @@ export default class AddP extends Vue {
 
     // methods
     async mounted() {
+        // создаем загрузчик для катенорий товаров
         const tableLoaderProductCategory = new TableLoader(
             this.sProductCategoryR,
             config
@@ -87,8 +98,14 @@ export default class AddP extends Vue {
         this.tableLoaderProductCategory = tableLoaderProductCategory;
     }
 
+    /**
+     * событие добавления
+     */
     async fOk() {
+        // инициализая созранятеля
         const rowSaverS = new RowSaverS(this.sRoute, new BaseModel(config));
+
+        // пытаемся созранить
         this.bIsLoad = true;
         const data = await rowSaverS.faAdd(this.row);
         this.bIsLoad = false;
@@ -97,7 +114,6 @@ export default class AddP extends Vue {
         } else {
             this.errorParseS = new ErrorParseS(data.errors);
             console.log(this.errorParseS);
-            
         }
     }
 }

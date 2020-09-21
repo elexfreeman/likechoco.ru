@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="pb-2 text-right btn-plus" v-if="bCanAdd">
-            <button v-on:click="() => fSetModalRoute(1)" class="btn btn-primary">
-                <i class="fa fa-plus"></i>
+            <button v-on:click="() => fSetModalRoute(1)" class="btn btn-primary btn-sm">
+                <i class="fa fa-plus"></i> Добавить
             </button>
         </div>
         <TTable

@@ -4,7 +4,7 @@
             <slot name="header"></slot>
             <div class="text-right">
                 <router-link :to="`${sRoute}/add`" class="btn btn-primary">
-                    <i class="fa fa-plus"></i>
+                    <i class="fa fa-plus"></i> Добавить
                 </router-link>
             </div>
         </template>

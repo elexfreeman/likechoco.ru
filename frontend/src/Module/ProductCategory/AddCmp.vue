@@ -7,19 +7,20 @@
         :sRoute="sRoute"
     >
         <template v-slot:content>
-            <TEdit
-                v-if="row"
-                :errorParseS="errorParseS"
-                :sRoute="sRoute"
-                :cTableInfoLoader="cTableInfoLoader"
-                :row="row"
-            />
+            <div class="t-edit-p">
+                <TEdit
+                    v-if="row"
+                    :errorParseS="errorParseS"
+                    :sRoute="sRoute"
+                    :cTableInfoLoader="cTableInfoLoader"
+                    :row="row"
+                />
+            </div>
         </template>
     </TEditCmp>
 </template>
 
 <script lang='ts'>
-
 /**
  * Компонет добавления
  * Можно использовать для копипасты

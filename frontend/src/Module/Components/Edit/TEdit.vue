@@ -1,10 +1,10 @@
 <template>
-    <div class="t-edit" v-if="!bIsLoad">
+    <div v-if="!bIsLoad">
         <div :key="key" v-for="(column, key) in cTableInfoLoader.aColumn">
             <div class="form-group">
-                <label>{{column.sCaption}}</label>
+                <label v-if="(column.sName!='id')">{{column.sCaption}}</label>
                 <input
-                    v-if="column.nType==ColumnTypeEnumInteger"
+                    v-if="(column.nType==ColumnTypeEnumInteger)&&(column.sName!='id')"
                     :disabled="column.sName=='id'"
                     v-model="row[column.sName]"
                     type="text"
