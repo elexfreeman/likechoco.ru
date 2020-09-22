@@ -51,12 +51,21 @@ export interface UpdateRowResponseI {
 }
 
 
+export interface RemoveDocRowReqestI {
+    id: number;
+}
+
+
 // маршрты для основных операций
 export const sGetInfoByIdR = 'row_info';
 export const sGetTableInfo = 'info';
 export const sInsertRow = 'insert';
 export const sUpdateRow = 'update';
+export const sList = 'list';
+export const sListDocRow = 'list_doc_row';
 
-// вставка строк табличного документа
-export const sInsertDocRow = 'insertDocRow';
+// удаление строк табличного документа
+export const sRemoveDocRow = 'delete_doc_rows';
+// список строк документа
+export const sGetDocRows = 'get_doc_rows';
 

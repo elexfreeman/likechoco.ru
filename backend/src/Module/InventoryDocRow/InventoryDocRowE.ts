@@ -8,8 +8,9 @@ export class InventoryDocRowE {
     public static NAME = 'inventory_doc_row';
 
 
+    public static DOC_NAME = 'inventory';
 
-    public getRulesInsertRow() {
+    public getRulesInsert() {
         let rules = new Components.ModelRulesC();
 
         rules.set(rules.rule('inventory_id')

@@ -1,7 +1,7 @@
 import { InventoryI, InventoryRowI } from "../Interfaces/InventoryI";
 import { SearchParamI } from "../Service/SearchS";
 import { ColumnI, PaginationOptionsI, ListInfoResponseI, ListResponseI } from "../Interfaces/ListI";
-import { GetRowByIdResponseI, TableI, sGetInfoByIdR, sGetTableInfo, sInsertRow, sUpdateRow, InsertRowResponseI as InsertRowResponseI, sInsertDocRow } from "../Interfaces/TableI";
+import { GetRowByIdResponseI, TableI, sGetInfoByIdR, sGetTableInfo, sInsertRow, sUpdateRow,  InsertRowResponseI,  } from "../Interfaces/TableI";
 
 export const sRoute = 'inventory';
 
@@ -88,7 +88,7 @@ export namespace InventoryR {
     export namespace insertDocRow {
 
         /** APIURL */
-        export const route = `/api/${sRoute}/${sInsertDocRow}`;
+        export const route = `/api/${sRoute}/${sInsertRow}`;
 
         /** Alias действия */
         export const action = `insertDocRow`;

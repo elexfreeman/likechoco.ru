@@ -1,7 +1,6 @@
 import { InventoryDocRowI } from "../Interfaces/InventoryDocRowI";
-import { SearchParamI } from "../Service/SearchS";
-import { ColumnI, PaginationOptionsI, ListInfoResponseI, ListResponseI } from "../Interfaces/ListI";
-import { GetRowByIdResponseI, TableI, sGetInfoByIdR, sGetTableInfo, sInsertRow, sUpdateRow, InsertRowResponseI as InsertRowResponseI, sInsertDocRow } from "../Interfaces/TableI";
+import { ListDocRowResponseI, ListInfoResponseI, ListResponseI } from "../Interfaces/ListI";
+import { GetRowByIdResponseI, TableI, sGetInfoByIdR, sGetTableInfo, sInsertRow, InsertRowResponseI, sListDocRow, sRemoveDocRow, RemoveDocRowReqestI } from "../Interfaces/TableI";
 
 export const sRoute = 'inventory_doc_row';
 
@@ -11,22 +10,24 @@ export const sRoute = 'inventory_doc_row';
 export namespace InventoryDocRowR {
     // =======================================================
     /** Начальные данные */
-    export namespace list {
+    export namespace listDocRow {
 
         /** APIURL */
-        export const route = `/api/${sRoute}/list`;
+        export const route = `/api/${sRoute}/${sListDocRow}`;
 
         /** Alias действия */
-        export const action = `list`;
+        export const action = `list_doc_row`;
 
         /** Параметры api запроса */
-        export interface RequestI extends SearchParamI {
+        export interface RequestI {
+            id: number;
         }
 
         /** Параметры api ответа */
-        export interface ResponseI extends ListResponseI<InventoryDocRowI> {
+        export interface ResponseI extends ListDocRowResponseI<InventoryDocRowI> {
         }
     }
+
     export namespace listInfo {
 
         /** APIURL */
@@ -46,24 +47,6 @@ export namespace InventoryDocRowR {
 
     //++++++++++++
 
-    export namespace getById {
-
-        /** APIURL */
-        export const route = `/api/${sRoute}/${sGetInfoByIdR}`;
-
-        /** Alias действия */
-        export const action = `getById`;
-
-        /** Параметры api запроса */
-        export interface RequestI {
-            id: number;
-        }
-
-        /** Параметры api ответа */
-        export interface ResponseI extends GetRowByIdResponseI<InventoryDocRowI> {
-        }
-    }
-
 
     export namespace insert {
 
@@ -82,41 +65,20 @@ export namespace InventoryDocRowR {
         }
     }
 
-    /**
-     * Вставить строку документа инфентаризации
-     */
-    export namespace insertDocRow {
+    export namespace removeDocRow {
 
         /** APIURL */
-        export const route = `/api/${sRoute}/${sInsertDocRow}`;
+        export const route = `/api/${sRoute}/${sRemoveDocRow}`;
 
         /** Alias действия */
-        export const action = `insertDocRow`;
+        export const action = `remove_doc_row`;
 
         /** Параметры api запроса */
-        export interface RequestI extends InventoryDocRowI { 
-        }
-
-        /** Параметры api ответа */
-        export interface ResponseI extends InsertRowResponseI {
-        }
-    }
-
-    export namespace update {
-
-        /** APIURL */
-        export const route = `/api/${sRoute}/${sUpdateRow}`;
-
-        /** Alias действия */
-        export const action = `update`;
-
-        /** Параметры api запроса */
-        export interface RequestI extends InventoryDocRowI {
+        export interface RequestI extends RemoveDocRowReqestI {
         }
 
         /** Параметры api ответа */
         export interface ResponseI {
-            id: number;
         }
     }
 

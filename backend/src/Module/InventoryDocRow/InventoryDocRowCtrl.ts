@@ -39,35 +39,24 @@ router.post(R.insert.route, async (req: System.MainRequest, res: any, next: any)
     })
 });
 
-
 /**
- * update 
+ * remove 
  */
-router.post(R.update.route, async (req: System.MainRequest, res: any, next: any) => {
+router.post(R.removeDocRow.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new InventoryDocRowController(req, res);
     await ctrl.faInit();
     await ctrl.userSys.isAuth(); // Пробуем авторизироваться
-    await ctrl.faAction('InventoryDocRow update', () => {
-        return ctrl.inventoryDocRowM.faUpdate(req.body);
+    await ctrl.faAction('InventoryDocRow removeDocRow', () => {
+        return ctrl.inventoryDocRowM.faRemoveDocRow(req.body);
     })
 });
 
-/**
- * get by id 
- */
-router.post(R.getById.route, async (req: System.MainRequest, res: any, next: any) => {
-    const ctrl = new InventoryDocRowController(req, res);
-    await ctrl.faInit();
-    await ctrl.userSys.isAuth(); // Пробуем авторизироваться
-    await ctrl.faAction('InventoryDocRow get', () => {
-        return ctrl.inventoryDocRowM.faGetById(req.body);
-    })
-});
+
 
 /**
  * List
  */
-router.post(R.list.route, async (req: System.MainRequest, res: any, next: any) => {
+router.post(R.listDocRow.route, async (req: System.MainRequest, res: any, next: any) => {
     const ctrl = new InventoryDocRowController(req, res);
     await ctrl.faInit();
     await ctrl.userSys.isAuth(); // Пробуем авторизироваться

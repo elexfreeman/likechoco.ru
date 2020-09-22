@@ -54,3 +54,11 @@ export interface ListResponseI<T> {
     list: T[];
     total: number;
 }
+
+
+/**
+ * Табличная часть документа
+ */
+export interface ListDocRowResponseI<T> {
+    list: T[];
+}

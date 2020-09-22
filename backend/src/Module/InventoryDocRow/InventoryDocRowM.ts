@@ -28,68 +28,8 @@ export class InventoryDocRowM extends System.BaseM {
 
     constructor(req: any) {
         super(req);
-
         this.inventoryDocRowSQL = new InventoryDocRowSQL(req);
     }
-
-
-    /**
-     * Получить по id 
-     * @param data 
-     */
-    public async faGetById(data: R.getById.RequestI): Promise<R.getById.ResponseI> {
-
-        data = <R.getById.RequestI>V.getById(this.req, data);
-        let ok = this.errorSys.isOk();
-
-        // --------------------------
-
-        let item: InventoryDocRowI = null;
-        if (ok) {
-            item = await this.inventoryDocRowSQL.faGetById(data.id);
-        }
-
-        // --------------------------
-
-        let out: R.getById.ResponseI = null;
-        if (ok) { // Формирование ответа
-            out = {
-                row: item,
-            }
-        }
-
-        return out;
-    }
-    // =====================================
-
-    /**
-     * Обновленеи 
-     * @param data 
-     */
-    public async faUpdate(data: R.update.RequestI): Promise<R.update.ResponseI> {
-
-        data = <R.update.RequestI>V.update(this.req, data);
-        let ok = this.errorSys.isOk();
-
-        // --------------------------
-
-        let id: number = data.id;
-        if (ok) {
-            await this.inventoryDocRowSQL.faUpdate(id, data);
-        }
-
-        // --------------------------
-
-        let out: R.update.ResponseI = null;
-        if (ok) { // Формирование ответа
-            out = {
-                id,
-            };
-        }
-
-        return out;
-    }
-    // =====================================
 
 
     /**
@@ -123,30 +63,56 @@ export class InventoryDocRowM extends System.BaseM {
 
 
     /**
+     * Вставка 
+     * @param data 
+     */
+    public async faRemoveDocRow(data: R.removeDocRow.RequestI): Promise<R.removeDocRow.ResponseI> {
+
+        data = <R.removeDocRow.RequestI>V.removeDocRow(this.req, data);
+        let ok = this.errorSys.isOk();
+
+        // --------------------------
+
+        let id: number = null;
+        if (ok) {
+            ok = await this.inventoryDocRowSQL.faRemoveDocRow(data.id);
+        }
+
+        // --------------------------
+
+        let out: R.removeDocRow.ResponseI = null;
+        if (ok) { // Формирование ответа
+            out = {
+            };
+        }
+
+        return out;
+    }
+    // =====================================
+
+
+    /**
      * InventoryDocRow list
      * @param data 
      */
-    public async faList(data: R.list.RequestI): Promise<R.list.ResponseI> {
+    public async faList(data: R.listDocRow.RequestI): Promise<R.listDocRow.ResponseI> {
 
-        data = <R.list.RequestI>V.list(this.req, data);
+        data = <R.listDocRow.RequestI>V.listDocRow(this.req, data);
         let ok = this.errorSys.isOk();
 
         // --------------------------
 
         let aList: InventoryDocRowI[] = [];
-        let nTotal = 0;
         if (ok) {
-            aList = await this.inventoryDocRowSQL.faList(new SearchS().fSetParam(data));
-            nTotal = await this.inventoryDocRowSQL.faListTotal(new SearchS().fSetParam(data));
+            aList = await this.inventoryDocRowSQL.faListDocRow(data.id);
         }
 
         // --------------------------
 
-        let out: R.list.ResponseI = null;
+        let out: R.listDocRow.ResponseI = null;
         if (ok) { // Формирование ответа
             out = {
                 list: aList,
-                total: nTotal,
             };
         }
 
@@ -223,32 +189,5 @@ export class InventoryDocRowM extends System.BaseM {
 
 
 
-    /**
-     * Вставка 
-     * @param data 
-     */
-    public async faInsertARow(data: R.insertRows.RequestI): Promise<R.insert.ResponseI> {
-
-        data = <R.insert.RequestI>V.insert(this.req, data);
-        let ok = this.errorSys.isOk();
-
-        // --------------------------
-
-        let id: number = null;
-        if (ok) {
-            id = await this.inventoryDocRowSQL.faInsert(data);
-        }
-
-        // --------------------------
-
-        let out: R.insert.ResponseI = null;
-        if (ok) { // Формирование ответа
-            out = {
-                id,
-            };
-        }
-
-        return out;
-    }
     // =====================================
 }
