@@ -7,6 +7,7 @@ export enum ColumnTypeEnum {
     Integer = 2,
     Float = 3,
     Data = 4,
+    Selector = 5, // поле выбора из связанное таблицы
 }
 
 /**
