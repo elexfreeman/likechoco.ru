@@ -55,6 +55,12 @@ export interface UpdateRowResponseI {
 export interface RemoveDocRowReqestI {
     id: number;
 }
+export interface AddRowResponseI {
+    id: number;
+}
+export interface UpdateRowResponseI {
+    id: number;
+}
 
 
 // маршрты для основных операций

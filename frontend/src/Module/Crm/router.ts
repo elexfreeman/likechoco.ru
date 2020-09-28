@@ -6,6 +6,7 @@ import { route as aProductRoute } from "../Product/router";
 import { route as aProductCategoryRoute } from "../ProductCategory/router";
 import { route as aClientRoute } from "../Client/router";
 import { route as aStorehouseRoute } from "../Storehouse/router";
+import { route as aInventoryRoute } from "../Inventory/router";
 
 /**
  * Маршруты модулей
@@ -17,6 +18,7 @@ const aRoute = [
     ... aProductCategoryRoute,
     ... aClientRoute,
     ... aStorehouseRoute,
+    ... aInventoryRoute,
 ];
 
 
