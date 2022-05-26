@@ -7,7 +7,7 @@
     "build": "tsc",
     "install": "tsc && node ./build/backend/src/install.js",
     "test": "ts-mocha",
-    "server": "./node_modules/.bin/node ./build/backend/src/index.js",
+    "server": "node ./build/backend/src/index.js",
     "watch": "tsc-watch --outDir ./build --onSuccess \"npm run server\"",
     "en": "./node_modules/.bin/ts-node ./src/en.ts",
     "run_test": "./node_modules/.bin/ts-node",

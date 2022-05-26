@@ -26,13 +26,6 @@ export class ClientE {
             .maxLen(255)
             .error('patronymic - неверный формат')
         );
-        rules.set(rules.rule('name')
-            .type(ModelRulesT.text)
-            .maxLen(255)
-            .require()
-            .error('name - неверный формат')
-        );
-
         rules.set(rules.rule('description')
             .type(ModelRulesT.text)
             .maxLen(1024)

@@ -5,7 +5,7 @@ import { ModelRulesT } from '@a-a-game-studio/aa-components/lib';
 
 export class ProductVarE {
     //Имя таблицы
-    public static NAME = 'product_category_var';
+    public static NAME = 'product_var';
 
     public getRulesInsert() {
         let rules = new Components.ModelRulesC();
